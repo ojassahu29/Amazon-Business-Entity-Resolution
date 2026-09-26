@@ -16,7 +16,9 @@ from collections import defaultdict
 from pathlib import Path
 
 import pandas as pd
+# pyrefly: ignore [missing-import]
 from rapidfuzz import fuzz
+
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 

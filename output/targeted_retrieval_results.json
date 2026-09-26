@@ -1,0 +1,488 @@
+{
+  "metadata": {
+    "validation_sample_size": 5000,
+    "seed": 42,
+    "total_val_matches": 17314,
+    "val_s2_matches": 8222,
+    "val_s3_matches": 9092
+  },
+  "experiment_1_variants": [
+    {
+      "variant": "Baseline A Union",
+      "overall_recall": 0.9053367217280813,
+      "total_retrieved": 15675,
+      "newly_recovered_matches": 0,
+      "s2_recall": 0.9042811967891025,
+      "s3_recall": 0.9062912450505939,
+      "mean_candidates": 1623.2106,
+      "median_candidates": 121.0,
+      "p95_candidates": 8339.2,
+      "max_candidates": 59339,
+      "s1_affected": 0,
+      "runtime_seconds": 844.9
+    },
+    {
+      "variant": "Variant 1A: Relaxed Name (1 info + >=1 secondary)",
+      "overall_recall": 0.9381425436063301,
+      "total_retrieved": 16243,
+      "newly_recovered_matches": 568,
+      "s2_recall": 0.9324981756263683,
+      "s3_recall": 0.943246810382754,
+      "mean_candidates": 6815.5242,
+      "median_candidates": 1940.5,
+      "p95_candidates": 27013.95000000003,
+      "max_candidates": 83929,
+      "s1_affected": 3473,
+      "runtime_seconds": 844.9
+    },
+    {
+      "variant": "Variant 1B: Relaxed Address (number+1 token OR >=2 tokens with >=1 info)",
+      "overall_recall": 0.979785144969389,
+      "total_retrieved": 16964,
+      "newly_recovered_matches": 1289,
+      "s2_recall": 0.9807832644125517,
+      "s3_recall": 0.9788825340959085,
+      "mean_candidates": 14736.1284,
+      "median_candidates": 3711.5,
+      "p95_candidates": 92633.8,
+      "max_candidates": 338018,
+      "s1_affected": 4982,
+      "runtime_seconds": 844.9
+    },
+    {
+      "variant": "Variant 1C: Geo Secondary Evidence",
+      "overall_recall": 0.9313272496245812,
+      "total_retrieved": 16125,
+      "newly_recovered_matches": 450,
+      "s2_recall": 0.9337144247141814,
+      "s3_recall": 0.9291684997800264,
+      "mean_candidates": 10696.3552,
+      "median_candidates": 391.0,
+      "p95_candidates": 56538.50000000005,
+      "max_candidates": 126138,
+      "s1_affected": 1692,
+      "runtime_seconds": 844.9
+    },
+    {
+      "variant": "Combined Relaxed Blocker (Baseline A + 1A + 1B + 1C)",
+      "overall_recall": 0.9908744368718956,
+      "total_retrieved": 17156,
+      "newly_recovered_matches": 1481,
+      "s2_recall": 0.9917295062028704,
+      "s3_recall": 0.9901011878574572,
+      "mean_candidates": 27080.4258,
+      "median_candidates": 10562.5,
+      "p95_candidates": 117599.45000000001,
+      "max_candidates": 358910,
+      "s1_affected": 4994,
+      "runtime_seconds": 844.9
+    }
+  ],
+  "experiment_2_cross_script": {
+    "total_cross_script_cases": 548,
+    "nature_breakdown": {
+      "4. something else": 239,
+      "3. different scripts with useful address evidence": 302,
+      "1. true transliteration": 7
+    },
+    "script_pairs": {
+      "Latin -> Latin": 239,
+      "Latin -> Devanagari": 157,
+      "Latin -> Tamil": 36,
+      "Latin -> Kannada": 30,
+      "Latin -> Gujarati": 26,
+      "Latin -> Bengali": 25,
+      "Latin -> Telugu": 24,
+      "Latin -> Malayalam": 8,
+      "Latin -> Unknown": 2,
+      "Latin -> Gurmukhi": 1
+    },
+    "country_distribution": {
+      "India": 467,
+      "US": 81
+    },
+    "address_same_script_count": 228,
+    "address_number_overlap_count": 276,
+    "address_token_overlap_count": 397,
+    "examples": [
+      {
+        "s1_id": "S1-290635254",
+        "matched_id": "S3-311715376",
+        "source": "S3",
+        "country": "India",
+        "s1_name": "Marketing Standard Service Limited",
+        "match_name": "@marketingstandard",
+        "s1_name_script": "Latin",
+        "match_name_script": "Latin",
+        "script_pair": "Latin -> Latin",
+        "s1_addr": "10/21 Kalkaji Extnbasement, New Delhi, South Delhi, Delhi",
+        "match_addr": "10/21 Kalkaji Extnbasement, New Delhi, South Delhi, \u0926\u093f\u0932\u094d\u0932\u0940",
+        "s1_addr_script": "Latin",
+        "match_addr_script": "Devanagari",
+        "address_same_script": false,
+        "shared_address_numbers": [
+          "10/21"
+        ],
+        "shared_address_tokens": [
+          "kalkaji",
+          "new",
+          "10",
+          "delhi",
+          "south",
+          "extnbasement",
+          "21"
+        ],
+        "nature": "4. something else"
+      },
+      {
+        "s1_id": "S1-338546895",
+        "matched_id": "S3-976371890",
+        "source": "S3",
+        "country": "India",
+        "s1_name": "First Foods Private Limited",
+        "match_name": "\u092b\u0930\u094d\u0938\u094d\u091f \u092b\u0942\u0921\u094d\u0938 \u092a\u094d\u0930\u093e\u0907\u0935\u0947\u091f \u0932\u093f\u092e\u093f\u091f\u0947\u0921",
+        "s1_name_script": "Latin",
+        "match_name_script": "Devanagari",
+        "script_pair": "Latin -> Devanagari",
+        "s1_addr": "Flat No. 29, Riddhi Siddhi Gruhsankul, Sinhgad Road, Anand Nagar, Pune, Maharashtra",
+        "match_addr": "Fat No. 29, Pune, MH",
+        "s1_addr_script": "Latin",
+        "match_addr_script": "Latin",
+        "address_same_script": true,
+        "shared_address_numbers": [
+          "29"
+        ],
+        "shared_address_tokens": [
+          "29",
+          "no",
+          "pune"
+        ],
+        "nature": "3. different scripts with useful address evidence"
+      },
+      {
+        "s1_id": "S1-338546895",
+        "matched_id": "S2-959412356",
+        "source": "S2",
+        "country": "India",
+        "s1_name": "First Foods Private Limited",
+        "match_name": "\u092b\u0930\u094d\u0938\u094d\u091f \u092b\u0942\u0921\u094d\u0938 \u092a\u094d\u0930\u093e\u0907\u0935\u0947\u091f \u0932\u093f\u092e\u093f\u091f\u0947\u0921",
+        "s1_name_script": "Latin",
+        "match_name_script": "Devanagari",
+        "script_pair": "Latin -> Devanagari",
+        "s1_addr": "Flat No. 29, Riddhi Siddhi Gruhsankul, Sinhgad Road, Anand Nagar, Pune, Maharashtra",
+        "match_addr": "#29, PUNE, Maharashtra",
+        "s1_addr_script": "Latin",
+        "match_addr_script": "Latin",
+        "address_same_script": true,
+        "shared_address_numbers": [
+          "29"
+        ],
+        "shared_address_tokens": [
+          "maharashtra",
+          "29",
+          "pune"
+        ],
+        "nature": "3. different scripts with useful address evidence"
+      },
+      {
+        "s1_id": "S1-249021867",
+        "matched_id": "S2-869907700",
+        "source": "S2",
+        "country": "India",
+        "s1_name": "Al Technologies Limited",
+        "match_name": "\u0905\u0932 \u091f\u0947\u0915\u094d\u0928\u094b\u0932\u0949\u091c\u0940\u091c \u0932\u093f\u092e\u093f\u091f\u0947\u0921",
+        "s1_name_script": "Latin",
+        "match_name_script": "Devanagari",
+        "script_pair": "Latin -> Devanagari",
+        "s1_addr": "Plot No. 3/1, Chitrakoot Scheme, Sector-3, Jaipur, Rajasthan",
+        "match_addr": "PLOT NO. 3/1, JAIPUR, Rajasthan",
+        "s1_addr_script": "Latin",
+        "match_addr_script": "Latin",
+        "address_same_script": true,
+        "shared_address_numbers": [
+          "3/1"
+        ],
+        "shared_address_tokens": [
+          "rajasthan",
+          "no",
+          "jaipur",
+          "1",
+          "plot",
+          "3"
+        ],
+        "nature": "3. different scripts with useful address evidence"
+      },
+      {
+        "s1_id": "S1-964576251",
+        "matched_id": "S2-65620648",
+        "source": "S2",
+        "country": "India",
+        "s1_name": "Apex Technologies Private Limited",
+        "match_name": "\u0c0f\u0c2a\u0c46\u0c15\u0c4d\u0c38\u0c4d \u0c1f\u0c46\u0c15\u0c4d\u0c28\u0c3e\u0c32\u0c1c\u0c40\u0c38\u0c4d \u0c2a\u0c4d\u0c30\u0c48\u0c35\u0c47\u0c1f\u0c4d \u0c32\u0c3f\u0c2e\u0c3f\u0c1f\u0c46\u0c21\u0c4d",
+        "s1_name_script": "Latin",
+        "match_name_script": "Telugu",
+        "script_pair": "Latin -> Telugu",
+        "s1_addr": "Plot No. 46, Balamrai Society, Mahendrahills, East Maredpally, Secunderabad, Hyderabad, Telangana",
+        "match_addr": "NO #46, HYDERABAD, Telangana",
+        "s1_addr_script": "Latin",
+        "match_addr_script": "Latin",
+        "address_same_script": true,
+        "shared_address_numbers": [
+          "46"
+        ],
+        "shared_address_tokens": [
+          "46",
+          "telangana",
+          "hyderabad",
+          "no"
+        ],
+        "nature": "3. different scripts with useful address evidence"
+      },
+      {
+        "s1_id": "S1-817723811",
+        "matched_id": "S2-554687885",
+        "source": "S2",
+        "country": "India",
+        "s1_name": "Lotus Developers LLP",
+        "match_name": "\u0932\u094b\u091f\u0938 \u0921\u0947\u0935\u0932\u092a\u0930\u094d\u0938 \u090f\u0932\u090f\u0932\u092a\u0940",
+        "s1_name_script": "Latin",
+        "match_name_script": "Devanagari",
+        "script_pair": "Latin -> Devanagari",
+        "s1_addr": "Flat No. 301, 3Rd Floor, Sonai Plaza, Bhiwandi, Thane, Maharashtra",
+        "match_addr": "MUMBAI (SUBURBAN), #301, Maharashtra, BHIWANDI",
+        "s1_addr_script": "Latin",
+        "match_addr_script": "Latin",
+        "address_same_script": true,
+        "shared_address_numbers": [
+          "301"
+        ],
+        "shared_address_tokens": [
+          "301",
+          "maharashtra",
+          "bhiwandi"
+        ],
+        "nature": "3. different scripts with useful address evidence"
+      },
+      {
+        "s1_id": "S1-372819293",
+        "matched_id": "S3-347176783",
+        "source": "S3",
+        "country": "US",
+        "s1_name": "Global Resources LLC",
+        "match_name": "Global LLC Services Enterprises",
+        "s1_name_script": "Latin",
+        "match_name_script": "Latin",
+        "script_pair": "Latin -> Latin",
+        "s1_addr": "313 Beltline Highway, Unit Unit 162, City Of Fitchburg, WI",
+        "match_addr": "",
+        "s1_addr_script": "Latin",
+        "match_addr_script": "Unknown",
+        "address_same_script": false,
+        "shared_address_numbers": [],
+        "shared_address_tokens": [],
+        "nature": "4. something else"
+      },
+      {
+        "s1_id": "S1-675544868",
+        "matched_id": "S2-597282931",
+        "source": "S2",
+        "country": "India",
+        "s1_name": "Skb & Associates Private Limited",
+        "match_name": "Shri Skb Associates & Private Limited",
+        "s1_name_script": "Latin",
+        "match_name_script": "Latin",
+        "script_pair": "Latin -> Latin",
+        "s1_addr": "407, Plot No 11 Sec 11, White House Vidhansabha, Gandhinagar, Gandhi Nagar, Gujarat",
+        "match_addr": "",
+        "s1_addr_script": "Latin",
+        "match_addr_script": "Unknown",
+        "address_same_script": false,
+        "shared_address_numbers": [],
+        "shared_address_tokens": [],
+        "nature": "4. something else"
+      },
+      {
+        "s1_id": "S1-675544868",
+        "matched_id": "S3-844058739",
+        "source": "S3",
+        "country": "India",
+        "s1_name": "Skb & Associates Private Limited",
+        "match_name": "skbassociates.com",
+        "s1_name_script": "Latin",
+        "match_name_script": "Latin",
+        "script_pair": "Latin -> Latin",
+        "s1_addr": "407, Plot No 11 Sec 11, White House Vidhansabha, Gandhinagar, Gandhi Nagar, Gujarat",
+        "match_addr": "40, Gandhi Nagar, Gandhinagar, \u0a97\u0ac1\u0a9c\u0ab0\u0abe\u0aa4",
+        "s1_addr_script": "Latin",
+        "match_addr_script": "Gujarati",
+        "address_same_script": false,
+        "shared_address_numbers": [],
+        "shared_address_tokens": [
+          "gandhi",
+          "nagar",
+          "gandhinagar"
+        ],
+        "nature": "4. something else"
+      },
+      {
+        "s1_id": "S1-275079702",
+        "matched_id": "S3-747118039",
+        "source": "S3",
+        "country": "US",
+        "s1_name": "Dermatology Associates of Wingo",
+        "match_name": "Dermato1ogy Associates Of Wingo",
+        "s1_name_script": "Latin",
+        "match_name_script": "Latin",
+        "script_pair": "Latin -> Latin",
+        "s1_addr": "166 Exchange Street, Wingo, KY",
+        "match_addr": "",
+        "s1_addr_script": "Latin",
+        "match_addr_script": "Unknown",
+        "address_same_script": false,
+        "shared_address_numbers": [],
+        "shared_address_tokens": [],
+        "nature": "4. something else"
+      }
+    ]
+  },
+  "experiment_3_fuzzy": [
+    {
+      "name": "Targeted Fuzzy: Token Sort Ratio >= 80% (Spelling/OCR)",
+      "target_category": "Spelling/OCR/Typo",
+      "category_size": 250,
+      "recovered": 72,
+      "recovered_pct": 28.799999999999997,
+      "indexing_mechanism": "Length-constrained 3-gram index or BK-tree over informative tokens",
+      "estimated_cand_expansion": "+15-25 candidates / S1"
+    },
+    {
+      "name": "Targeted Fuzzy: Compact Name Prefix (5 chars) (Spelling/OCR)",
+      "target_category": "Spelling/OCR/Typo",
+      "category_size": 250,
+      "recovered": 174,
+      "recovered_pct": 69.6,
+      "indexing_mechanism": "country + compact(name)[:5]",
+      "estimated_cand_expansion": "+45-70 candidates / S1"
+    },
+    {
+      "name": "Single Informative Token (Length >= 5) (Single-Token)",
+      "target_category": "Single Shared Name Token",
+      "category_size": 876,
+      "recovered": 686,
+      "recovered_pct": 78.31050228310502,
+      "indexing_mechanism": "country + distinctive token (len >= 5, non-stopword)",
+      "estimated_cand_expansion": "+30-60 candidates / S1"
+    },
+    {
+      "name": "Cross-Script Address Evidence (Number + Shared Addr Token)",
+      "target_category": "Multilingual / Transliteration",
+      "category_size": 309,
+      "recovered": 289,
+      "recovered_pct": 93.52750809061489,
+      "indexing_mechanism": "country + address number + secondary Latin address token",
+      "estimated_cand_expansion": "+20-40 candidates / S1"
+    }
+  ],
+  "experiment_4_hard_negatives": {
+    "total_candidates": 8116053,
+    "total_retrieved_true_matches": 15675,
+    "candidate_precision": 0.0019313575207061857,
+    "candidate_percentiles": {
+      "p25": 16.0,
+      "p50": 121.0,
+      "p75": 504.0,
+      "p90": 3726.4000000000015,
+      "p95": 8339.2,
+      "p99": 26156.03,
+      "max": 59339
+    },
+    "bucket_counts": {
+      ">1,000 candidates": 957,
+      ">5,000 candidates": 430,
+      ">10,000 candidates": 230,
+      ">20,000 candidates": 148
+    },
+    "worst_case_entities": [
+      {
+        "s1_id": "S1-164601651",
+        "candidate_count": 59339,
+        "true_matches": 3,
+        "business_name": "Developers Sss Developers Private Limited",
+        "business_address": "Jaipur, Rajasthan, Jaipur, Mohalla Saray, Sharma Medical, Ward No 28, C/O Sunil Sharma",
+        "country": "India"
+      },
+      {
+        "s1_id": "S1-857039595",
+        "candidate_count": 35615,
+        "true_matches": 3,
+        "business_name": "YN Life",
+        "business_address": "Lg-006, Ug 007 Upper Ground & Ground Floor, Plaza Level, Mgf Metropolis Mall, Mg Road Gurgaon, Dlf Qe, Gurgaon, Haryana",
+        "country": "India"
+      },
+      {
+        "s1_id": "S1-58694853",
+        "candidate_count": 35388,
+        "true_matches": 7,
+        "business_name": "Indian Systems Private Limited",
+        "business_address": "Noida, Khas-76, Gautam Buddha Nagar, Uttar Pradesh, Jalpura, Greater Noida",
+        "country": "India"
+      },
+      {
+        "s1_id": "S1-710121220",
+        "candidate_count": 35326,
+        "true_matches": 3,
+        "business_name": "JF Surgical Private Limited",
+        "business_address": "Ns-070, Omicron-I, Greater Noida, Noida, Gautam Buddha Nagar, Uttar Pradesh",
+        "country": "India"
+      },
+      {
+        "s1_id": "S1-882281475",
+        "candidate_count": 34902,
+        "true_matches": 3,
+        "business_name": "Euphoric (india) (India) Pvt Ltd",
+        "business_address": "6Th Floor Signature Elite Pn J 7, Gokul Vihar, Govind Marg, Narayan Singh Circle, Rajasthan, Jaipur, Unit 608 609, Jaipur",
+        "country": "India"
+      },
+      {
+        "s1_id": "S1-967637085",
+        "candidate_count": 33933,
+        "true_matches": 3,
+        "business_name": "Womens Health Unified Care",
+        "business_address": "926 Maple Hill Lane, Rock Hill, SC",
+        "country": "US"
+      },
+      {
+        "s1_id": "S1-839524459",
+        "candidate_count": 33450,
+        "true_matches": 2,
+        "business_name": "Wisemen Goods Private Limited",
+        "business_address": "Lgf- 106, Ansal Fortune, Arcade, Sec-18, Noida, Noida, Gautam Buddha Nagar, Uttar Pradesh",
+        "country": "India"
+      },
+      {
+        "s1_id": "S1-75509313",
+        "candidate_count": 32968,
+        "true_matches": 3,
+        "business_name": "Universal Talent Private Limited",
+        "business_address": "Shop No 608, 6Th Floor, Sl Tower, Alpha Commercial Belt, Alpha- 1, Greater Noida, Gautam Buddha Nagar, Uttar Pradesh",
+        "country": "India"
+      },
+      {
+        "s1_id": "S1-778997909",
+        "candidate_count": 32871,
+        "true_matches": 6,
+        "business_name": "Dlf Qe Healthcare Private Limited",
+        "business_address": "202, 2Nd Floor, Qutub Plaza, Dlf Phase-1, Gurgaon, Dlf Qe, Gurgaon, Haryana",
+        "country": "India"
+      },
+      {
+        "s1_id": "S1-922901135",
+        "candidate_count": 32023,
+        "true_matches": 4,
+        "business_name": "Indian Properties",
+        "business_address": "Unit No.920-921, 9Th Floor, Tower-4, Assotech Business Cresterra, Sector -135, Noida, Gautam Buddha Nagar, Uttar Pradesh",
+        "country": "India"
+      }
+    ]
+  }
+}

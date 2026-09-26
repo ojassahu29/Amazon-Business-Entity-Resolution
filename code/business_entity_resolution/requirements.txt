@@ -1,0 +1,17 @@
+# Core data processing & numerical computing
+pandas>=2.0.0
+numpy>=1.26.0
+
+# Machine learning & feature extraction
+scikit-learn>=1.4.0
+scipy>=1.12.0
+
+# String matching, tokenization & search
+pyahocorasick>=2.1.0
+rapidfuzz>=3.6.0
+
+# Gradient boosting models
+lightgbm>=4.3.0
+
+# Pipeline utilities & progress
+tqdm>=4.66.0

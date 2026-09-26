@@ -1,0 +1,16 @@
+name: entity-resolution
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python>=3.10
+  - pandas>=2.0.0
+  - numpy>=1.26.0
+  - scikit-learn>=1.4.0
+  - scipy>=1.12.0
+  - lightgbm>=4.3.0
+  - tqdm>=4.66.0
+  - pip
+  - pip:
+      - pyahocorasick>=2.1.0
+      - rapidfuzz>=3.6.0

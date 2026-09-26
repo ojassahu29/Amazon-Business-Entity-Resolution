@@ -1,0 +1,791 @@
+{
+  "metadata": {
+    "validation_sample_size": 5000,
+    "seed": 42,
+    "train_ratio": 0.8,
+    "train_s1_count": 4000,
+    "test_s1_count": 1000,
+    "total_candidate_pairs": 7167255,
+    "train_candidate_pairs": 5652990,
+    "test_candidate_pairs": 1514265,
+    "optimal_threshold": 0.98,
+    "optimal_macro_f05": 0.7864664323333214,
+    "test_pr_auc": 0.7607545793143398,
+    "total_runtime_seconds": 1104.628625869751
+  },
+  "hard_negative_analysis": {
+    "total_candidate_pairs": 7167255,
+    "total_positives": 16174,
+    "total_negatives": 7151081,
+    "positive_rate": 0.0022566519539209923,
+    "true_matches_total": 17314,
+    "blocking_recall": 0.9341573293288669,
+    "candidate_count_distribution": {
+      "mean": 1433.451,
+      "std": 4375.520647374321,
+      "min": 0,
+      "p25": 53.0,
+      "median": 199.0,
+      "p75": 513.25,
+      "p90": 2661.400000000005,
+      "p95": 7400.600000000002,
+      "p99": 25432.99000000002,
+      "max": 32851
+    },
+    "positives_per_s1_distribution": {
+      "mean": 3.2348,
+      "min": 0,
+      "median": 3.0,
+      "p95": 6.0,
+      "max": 10
+    },
+    "negatives_per_s1_distribution": {
+      "mean": 1430.2162,
+      "min": 0,
+      "median": 196.0,
+      "p90": 2659.100000000004,
+      "p95": 7392.750000000003,
+      "p99": 25430.99000000002,
+      "max": 32848
+    },
+    "zero_positive_s1_entities": {
+      "total_zero_pos": 332,
+      "pct_of_validation": 6.64,
+      "singletons_with_zero_pos": 294,
+      "non_singletons_with_zero_pos_missed_recall": 38
+    }
+  },
+  "feature_importance": [
+    {
+      "feature": "addr_fuzz_token_set_ratio",
+      "gain": 7489029185.730957,
+      "split": 1310,
+      "gain_pct": 18.818905174618227
+    },
+    {
+      "feature": "addr_fuzz_ratio",
+      "gain": 6648832110.967983,
+      "split": 1352,
+      "gain_pct": 16.707604939858527
+    },
+    {
+      "feature": "name_fuzz_ratio",
+      "gain": 5167294536.302032,
+      "split": 1295,
+      "gain_pct": 12.98470382159414
+    },
+    {
+      "feature": "addr_char_len_ratio",
+      "gain": 4695307858.710636,
+      "split": 1602,
+      "gain_pct": 11.79866591080602
+    },
+    {
+      "feature": "name_fuzz_token_set_ratio",
+      "gain": 4553302333.207302,
+      "split": 1077,
+      "gain_pct": 11.441825464275135
+    },
+    {
+      "feature": "name_rare_shared_count",
+      "gain": 2609719955.1789474,
+      "split": 89,
+      "gain_pct": 6.557869004222343
+    },
+    {
+      "feature": "name_fuzz_partial_ratio",
+      "gain": 1452742661.1043777,
+      "split": 1552,
+      "gain_pct": 3.650543442204176
+    },
+    {
+      "feature": "addr_token_overlap",
+      "gain": 1071415167.3238564,
+      "split": 969,
+      "gain_pct": 2.692319650046524
+    },
+    {
+      "feature": "name_char_len_ratio",
+      "gain": 1012975819.5893021,
+      "split": 1526,
+      "gain_pct": 2.5454695689200504
+    },
+    {
+      "feature": "addr_fuzz_token_sort_ratio",
+      "gain": 895375215.6637955,
+      "split": 1421,
+      "gain_pct": 2.2499553495378306
+    },
+    {
+      "feature": "name_token_count_diff",
+      "gain": 871530753.0414047,
+      "split": 339,
+      "gain_pct": 2.1900374790232555
+    },
+    {
+      "feature": "name_token_overlap",
+      "gain": 833366966.3929825,
+      "split": 210,
+      "gain_pct": 2.0941371073957256
+    },
+    {
+      "feature": "addr_token_jaccard",
+      "gain": 617971712.1417923,
+      "split": 1248,
+      "gain_pct": 1.5528783188014472
+    },
+    {
+      "feature": "name_fuzz_token_sort_ratio",
+      "gain": 540258648.8187904,
+      "split": 1147,
+      "gain_pct": 1.3575960287696278
+    },
+    {
+      "feature": "name_token_jaccard",
+      "gain": 305686770.5977173,
+      "split": 512,
+      "gain_pct": 0.7681490092166375
+    },
+    {
+      "feature": "name_shared_info_count",
+      "gain": 262449212.66064072,
+      "split": 201,
+      "gain_pct": 0.6594989448865054
+    },
+    {
+      "feature": "name_has_rare_shared",
+      "gain": 211908152.84630585,
+      "split": 36,
+      "gain_pct": 0.5324961801112147
+    },
+    {
+      "feature": "addr_shared_tokens",
+      "gain": 160926398.98002625,
+      "split": 574,
+      "gain_pct": 0.40438601150975545
+    },
+    {
+      "feature": "addr_shared_info_tokens",
+      "gain": 124019311.55329514,
+      "split": 372,
+      "gain_pct": 0.3116435529974634
+    },
+    {
+      "feature": "source_is_s2",
+      "gain": 96507914.23137665,
+      "split": 286,
+      "gain_pct": 0.2425111775476678
+    },
+    {
+      "feature": "addr_shared_numbers",
+      "gain": 61429229.17463684,
+      "split": 276,
+      "gain_pct": 0.15436324390215994
+    },
+    {
+      "feature": "name_shared_token_count",
+      "gain": 39334259.72467041,
+      "split": 241,
+      "gain_pct": 0.09884161024272042
+    },
+    {
+      "feature": "name_compact_exact",
+      "gain": 35090448.745983124,
+      "split": 34,
+      "gain_pct": 0.08817749418625126
+    },
+    {
+      "feature": "b_name_rare_single",
+      "gain": 11773978.901489258,
+      "split": 34,
+      "gain_pct": 0.029586397245887568
+    },
+    {
+      "feature": "b_name_overlap2",
+      "gain": 9000483.206932068,
+      "split": 28,
+      "gain_pct": 0.022616982227779407
+    },
+    {
+      "feature": "num_blockers_fired",
+      "gain": 7849341.309539795,
+      "split": 441,
+      "gain_pct": 0.019724320218819577
+    },
+    {
+      "feature": "b_name_rare_stop",
+      "gain": 3036928.2178382874,
+      "split": 85,
+      "gain_pct": 0.007631384887979021
+    },
+    {
+      "feature": "b_name_prefix5",
+      "gain": 2154342.4683761597,
+      "split": 55,
+      "gain_pct": 0.005413567716262923
+    },
+    {
+      "feature": "b_addr_overlap3",
+      "gain": 1816156.599685669,
+      "split": 34,
+      "gain_pct": 0.004563752922322971
+    },
+    {
+      "feature": "b_addr_num_token",
+      "gain": 1570534.7461471558,
+      "split": 82,
+      "gain_pct": 0.003946538827422353
+    },
+    {
+      "feature": "name_exact",
+      "gain": 753571.3581237793,
+      "split": 24,
+      "gain_pct": 0.0018936216669925446
+    },
+    {
+      "feature": "b_addr_rare_overlap2",
+      "gain": 696764.498840332,
+      "split": 60,
+      "gain_pct": 0.001750873805873249
+    },
+    {
+      "feature": "name_sorted_exact",
+      "gain": 48153.740898132324,
+      "split": 30,
+      "gain_pct": 0.00012100375913765906
+    },
+    {
+      "feature": "addr_pincode_overlap",
+      "gain": 44353.3080406189,
+      "split": 43,
+      "gain_pct": 0.00011145379160591042
+    },
+    {
+      "feature": "addr_exact",
+      "gain": 20371.01202392578,
+      "split": 5,
+      "gain_pct": 5.118956463939186e-05
+    },
+    {
+      "feature": "b_name_norm",
+      "gain": 2725.112060546875,
+      "split": 4,
+      "gain_pct": 6.847833569049531e-06
+    },
+    {
+      "feature": "b_name_compact",
+      "gain": 1006.9632873535156,
+      "split": 3,
+      "gain_pct": 2.53036089846378e-06
+    },
+    {
+      "feature": "b_name_sorted",
+      "gain": 418.0480041503906,
+      "split": 3,
+      "gain_pct": 1.0504974080664822e-06
+    },
+    {
+      "feature": "country_exact",
+      "gain": 0.0,
+      "split": 0,
+      "gain_pct": 0.0
+    }
+  ],
+  "pairwise_metrics_by_threshold": {
+    "0.5": {
+      "threshold": 0.5,
+      "tp": 2686,
+      "fp": 643,
+      "fn": 548,
+      "tn": 1510388,
+      "precision": 0.806848903574647,
+      "recall": 0.8305504019789735,
+      "f05": 0.8114803625377643
+    },
+    "0.6": {
+      "threshold": 0.6,
+      "tp": 2681,
+      "fp": 636,
+      "fn": 553,
+      "tn": 1510395,
+      "precision": 0.8082604763340367,
+      "recall": 0.829004329004329,
+      "f05": 0.8123257786934915
+    },
+    "0.7": {
+      "threshold": 0.7,
+      "tp": 2679,
+      "fp": 622,
+      "fn": 555,
+      "tn": 1510409,
+      "precision": 0.8115722508330809,
+      "recall": 0.8283858998144712,
+      "f05": 0.8148801557367076
+    },
+    "0.8": {
+      "threshold": 0.8,
+      "tp": 2675,
+      "fp": 615,
+      "fn": 559,
+      "tn": 1510416,
+      "precision": 0.8130699088145896,
+      "recall": 0.8271490414347558,
+      "f05": 0.8158472611931195
+    },
+    "0.9": {
+      "threshold": 0.9,
+      "tp": 2665,
+      "fp": 601,
+      "fn": 569,
+      "tn": 1510430,
+      "precision": 0.8159828536436007,
+      "recall": 0.8240568954854669,
+      "f05": 0.8175849797521166
+    },
+    "0.95": {
+      "threshold": 0.95,
+      "tp": 2660,
+      "fp": 591,
+      "fn": 574,
+      "tn": 1510440,
+      "precision": 0.8182097816056598,
+      "recall": 0.8225108225108225,
+      "f05": 0.8190663874861437
+    },
+    "0.98": {
+      "threshold": 0.98,
+      "tp": 2652,
+      "fp": 582,
+      "fn": 582,
+      "tn": 1510449,
+      "precision": 0.8200371057513914,
+      "recall": 0.8200371057513914,
+      "f05": 0.8200371057513914
+    }
+  },
+  "macro_metrics_by_threshold": {
+    "0.1": {
+      "macro_f05": 0.7493273612490048,
+      "macro_precision": 0.769877442732706,
+      "macro_recall": 0.768656746031746,
+      "singleton_f05": 0.43103448275862066,
+      "non_singleton_f05": 0.7689250119416187,
+      "s2_macro_f05": 0.7454070760155492,
+      "s3_macro_f05": 0.7364574670769418,
+      "mean_pred_matches": 3.652,
+      "median_pred_matches": 3.0,
+      "p95_pred_matches": 8.0,
+      "max_pred_matches": 28
+    },
+    "0.2": {
+      "macro_f05": 0.7650794611387537,
+      "macro_precision": 0.7901504569504569,
+      "macro_recall": 0.7657115079365079,
+      "singleton_f05": 0.4827586206896552,
+      "non_singleton_f05": 0.7824622729710761,
+      "s2_macro_f05": 0.7594096104308986,
+      "s3_macro_f05": 0.7437469552465168,
+      "mean_pred_matches": 3.485,
+      "median_pred_matches": 3.0,
+      "p95_pred_matches": 7.0,
+      "max_pred_matches": 27
+    },
+    "0.3": {
+      "macro_f05": 0.7774067904158593,
+      "macro_precision": 0.8066317679597091,
+      "macro_recall": 0.7646448412698412,
+      "singleton_f05": 0.5172413793103449,
+      "non_singleton_f05": 0.7934254675327593,
+      "s2_macro_f05": 0.7609122433329123,
+      "s3_macro_f05": 0.7594647188499172,
+      "mean_pred_matches": 3.379,
+      "median_pred_matches": 3.0,
+      "p95_pred_matches": 7.0,
+      "max_pred_matches": 27
+    },
+    "0.4": {
+      "macro_f05": 0.7777005594928617,
+      "macro_precision": 0.8078698398551339,
+      "macro_recall": 0.7615837301587302,
+      "singleton_f05": 0.5172413793103449,
+      "non_singleton_f05": 0.793737324302401,
+      "s2_macro_f05": 0.7633038962948977,
+      "s3_macro_f05": 0.7602289482640322,
+      "mean_pred_matches": 3.345,
+      "median_pred_matches": 3.0,
+      "p95_pred_matches": 7.0,
+      "max_pred_matches": 27
+    },
+    "0.5": {
+      "macro_f05": 0.7786869320137856,
+      "macro_precision": 0.8094484112837054,
+      "macro_recall": 0.7600503968253968,
+      "singleton_f05": 0.5172413793103449,
+      "non_singleton_f05": 0.7947844288893691,
+      "s2_macro_f05": 0.7639588670551317,
+      "s3_macro_f05": 0.761770594118178,
+      "mean_pred_matches": 3.329,
+      "median_pred_matches": 3.0,
+      "p95_pred_matches": 7.0,
+      "max_pred_matches": 27
+    },
+    "0.6": {
+      "macro_f05": 0.7801110504875132,
+      "macro_precision": 0.811552402880344,
+      "macro_recall": 0.7597837301587301,
+      "singleton_f05": 0.5344827586206896,
+      "non_singleton_f05": 0.7952346608147699,
+      "s2_macro_f05": 0.7641150261694952,
+      "s3_macro_f05": 0.7619237600947135,
+      "mean_pred_matches": 3.317,
+      "median_pred_matches": 3.0,
+      "p95_pred_matches": 7.0,
+      "max_pred_matches": 27
+    },
+    "0.7": {
+      "macro_f05": 0.7811193706648196,
+      "macro_precision": 0.8132170854200266,
+      "macro_recall": 0.7592003968253968,
+      "singleton_f05": 0.5344827586206896,
+      "non_singleton_f05": 0.7963050644000208,
+      "s2_macro_f05": 0.765388982446662,
+      "s3_macro_f05": 0.761585295133537,
+      "mean_pred_matches": 3.301,
+      "median_pred_matches": 3.0,
+      "p95_pred_matches": 7.0,
+      "max_pred_matches": 27
+    },
+    "0.8": {
+      "macro_f05": 0.7825575528596762,
+      "macro_precision": 0.8153242282771694,
+      "macro_recall": 0.7592742063492062,
+      "singleton_f05": 0.5517241379310345,
+      "non_singleton_f05": 0.796770225965686,
+      "s2_macro_f05": 0.7657280877857674,
+      "s3_macro_f05": 0.7629413842198892,
+      "mean_pred_matches": 3.29,
+      "median_pred_matches": 3.0,
+      "p95_pred_matches": 7.0,
+      "max_pred_matches": 27
+    },
+    "0.85": {
+      "macro_f05": 0.782722563535192,
+      "macro_precision": 0.8158408949438362,
+      "macro_recall": 0.7586730158730158,
+      "singleton_f05": 0.5517241379310345,
+      "non_singleton_f05": 0.7969453965341741,
+      "s2_macro_f05": 0.7660138020714815,
+      "s3_macro_f05": 0.7629485437270487,
+      "mean_pred_matches": 3.284,
+      "median_pred_matches": 3.0,
+      "p95_pred_matches": 7.0,
+      "max_pred_matches": 27
+    },
+    "0.9": {
+      "macro_f05": 0.7836368407574277,
+      "macro_precision": 0.8176908949438362,
+      "macro_recall": 0.7568563492063493,
+      "singleton_f05": 0.5517241379310345,
+      "non_singleton_f05": 0.7979159668337873,
+      "s2_macro_f05": 0.7653555860185286,
+      "s3_macro_f05": 0.7644055527268209,
+      "mean_pred_matches": 3.266,
+      "median_pred_matches": 3.0,
+      "p95_pred_matches": 7.0,
+      "max_pred_matches": 27
+    },
+    "0.95": {
+      "macro_f05": 0.784609081999247,
+      "macro_precision": 0.8196075616105027,
+      "macro_recall": 0.7556563492063492,
+      "singleton_f05": 0.5517241379310345,
+      "non_singleton_f05": 0.7989480700628949,
+      "s2_macro_f05": 0.7667663003042431,
+      "s3_macro_f05": 0.7651583770224083,
+      "mean_pred_matches": 3.251,
+      "median_pred_matches": 3.0,
+      "p95_pred_matches": 7.0,
+      "max_pred_matches": 27
+    },
+    "0.98": {
+      "macro_f05": 0.7864664323333214,
+      "macro_precision": 0.8224885139914552,
+      "macro_recall": 0.7542301587301588,
+      "singleton_f05": 0.5689655172413793,
+      "non_singleton_f05": 0.7998582084217849,
+      "s2_macro_f05": 0.7662107447486873,
+      "s3_macro_f05": 0.7646127241468069,
+      "mean_pred_matches": 3.234,
+      "median_pred_matches": 3.0,
+      "p95_pred_matches": 7.0,
+      "max_pred_matches": 27
+    }
+  },
+  "rule_based_comparisons": {
+    "Rule 1: Exact Name + Country": {
+      "macro_f05": 0.3439411535568654,
+      "macro_precision": 0.44082632693553075,
+      "macro_recall": 0.26551428571428576,
+      "singleton_f05": 0.6896551724137931,
+      "non_singleton_f05": 0.32265515239582315,
+      "s2_macro_f05": 0.3013490575114477,
+      "s3_macro_f05": 0.3177446513414842,
+      "mean_pred_matches": 11.079,
+      "median_pred_matches": 1.0,
+      "p95_pred_matches": 63.0,
+      "max_pred_matches": 377
+    },
+    "Rule 2: Exact Name + Exact Address + Country": {
+      "macro_f05": 0.08003131590631592,
+      "macro_precision": 0.093,
+      "macro_recall": 0.06772619047619048,
+      "singleton_f05": 1.0,
+      "non_singleton_f05": 0.02338780881774512,
+      "s2_macro_f05": 0.15724019036519035,
+      "s3_macro_f05": 0.12,
+      "mean_pred_matches": 0.038,
+      "median_pred_matches": 0.0,
+      "p95_pred_matches": 0.0,
+      "max_pred_matches": 2
+    },
+    "Rule 3: High Name Similarity (Ratio >= 90)": {
+      "macro_f05": 0.4352912851787265,
+      "macro_precision": 0.4977644002098573,
+      "macro_recall": 0.45420992063492066,
+      "singleton_f05": 0.3793103448275862,
+      "non_singleton_f05": 0.43873809466956104,
+      "s2_macro_f05": 0.4015438452941421,
+      "s3_macro_f05": 0.40544990832830197,
+      "mean_pred_matches": 25.899,
+      "median_pred_matches": 3.0,
+      "p95_pred_matches": 149.04999999999995,
+      "max_pred_matches": 709
+    },
+    "Rule 4: Name Token-Sort >= 85 + Country": {
+      "macro_f05": 0.4106832699346697,
+      "macro_precision": 0.4322995372349452,
+      "macro_recall": 0.5797853174603174,
+      "singleton_f05": 0.20689655172413793,
+      "non_singleton_f05": 0.4232306474890336,
+      "s2_macro_f05": 0.3933205638975961,
+      "s3_macro_f05": 0.402659131522474,
+      "mean_pred_matches": 46.22,
+      "median_pred_matches": 6.0,
+      "p95_pred_matches": 229.0999999999999,
+      "max_pred_matches": 1577
+    },
+    "Rule 5: Combined Name + Address Rule": {
+      "macro_f05": 0.6888858705198218,
+      "macro_precision": 0.7719440476190476,
+      "macro_recall": 0.5603373015873016,
+      "singleton_f05": 0.5689655172413793,
+      "non_singleton_f05": 0.696269501613399,
+      "s2_macro_f05": 0.6472932481819866,
+      "s3_macro_f05": 0.6545157010726675,
+      "mean_pred_matches": 2.341,
+      "median_pred_matches": 2.0,
+      "p95_pred_matches": 5.0,
+      "max_pred_matches": 12
+    }
+  },
+  "error_analysis": {
+    "total_false_positives": 582,
+    "total_false_negatives": 582,
+    "top_false_positives": [
+      {
+        "rank": 1,
+        "predicted_prob": 1.0,
+        "s1_id": "S1-435676166",
+        "cand_id": "S3-727060642",
+        "s1_name": "Cooper's Management Inc",
+        "cand_name": "cooper s management inc highland",
+        "s1_addr": "30173 Cr 1343D Road, Lequire, OK",
+        "cand_addr": "30176 cr 1343d road lequire oklahoma",
+        "s1_country": "US",
+        "cand_country": "us"
+      },
+      {
+        "rank": 2,
+        "predicted_prob": 1.0,
+        "s1_id": "S1-549953617",
+        "cand_id": "S2-939119061",
+        "s1_name": "Saksham Medical Centre",
+        "cand_name": "star medical centre",
+        "s1_addr": "F-44 Krishna Apra D Mall, Shakti Khand2 Indirapuram, Ghaziabad, Uttar Pradesh",
+        "cand_addr": "",
+        "s1_country": "India",
+        "cand_country": "india"
+      },
+      {
+        "rank": 3,
+        "predicted_prob": 1.0,
+        "s1_id": "S1-231120729",
+        "cand_id": "S3-32906959",
+        "s1_name": "Good Infrastructure Limited",
+        "cand_name": "jasola 6old priae limited",
+        "s1_addr": "No. Dtj-108, 1St Floor, Plot No. 11, Dlf Tower B, Jasola, New Delhi, South Delhi, Delhi",
+        "cand_addr": "dtj 416 dlf tower b plot no 11 jasola new delhi dl",
+        "s1_country": "India",
+        "cand_country": "india"
+      },
+      {
+        "rank": 4,
+        "predicted_prob": 1.0,
+        "s1_id": "S1-725631606",
+        "cand_id": "S3-764074977",
+        "s1_name": "FN Bollywood Private Limited",
+        "cand_name": "fn bollywood private limited",
+        "s1_addr": "Sh 180, 2Nd Floor, Raghuleela Mall, Near Poisar Bus Depot, Kandivlai West, Mumbai, Maharashtra",
+        "cand_addr": "",
+        "s1_country": "India",
+        "cand_country": "india"
+      },
+      {
+        "rank": 5,
+        "predicted_prob": 1.0,
+        "s1_id": "S1-597403074",
+        "cand_id": "S3-253991181",
+        "s1_name": "Highland Companies Inc",
+        "cand_name": "highland cnmpanilse corp",
+        "s1_addr": "4305 Mountain Trail Loop, Rio Rancho, NM",
+        "cand_addr": "4312 mountain trail loop rio rancho new mexico",
+        "s1_country": "US",
+        "cand_country": "us"
+      },
+      {
+        "rank": 6,
+        "predicted_prob": 1.0,
+        "s1_id": "S1-118295228",
+        "cand_id": "S3-467024725",
+        "s1_name": "Family Specialists LLC",
+        "cand_name": "family specialists highland llc",
+        "s1_addr": "8 Bolan Drive, Huntington, NY",
+        "cand_addr": "12 1 2 bolan drive huntington statin new york",
+        "s1_country": "US",
+        "cand_country": "us"
+      },
+      {
+        "rank": 7,
+        "predicted_prob": 1.0,
+        "s1_id": "S1-118295228",
+        "cand_id": "S2-842845333",
+        "s1_name": "Family Specialists LLC",
+        "cand_name": "family specialists",
+        "s1_addr": "8 Bolan Drive, Huntington, NY",
+        "cand_addr": "hilltop drive lexington nc",
+        "s1_country": "US",
+        "cand_country": "us"
+      },
+      {
+        "rank": 8,
+        "predicted_prob": 1.0,
+        "s1_id": "S1-508137122",
+        "cand_id": "S3-244460965",
+        "s1_name": "Internal Medicine Care Associates LLC",
+        "cand_name": "internal medicine care associates co",
+        "s1_addr": "7232 Hafners Landing Street, Clay, NY",
+        "cand_addr": "",
+        "s1_country": "US",
+        "cand_country": "us"
+      }
+    ],
+    "top_false_negatives": [
+      {
+        "rank": 1,
+        "predicted_prob": 0.0,
+        "s1_id": "S1-463535513",
+        "cand_id": "S3-696360798",
+        "s1_name": "Integrated Design Digital LLC",
+        "cand_name": "integrated design",
+        "s1_addr": "1657 Valley Grove Road, Asheboro, NC",
+        "cand_addr": "valley grove road asheboro north carolina",
+        "s1_country": "US",
+        "cand_country": "us"
+      },
+      {
+        "rank": 2,
+        "predicted_prob": 0.0,
+        "s1_id": "S1-90781259",
+        "cand_id": "S2-114096186",
+        "s1_name": "M & B Sterling PLLC",
+        "cand_name": "m + b pllc center",
+        "s1_addr": "2880 Point Drive, Chesapeake City, VA",
+        "cand_addr": "2880 point drive chesapeake city va",
+        "s1_country": "US",
+        "cand_country": "us"
+      },
+      {
+        "rank": 3,
+        "predicted_prob": 0.0,
+        "s1_id": "S1-328940478",
+        "cand_id": "S2-293429986",
+        "s1_name": "Alappuzha Agencies Private Limited",
+        "cand_name": "fluxveotavo",
+        "s1_addr": "400, Tharayil Thejas Aryadu, Pathirapally P. O., Alappuzha, Kerala",
+        "cand_addr": "400 alappuzha kerala",
+        "s1_country": "India",
+        "cand_country": "india"
+      },
+      {
+        "rank": 4,
+        "predicted_prob": 0.0,
+        "s1_id": "S1-255194197",
+        "cand_id": "S3-265442425",
+        "s1_name": "Federal Pioneer Montreal",
+        "cand_name": "tavokor",
+        "s1_addr": "3651 Wall Avenue, Unit 1180, Ogden City, UT",
+        "cand_addr": "3651 wall avenue ogen utah",
+        "s1_country": "US",
+        "cand_country": "us"
+      },
+      {
+        "rank": 5,
+        "predicted_prob": 0.0,
+        "s1_id": "S1-406260494",
+        "cand_id": "S3-259467716",
+        "s1_name": "Teamsters Local 17 Corp",
+        "cand_name": "the teamsters local 17 corp",
+        "s1_addr": "PA, Salford Township, 152 Fretz Road",
+        "cand_addr": "152 fretz rd teflord city pennsylvania",
+        "s1_country": "US",
+        "cand_country": "us"
+      },
+      {
+        "rank": 6,
+        "predicted_prob": 0.0,
+        "s1_id": "S1-406260494",
+        "cand_id": "S2-651514182",
+        "s1_name": "Teamsters Local 17 Corp",
+        "cand_name": "pyrawex",
+        "s1_addr": "PA, Salford Township, 152 Fretz Road",
+        "cand_addr": "52 fretz rd salford township pa",
+        "s1_country": "US",
+        "cand_country": "us"
+      },
+      {
+        "rank": 7,
+        "predicted_prob": 0.0,
+        "s1_id": "S1-93447707",
+        "cand_id": "S3-862257656",
+        "s1_name": "Cassie Burgoyne Clean Aviation Inc",
+        "cand_name": "cassie burgoyne clean aviation incorporated",
+        "s1_addr": "5124 Chambers Street, Phoenix, AZ",
+        "cand_addr": "5124 chambers st laveen annex arizona",
+        "s1_country": "US",
+        "cand_country": "us"
+      },
+      {
+        "rank": 8,
+        "predicted_prob": 0.0,
+        "s1_id": "S1-731810949",
+        "cand_id": "S3-849791493",
+        "s1_name": "Banks's Tattoo LLC",
+        "cand_name": "banksstattoo com",
+        "s1_addr": "121 4th Street, Unit APT 502, Pittsburg, KS",
+        "cand_addr": "fourth st apt 502 pittsburg kansas",
+        "s1_country": "US",
+        "cand_country": "us"
+      }
+    ]
+  }
+}

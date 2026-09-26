@@ -1,0 +1,464 @@
+{
+  "total_cands_method_a": 8463313,
+  "total_cands_method_b": 7167255,
+  "mean_cands_method_a": 1692.6626,
+  "mean_cands_method_b": 1433.451,
+  "total_intersection": 7167255,
+  "total_only_a": 1296058,
+  "total_only_b": 0,
+  "jaccard_similarity": 0.8468616249924823,
+  "s1_with_diff_count": 402,
+  "s1_with_diff_pct": 8.04,
+  "true_matches_in_gt": 17314,
+  "true_matches_in_a": 16218,
+  "true_matches_in_b": 16174,
+  "true_matches_recall_a": 0.9366986253898579,
+  "true_matches_recall_b": 0.9341573293288669,
+  "true_matches_only_in_a": 44,
+  "true_matches_only_in_b": 0,
+  "examples_of_diff": [
+    {
+      "s1_id": "S1-145483381",
+      "s1_name": "Indo Projects Private Limited",
+      "s1_addr": "Rajkot, Pipaliya, Taluka Gondal, Gondal, Gujarat, Survey No 26 P1",
+      "s1_info_name_a_list": [
+        "indo",
+        "projects"
+      ],
+      "s1_info_name_b_set": [
+        "projects",
+        "indo"
+      ],
+      "s1_info_addr_a_list": [
+        "rajkot",
+        "pipaliya",
+        "taluka",
+        "gondal",
+        "gondal",
+        "survey"
+      ],
+      "s1_info_addr_b_set": [
+        "gondal",
+        "pipaliya",
+        "survey",
+        "taluka",
+        "rajkot"
+      ],
+      "count_a": 1604,
+      "count_b": 447,
+      "diff_only_a_count": 1157,
+      "diff_only_b_count": 0,
+      "tm_only_a": [
+        "S3-900662587"
+      ],
+      "tm_only_b": [],
+      "sample_only_a_cands": [
+        "S3-106575688",
+        "S3-173343049",
+        "S3-717203823",
+        "S3-322378937",
+        "S2-136314858"
+      ]
+    },
+    {
+      "s1_id": "S1-575404162",
+      "s1_name": "Malappuram Foundation Pvt. Ltd.",
+      "s1_addr": "Malappuram, Kerala, Malapuram, Ambat Building Parambil Peedika Po, Malappuram, 12/544 K",
+      "s1_info_name_a_list": [
+        "malappuram",
+        "foundation"
+      ],
+      "s1_info_name_b_set": [
+        "foundation",
+        "malappuram"
+      ],
+      "s1_info_addr_a_list": [
+        "malappuram",
+        "kerala",
+        "malapuram",
+        "ambat",
+        "building",
+        "parambil",
+        "peedika",
+        "malappuram",
+        "544"
+      ],
+      "s1_info_addr_b_set": [
+        "building",
+        "ambat",
+        "544",
+        "parambil",
+        "malappuram",
+        "kerala",
+        "malapuram",
+        "peedika"
+      ],
+      "count_a": 11009,
+      "count_b": 2982,
+      "diff_only_a_count": 8027,
+      "diff_only_b_count": 0,
+      "tm_only_a": [],
+      "tm_only_b": [],
+      "sample_only_a_cands": [
+        "S3-125175461",
+        "S2-952091419",
+        "S2-125393517",
+        "S3-351470197",
+        "S2-426849984"
+      ]
+    },
+    {
+      "s1_id": "S1-372819293",
+      "s1_name": "Global Resources LLC",
+      "s1_addr": "313 Beltline Highway, Unit Unit 162, City Of Fitchburg, WI",
+      "s1_info_name_a_list": [
+        "resources"
+      ],
+      "s1_info_name_b_set": [
+        "resources"
+      ],
+      "s1_info_addr_a_list": [
+        "313",
+        "beltline",
+        "highway",
+        "unit",
+        "unit",
+        "162",
+        "fitchburg"
+      ],
+      "s1_info_addr_b_set": [
+        "highway",
+        "fitchburg",
+        "unit",
+        "beltline",
+        "313",
+        "162"
+      ],
+      "count_a": 1577,
+      "count_b": 13,
+      "diff_only_a_count": 1564,
+      "diff_only_b_count": 0,
+      "tm_only_a": [],
+      "tm_only_b": [],
+      "sample_only_a_cands": [
+        "S3-699496399",
+        "S3-562555442",
+        "S3-999378822",
+        "S3-915103882",
+        "S3-65291793"
+      ]
+    },
+    {
+      "s1_id": "S1-886227604",
+      "s1_name": "Surya Infrastructure LLP",
+      "s1_addr": "Rs No.149/1, Pingali Palitana R S Nd Taluka Talaja, Dis Bhavnagar, Pingali, Bhavnagar, Gujarat",
+      "s1_info_name_a_list": [
+        "surya",
+        "infrastructure"
+      ],
+      "s1_info_name_b_set": [
+        "surya",
+        "infrastructure"
+      ],
+      "s1_info_addr_a_list": [
+        "149",
+        "pingali",
+        "palitana",
+        "taluka",
+        "talaja",
+        "dis",
+        "bhavnagar",
+        "pingali",
+        "bhavnagar"
+      ],
+      "s1_info_addr_b_set": [
+        "bhavnagar",
+        "dis",
+        "palitana",
+        "taluka",
+        "talaja",
+        "149",
+        "pingali"
+      ],
+      "count_a": 326,
+      "count_b": 124,
+      "diff_only_a_count": 202,
+      "diff_only_b_count": 0,
+      "tm_only_a": [],
+      "tm_only_b": [],
+      "sample_only_a_cands": [
+        "S3-292521402",
+        "S2-238238599",
+        "S2-733255993",
+        "S3-990765137",
+        "S3-199529712"
+      ]
+    },
+    {
+      "s1_id": "S1-70751113",
+      "s1_name": "Trippy & Brothers Clinic",
+      "s1_addr": "D. No. 2-40/46/Ac/104, Flat No.104, Anusha Castle, Beside Harsha Toyota, Kothaguda X Roads, Kondapur, Hyderabad, Telangana",
+      "s1_info_name_a_list": [
+        "trippy",
+        "brothers",
+        "clinic"
+      ],
+      "s1_info_name_b_set": [
+        "trippy",
+        "brothers",
+        "clinic"
+      ],
+      "s1_info_addr_a_list": [
+        "104",
+        "104",
+        "anusha",
+        "castle",
+        "beside",
+        "harsha",
+        "toyota",
+        "kothaguda",
+        "roads",
+        "kondapur"
+      ],
+      "s1_info_addr_b_set": [
+        "kondapur",
+        "harsha",
+        "anusha",
+        "beside",
+        "toyota",
+        "roads",
+        "kothaguda",
+        "104",
+        "castle"
+      ],
+      "count_a": 431,
+      "count_b": 365,
+      "diff_only_a_count": 66,
+      "diff_only_b_count": 0,
+      "tm_only_a": [],
+      "tm_only_b": [],
+      "sample_only_a_cands": [
+        "S2-27206232",
+        "S3-882498611",
+        "S2-337143218",
+        "S3-49887384",
+        "S2-380788212"
+      ]
+    },
+    {
+      "s1_id": "S1-55637318",
+      "s1_name": "Legacy Legacy Cayman Inc",
+      "s1_addr": "1680 Williams Hollow Road, Mcewen, TN",
+      "s1_info_name_a_list": [
+        "legacy",
+        "legacy",
+        "cayman"
+      ],
+      "s1_info_name_b_set": [
+        "legacy",
+        "cayman"
+      ],
+      "s1_info_addr_a_list": [
+        "1680",
+        "williams",
+        "hollow",
+        "mcewen"
+      ],
+      "s1_info_addr_b_set": [
+        "1680",
+        "williams",
+        "hollow",
+        "mcewen"
+      ],
+      "count_a": 23400,
+      "count_b": 468,
+      "diff_only_a_count": 22932,
+      "diff_only_b_count": 0,
+      "tm_only_a": [
+        "S3-630429663"
+      ],
+      "tm_only_b": [],
+      "sample_only_a_cands": [
+        "S2-95794321",
+        "S2-840128331",
+        "S3-353258187",
+        "S3-682837198",
+        "S3-864130197"
+      ]
+    },
+    {
+      "s1_id": "S1-891027699",
+      "s1_name": "Dynamic Power Private Limited",
+      "s1_addr": "Pl No 292 Bno 9 Varad Apt Talegaon Tal Maval Pune, Talegaon Pune, Pune, Maharashtra",
+      "s1_info_name_a_list": [
+        "dynamic",
+        "power"
+      ],
+      "s1_info_name_b_set": [
+        "power",
+        "dynamic"
+      ],
+      "s1_info_addr_a_list": [
+        "292",
+        "bno",
+        "varad",
+        "apt",
+        "talegaon",
+        "tal",
+        "maval",
+        "talegaon"
+      ],
+      "s1_info_addr_b_set": [
+        "tal",
+        "maval",
+        "varad",
+        "292",
+        "bno",
+        "apt",
+        "talegaon"
+      ],
+      "count_a": 523,
+      "count_b": 271,
+      "diff_only_a_count": 252,
+      "diff_only_b_count": 0,
+      "tm_only_a": [],
+      "tm_only_b": [],
+      "sample_only_a_cands": [
+        "S3-476700533",
+        "S2-548811922",
+        "S3-373255276",
+        "S2-76978588",
+        "S3-69523705"
+      ]
+    },
+    {
+      "s1_id": "S1-748949030",
+      "s1_name": "Royal Estate Private Limited",
+      "s1_addr": "Hampapura Village, Hampapura Hobli, Heggada Devana Kote Taluk, Mysuru, Mysore, Karnataka",
+      "s1_info_name_a_list": [
+        "royal",
+        "estate"
+      ],
+      "s1_info_name_b_set": [
+        "royal",
+        "estate"
+      ],
+      "s1_info_addr_a_list": [
+        "hampapura",
+        "village",
+        "hampapura",
+        "hobli",
+        "heggada",
+        "devana",
+        "kote",
+        "taluk",
+        "mysuru",
+        "mysore"
+      ],
+      "s1_info_addr_b_set": [
+        "village",
+        "hampapura",
+        "heggada",
+        "hobli",
+        "kote",
+        "mysore",
+        "devana",
+        "taluk",
+        "mysuru"
+      ],
+      "count_a": 935,
+      "count_b": 928,
+      "diff_only_a_count": 7,
+      "diff_only_b_count": 0,
+      "tm_only_a": [],
+      "tm_only_b": [],
+      "sample_only_a_cands": [
+        "S2-468738400",
+        "S2-370757293",
+        "S3-285871722",
+        "S2-462925949",
+        "S2-790606704"
+      ]
+    },
+    {
+      "s1_id": "S1-561390382",
+      "s1_name": "Ashrafi Law Chambers Private Limited",
+      "s1_addr": "Kf-9, Kavi Nagar Ghaziabad, Ghaziabad, Uttar Pradesh",
+      "s1_info_name_a_list": [
+        "ashrafi",
+        "law",
+        "chambers"
+      ],
+      "s1_info_name_b_set": [
+        "ashrafi",
+        "law",
+        "chambers"
+      ],
+      "s1_info_addr_a_list": [
+        "kavi",
+        "ghaziabad",
+        "ghaziabad"
+      ],
+      "s1_info_addr_b_set": [
+        "ghaziabad",
+        "kavi"
+      ],
+      "count_a": 7626,
+      "count_b": 7329,
+      "diff_only_a_count": 297,
+      "diff_only_b_count": 0,
+      "tm_only_a": [],
+      "tm_only_b": [],
+      "sample_only_a_cands": [
+        "S2-92620312",
+        "S3-659614012",
+        "S3-433227344",
+        "S2-979279754",
+        "S3-902430834"
+      ]
+    },
+    {
+      "s1_id": "S1-47516451",
+      "s1_name": "Internal Medicine Clinic Inc",
+      "s1_addr": "659 13th Street, Unit UNIT 120, Upland, CA",
+      "s1_info_name_a_list": [
+        "internal",
+        "medicine",
+        "clinic"
+      ],
+      "s1_info_name_b_set": [
+        "medicine",
+        "clinic",
+        "internal"
+      ],
+      "s1_info_addr_a_list": [
+        "659",
+        "13th",
+        "unit",
+        "unit",
+        "120",
+        "upland"
+      ],
+      "s1_info_addr_b_set": [
+        "13th",
+        "upland",
+        "120",
+        "unit",
+        "659"
+      ],
+      "count_a": 20909,
+      "count_b": 19886,
+      "diff_only_a_count": 1023,
+      "diff_only_b_count": 0,
+      "tm_only_a": [],
+      "tm_only_b": [],
+      "sample_only_a_cands": [
+        "S3-86441214",
+        "S3-298105459",
+        "S3-196327882",
+        "S3-444114414",
+        "S3-103536954"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "metadata": {
+    "validation_sample": 5000,
+    "seed": 123,
+    "total_val_positives": 17205,
+    "timestamp": "2026-09-27 03:23:41",
+    "elapsed_seconds": 723.82
+  },
+  "configurations": [
+    {
+      "configuration": "C3",
+      "use_A": false,
+      "use_B": false,
+      "use_C2A": false,
+      "retrieved_true_matches": 16100,
+      "total_val_matches": 17205,
+      "retrieval_recall": 0.9357744841615809,
+      "total_candidates": 9510217,
+      "mean_candidates_per_s1": 1902.0434,
+      "median_candidates": 214.0,
+      "p90_candidates": 4347.300000000008,
+      "p95_candidates": 11280.300000000012,
+      "p99_candidates": 29510.050000000003,
+      "max_candidates": 57085
+    },
+    {
+      "configuration": "C3 + C2-A",
+      "use_A": false,
+      "use_B": false,
+      "use_C2A": true,
+      "retrieved_true_matches": 16206,
+      "total_val_matches": 17205,
+      "retrieval_recall": 0.9419354838709677,
+      "total_candidates": 9514202,
+      "mean_candidates_per_s1": 1902.8404,
+      "median_candidates": 214.0,
+      "p90_candidates": 4355.400000000005,
+      "p95_candidates": 11280.300000000012,
+      "p99_candidates": 29510.050000000003,
+      "max_candidates": 57085
+    },
+    {
+      "configuration": "C3 + A + C2-A",
+      "use_A": true,
+      "use_B": false,
+      "use_C2A": true,
+      "retrieved_true_matches": 16264,
+      "total_val_matches": 17205,
+      "retrieval_recall": 0.9453065969195001,
+      "total_candidates": 9595099,
+      "mean_candidates_per_s1": 1919.0198,
+      "median_candidates": 222.0,
+      "p90_candidates": 4369.200000000004,
+      "p95_candidates": 11344.600000000006,
+      "p99_candidates": 29510.050000000003,
+      "max_candidates": 57085
+    },
+    {
+      "configuration": "C3 + A + B + C2-A",
+      "use_A": true,
+      "use_B": true,
+      "use_C2A": true,
+      "retrieved_true_matches": 16273,
+      "total_val_matches": 17205,
+      "retrieval_recall": 0.9458297006684103,
+      "total_candidates": 9615416,
+      "mean_candidates_per_s1": 1923.0832,
+      "median_candidates": 226.0,
+      "p90_candidates": 4369.200000000004,
+      "p95_candidates": 11344.600000000006,
+      "p99_candidates": 29510.050000000003,
+      "max_candidates": 57085
+    }
+  ],
+  "incremental_analysis": {
+    "C2A_over_C3": {
+      "unique_true_matches": 106,
+      "added_candidates": 3985,
+      "added_candidates_per_s1": 0.797,
+      "candidates_per_unique_match": 37.594339622641506
+    },
+    "A_over_C3_C2A": {
+      "unique_true_matches": 58,
+      "added_candidates": 80897,
+      "added_candidates_per_s1": 16.1794,
+      "candidates_per_unique_match": 1394.7758620689656
+    },
+    "B_over_C3_A_C2A": {
+      "unique_true_matches": 9,
+      "added_candidates": 20317,
+      "added_candidates_per_s1": 4.0634,
+      "candidates_per_unique_match": 2257.4444444444443
+    }
+  },
+  "cross_seed_comparison": {
+    "seed_42": {
+      "C3": {
+        "recall": 93.67,
+        "candidates": 8463313,
+        "mean": 1692.66
+      },
+      "C3 + C2-A": {
+        "recall": 94.21,
+        "candidates": 8467371,
+        "mean": 1693.47
+      },
+      "C3 + A + C2-A": {
+        "recall": 94.55,
+        "candidates": 8555167,
+        "mean": 1711.03
+      },
+      "C3 + A + B + C2-A": {
+        "recall": 94.61,
+        "candidates": 8574256,
+        "mean": 1714.85
+      }
+    },
+    "seed_123": {
+      "C3": {
+        "recall": 93.57744841615809,
+        "candidates": 9510217,
+        "mean": 1902.0434
+      },
+      "C3 + C2-A": {
+        "recall": 94.19354838709677,
+        "candidates": 9514202,
+        "mean": 1902.8404
+      },
+      "C3 + A + C2-A": {
+        "recall": 94.53065969195002,
+        "candidates": 9595099,
+        "mean": 1919.0198
+      },
+      "C3 + A + B + C2-A": {
+        "recall": 94.58297006684103,
+        "candidates": 9615416,
+        "mean": 1923.0832
+      }
+    },
+    "b_contribution_seed42": {
+      "unique_matches": 10,
+      "added_candidates": 19089,
+      "candidates_per_match": 1908.9
+    },
+    "b_contribution_seed123": {
+      "unique_matches": 9,
+      "added_candidates": 20317,
+      "candidates_per_match": 2257.4444444444443
+    }
+  }
+}

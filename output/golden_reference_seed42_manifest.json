@@ -1,0 +1,24 @@
+{
+  "architecture": "Combo 3 + Secondary A (DF <= 2000) + C2-A (DF <= 500)",
+  "implementation_source": "code/business_entity_resolution/src/evaluate_retrieval_pruning.py",
+  "validation_sample": {
+    "num_s1": 5000,
+    "seed": 42,
+    "total_gt_matches": 17314
+  },
+  "metrics": {
+    "retrieved_matches": 16370,
+    "recall_percent": 94.5478,
+    "total_candidate_pairs": 8555167,
+    "mean_candidates": 1711.0334,
+    "median_candidates": 233.5,
+    "p90": 3792.4000000000015,
+    "p95": 8339.2,
+    "p99": 26163.15,
+    "max": 59456,
+    "min": 1
+  },
+  "sha256_digest": "873c791862d91ae0c91f26047c4787af50de93e32d06db878e0d5802956f2c5c",
+  "reference_file": "output\\golden_reference_seed42.pkl",
+  "created_at": "2026-09-26T22:18:02Z"
+}

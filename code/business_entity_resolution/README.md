@@ -13,13 +13,14 @@ code/business_entity_resolution/
 ├── environment.yml                # Conda environment definition
 ├── pyproject.toml                 # PEP 517/621 packaging metadata
 └── src/                           # Core source modules
-    ├── __init__.py                # Package initialization
+    ├── __init__.py                # Package initialization (exports production retrieval API)
     ├── data_loader.py             # Chunked streaming loaders for multi-GB TSVs
     ├── preprocessing.py           # Unicode NFKC normalization, tokenization, & legal suffix cleaners
+    ├── retrieval.py               # Canonical frozen production retrieval (Combo 3 + Sec A + C2-A)
+    ├── blocking.py                # Legacy multi-index candidate blocker
     ├── profile_data.py            # Memory-safe dataset profiler & exploratory data analysis
     ├── analyze_true_matches.py     # Ground truth diagnostic: agreement rates, distributions, edit distances
     ├── analyze_hard_negatives.py   # Adversarial & hard negative mining, token collision profiling
-    ├── blocking.py                # Multi-index candidate blocker with stopword filtering
     └── evaluation.py              # Micro, macro, and per-source F0.5 evaluation suite
 ```
 
@@ -109,23 +110,43 @@ python src/analyze_hard_negatives.py --data-dir path/to/dataset --sample-size 50
 
 ---
 
-### 5. Multi-Index Candidate Blocker (`blocking.py`)
-High-recall inverted-index blocker designed to scale to 10M+ records without quadratic memory blowup.
+### 5. Frozen Production Retrieval Engine (`retrieval.py`)
+Canonical high-recall candidate retrieval architecture selected from conducted validation experiments. Combines three complementary retrieval layers:
 
-```bash
-python src/blocking.py --data-dir path/to/dataset --sample-size 5000
-```
+1. **Combo 3 (Primary Frequency-Aware Multi-Index)**:
+   - `(country, name_norm)` exact normalized match.
+   - `(country, name_sorted)` token-sorted match.
+   - `(country, name_compact)` space/punctuation-stripped compact match.
+   - Informative name token overlap ($\ge 2$ shared tokens).
+   - Informative address token overlap ($\ge 3$ shared tokens).
+   - Rare informative name token ($DF \le 500$) co-occurring with name stopword token.
+   - Rare address number ($DF \le 500, \text{len} \ge 3$) co-occurring with address token ($DF \le 1000$).
+   - Rare address 2-token overlap ($DF \le 500$).
+   - Single rare informative name token ($\text{len} \ge 5, DF \le 50$).
+   - Rare compact prefix-5 ($\text{len} \ge 5, DF \le 50$).
+2. **Secondary A (Address Overlap)**:
+   - $\ge 2$ shared informative address tokens with $DF \le 2000$.
+3. **C2-A (Country + Building Number + Address Token)**:
+   - Same country + shared building/address number + $\ge 1$ address token with $DF \le 500$.
 
-**Blocking Strategies Combined:**
-1. **`country + name_norm`**: Catches exact normalized name matches within the same country (~78.8% of true pairs).
-2. **`country + name_sorted`**: Catches token permutation differences (e.g., `"Amazon India"` vs `"India Amazon"`).
-3. **`country + name_compact`**: Catches punctuation and spacing variations (e.g., `"Wal-Mart"` vs `"Walmart"`).
-4. **`country + informative name tokens`**: Catches partial/sub-token matches using stopword-filtered tokens (length $\ge 3$, non-legal keywords).
-5. **`country + address tokens`**: Catches name variations sharing distinctive address elements.
+#### Note on Secondary B Removal
+Secondary B (single informative name token with length $\ge 4$ and $DF \le 100$) was rigorously evaluated across two independent validation splits:
+- `seed=42`: Contributed only 10 unique true matches while adding 19,089 candidate pairs (~1,909 candidates per match).
+- `seed=123`: Contributed only 9 unique true matches while adding 20,317 candidate pairs (~2,257 candidates per match).
+Because the marginal recall gain was negligible relative to the substantial candidate volume explosion, Secondary B is excluded from production retrieval.
 
-**Safety Mechanisms:**
-- Enforces an empirical stopword list (`pvt`, `ltd`, `limited`, `private`, `llc`, `inc`, `corp`, `services`, `solutions`, etc.).
-- Truncates oversized inverted-index buckets to protect against candidate explosion on adversarial queries.
+#### Validated Architecture Metrics (5,000 $S_1$ queries, full $S_2 + S_3$ universe):
+- **Seed=42 Validation**:
+  - Retrieved True Matches: 16,370 / 17,314 (94.55% recall)
+  - Total Candidate Pairs: 8,555,167
+  - Distribution: Mean 1,711.03 / $S_1$, Median 233.5, P90 3,792.4, P95 8,339.2, P99 26,163.2, Max 59,456
+  - Canonical SHA-256 Digest: `873c791862d91ae0c91f26047c4787af50de93e32d06db878e0d5802956f2c5c`
+- **Seed=123 Validation**:
+  - Retrieved True Matches: 16,264 / 17,205 (94.53% recall)
+  - Total Candidate Pairs: 9,595,099 (Mean 1,919.02 / $S_1$)
+
+#### Legacy Blocker (`blocking.py`)
+`blocking.py` contains the early prototype blocker (`InvertedIndexBlocker`) and is preserved for historical baseline comparisons. Production execution uses `retrieval.py`.
 
 ---
 

@@ -33,7 +33,10 @@ Business-Entity-Resolution-Challenge/
 ├── docs/                                      # Official problem statement & challenge PDF
 │   └── Business Entity Resolution Challenge.pdf
 ├── dataset/                                   # Local data directory (train/test TSVs)
-├── output/                                    # Pipeline outputs (candidate_pairs.tsv, matching_results.tsv)
+├── output/                                    # Pipeline outputs and validation manifests
+├── tests/                                     # Automated test suite (regression & edge cases)
+│   ├── test_production_retrieval_regression.py
+│   └── test_retrieval_edge_cases.py
 ├── utils/                                     # Utility scripts (submission validator)
 └── code/
     └── business_entity_resolution/            # Main ML pipeline package
@@ -45,10 +48,11 @@ Business-Entity-Resolution-Challenge/
             ├── __init__.py
             ├── data_loader.py                 # Chunked, streaming TSV reader for multi-GB files
             ├── preprocessing.py               # Unicode NFKC, Indic-safe cleaner & normalizer
+            ├── retrieval.py                   # Canonical frozen production retrieval (Combo 3 + Sec A + C2-A)
+            ├── blocking.py                    # Legacy multi-index candidate blocker
             ├── profile_data.py                # Memory-safe EDA & dataset profiling
             ├── analyze_true_matches.py        # Ground truth distribution & agreement diagnostics
             ├── analyze_hard_negatives.py      # Hard negative mining & token collision profiling
-            ├── blocking.py                    # Multi-index candidate blocker with stopword filtering
             └── evaluation.py                  # Micro, macro, and per-source F0.5 metrics
 ```
 
@@ -76,9 +80,15 @@ flowchart TD
 2. **Diagnostic Analysis** (`analyze_true_matches.py`, `analyze_hard_negatives.py`):
    - Deep inspection of true match distributions (78%+ exact name agreement across true pairs, 99.4% country agreement).
    - Identification of high-frequency legal stopwords causing candidate combinatorial explosion.
-3. **Multi-Index Blocking** (`blocking.py`):
-   - Inverted indexing on `country + name_norm`, `country + name_sorted`, `country + name_compact`, and informative name & address tokens.
-   - Stopword filtering on corporate legal terms to maintain high recall while reducing candidate pairs by orders of magnitude.
+3. **Frozen Production Retrieval** (`retrieval.py`):
+   - Multi-layer, frequency-aware candidate retrieval architecture selected from conducted validation experiments:
+     - **Combo 3**: Primary multi-index frequency-aware retrieval combining exact normalized, token-sorted, compact, 2-token name overlap, 3-token address overlap, rare name token + stopword co-occurrence, address number + address token co-occurrence, rare address 2-token overlap, rare name token ($DF \le 50$), and rare compact prefix-5 ($DF \le 50$).
+     - **Secondary A**: High-recall address token overlap ($\ge 2$ shared informative address tokens with document frequency $DF \le 2000$).
+     - **C2-A**: Country match + building/address number + address token ($DF \le 500$).
+   - **Exclusion of Secondary B**: Evaluated on two independent validation samples (`seed=42` and `seed=123`) and excluded from production retrieval because it contributed only 10 unique matches for ~19k candidates on `seed=42` and 9 unique matches for ~20k candidates on `seed=123`.
+   - **Validated Retrieval Performance** (5,000 $S_1$ validation records, full $S_2 + S_3$ universe):
+     - `seed=42`: 16,370 / 17,314 true matches (94.55% recall), 8,555,167 candidates (mean 1,711.03 / $S_1$).
+     - `seed=123`: 16,264 / 17,205 true matches (94.53% recall), 9,595,099 candidates (mean 1,919.02 / $S_1$).
 4. **Scoring & Resolution** (`evaluation.py`):
    - Evaluates micro and macro Precision, Recall, and $F_{0.5}$ with support for singletons.
 

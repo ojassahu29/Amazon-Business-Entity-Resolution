@@ -41,3 +41,6 @@ dataset/test/*.tsv
 
 # Generated outputs
 output/*.tsv
+
+# Generated retrieval caches
+output/*.pkl

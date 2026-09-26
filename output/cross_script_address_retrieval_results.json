@@ -1,0 +1,1336 @@
+{
+  "results": [
+    {
+      "variant_id": "Variant C2-A",
+      "name": "Country + Shared Address Number + 1 Addr Token (DF <= 500)",
+      "retrieved_true_matches": 16312,
+      "total_val_matches": 17314,
+      "recall": 0.9421277578837934,
+      "newly_recovered_over_c3": 94,
+      "newly_recovered_over_c3ab": 70,
+      "total_candidates": 8467371,
+      "mean_candidates_per_s1": 1693.4742,
+      "median_candidates": 222.0,
+      "p90_candidates": 3782.300000000001,
+      "p95_candidates": 8339.2,
+      "p99_candidates": 26163.15,
+      "max_candidates": 59456,
+      "total_added_candidates": 4058,
+      "added_mean_candidates": 0.8115999999999985,
+      "efficiency_total": 0.023164120256283883,
+      "efficiency_mean": 115.82060128141963,
+      "recall_gain_per_1000_cands_s1": 668.9419041320297,
+      "affected_s1_count": 488,
+      "recovered_cross_script_count": 40,
+      "recovered_other_missed_count": 54,
+      "cross_script_zero_name_tokens": 22,
+      "cross_script_zero_name_char_overlap": 13,
+      "cross_script_depend_addr_num": 40,
+      "cross_script_depend_pincode": 0,
+      "cross_script_have_shared_addr_tok": 40,
+      "recovered_examples": [
+        {
+          "s1_id": "S1-594639890",
+          "cand_id": "S3-264516911",
+          "s1_name": "Jonell's Brewing",
+          "cand_name": "J0nell's (Brewing)",
+          "s1_addr": "CT, 66 Buell Street, North Haven",
+          "cand_addr": "66 Buell Street, North Haven, Connecticut",
+          "shared_numbers": [
+            "66"
+          ],
+          "shared_addr_tokens": [
+            "buell",
+            "haven"
+          ],
+          "source": "S3",
+          "retrieval_evidence": "Shared number: ['66'] + Shared Addr Token: ['buell', 'haven']"
+        },
+        {
+          "s1_id": "S1-936116075",
+          "cand_id": "S3-576914791",
+          "s1_name": "Hutchinson, Chrysa, Esq., P.C.",
+          "cand_name": "Hutchins0n, Crhrysa, Esq., P.C.",
+          "s1_addr": "75 Ringgold Street, Brownsville, TX",
+          "cand_addr": "75 Ringgold Street, Brownsville, Texas",
+          "shared_numbers": [
+            "75"
+          ],
+          "shared_addr_tokens": [
+            "ringgold",
+            "brownsville"
+          ],
+          "source": "S3",
+          "retrieval_evidence": "Shared number: ['75'] + Shared Addr Token: ['ringgold', 'brownsville']"
+        },
+        {
+          "s1_id": "S1-936116075",
+          "cand_id": "S2-48788412",
+          "s1_name": "Hutchinson, Chrysa, Esq., P.C.",
+          "cand_name": "hutchinsonchrysaesq.com",
+          "s1_addr": "75 Ringgold Street, Brownsville, TX",
+          "cand_addr": "75 RINGGOLD ST, TX, BROWNSVILLE",
+          "shared_numbers": [
+            "75"
+          ],
+          "shared_addr_tokens": [
+            "ringgold",
+            "brownsville"
+          ],
+          "source": "S2",
+          "retrieval_evidence": "Shared number: ['75'] + Shared Addr Token: ['ringgold', 'brownsville']"
+        },
+        {
+          "s1_id": "S1-192899223",
+          "cand_id": "S2-643148629",
+          "s1_name": "Gonzalez Dave LLC",
+          "cand_name": "gónzalezdave.com",
+          "s1_addr": "417 Melanie Street, San Tan Valley, AZ",
+          "cand_addr": "417 MELANIE STREET, QUEEN CREEK, AZ",
+          "shared_numbers": [
+            "417"
+          ],
+          "shared_addr_tokens": [
+            "417",
+            "melanie"
+          ],
+          "source": "S2",
+          "retrieval_evidence": "Shared number: ['417'] + Shared Addr Token: ['417', 'melanie']"
+        },
+        {
+          "s1_id": "S1-819290306",
+          "cand_id": "S3-457057660",
+          "s1_name": "Smart Global Private Limited",
+          "cand_name": "ஸ்மார்ட் குளோபல் பிரைவேட் லிமிடெட்",
+          "s1_addr": "Chennai, Tamil Nadu, Chennai, 2C Southboag Road T Nagar, Old No 51 New No 14 Flat",
+          "cand_addr": "தமிழ்நாடு, Old No 53 New No 14 Flet, 2C Southboag Road T Nagar, Chennai",
+          "shared_numbers": [
+            "2c",
+            "14"
+          ],
+          "shared_addr_tokens": [
+            "southboag"
+          ],
+          "source": "S3",
+          "retrieval_evidence": "Shared number: ['2c', '14'] + Shared Addr Token: ['southboag']"
+        },
+        {
+          "s1_id": "S1-819290306",
+          "cand_id": "S3-620602407",
+          "s1_name": "Smart Global Private Limited",
+          "cand_name": "ஸ்மார்ட் குளோபல் பிரைவேட் லிமிடெட்",
+          "s1_addr": "Chennai, Tamil Nadu, Chennai, 2C Southboag Road T Nagar, Old No 51 New No 14 Flat",
+          "cand_addr": "H.no 53 New No 14 Flat, Chennai, தமிழ்நாடு, Chennai, 2C Southboag Road T Nagar",
+          "shared_numbers": [
+            "2c",
+            "14"
+          ],
+          "shared_addr_tokens": [
+            "southboag"
+          ],
+          "source": "S3",
+          "retrieval_evidence": "Shared number: ['2c', '14'] + Shared Addr Token: ['southboag']"
+        },
+        {
+          "s1_id": "S1-295859366",
+          "cand_id": "S2-700894013",
+          "s1_name": "Supreme Producer Private Limited",
+          "cand_name": "ಸುಪ್ರೀಮ್ ಪ್ರೊಡ್ಯೂಸರ್ ಪ್ರೈವೇಟ್ ಲಿಮಿಟೆಡ್",
+          "s1_addr": "Ark 48, 1St Floor, No.48, R.V.Road, Bangalore South, Bangalore, Karnataka",
+          "cand_addr": "ARK 48, 1ST FLOOR, NO.48, R.V.ROAD, BANGALORE, BANGALORE SOUTH, Karnataka",
+          "shared_numbers": [
+            "1st",
+            "48"
+          ],
+          "shared_addr_tokens": [
+            "1st",
+            "ark"
+          ],
+          "source": "S2",
+          "retrieval_evidence": "Shared number: ['1st', '48'] + Shared Addr Token: ['1st', 'ark']"
+        },
+        {
+          "s1_id": "S1-230302529",
+          "cand_id": "S2-931524038",
+          "s1_name": "Edythe's United Home Improvements P.C.",
+          "cand_name": "Xylociraonyx",
+          "s1_addr": "226 Church Street, Alva, OK",
+          "cand_addr": "226 CHURDH STREET, PO BOX 116, ALVA, OK",
+          "shared_numbers": [
+            "226"
+          ],
+          "shared_addr_tokens": [
+            "alva",
+            "226"
+          ],
+          "source": "S2",
+          "retrieval_evidence": "Shared number: ['226'] + Shared Addr Token: ['alva', '226']"
+        },
+        {
+          "s1_id": "S1-583111690",
+          "cand_id": "S3-543164333",
+          "s1_name": "Blv Charitable Pvt Ltd",
+          "cand_name": "8lv Charitable Pvt (Ltd)",
+          "s1_addr": "New No.36, Old No.34, Sarangapani Street, T. Nagar, Chennai, Tamil Nadu",
+          "cand_addr": "H.no 36, Old No.34, Sarangapani Street, T. Nagar, Chennai, TN",
+          "shared_numbers": [
+            "36",
+            "34"
+          ],
+          "shared_addr_tokens": [
+            "sarangapani"
+          ],
+          "source": "S3",
+          "retrieval_evidence": "Shared number: ['36', '34'] + Shared Addr Token: ['sarangapani']"
+        },
+        {
+          "s1_id": "S1-237990037",
+          "cand_id": "S3-496376923",
+          "s1_name": "Valley Worldwide LLC",
+          "cand_name": "Valley Worhldwied LLC",
+          "s1_addr": "32 Havens Avenue, Unit Apartment 1, Owasco, NY",
+          "cand_addr": "#32 Havens Avenue, # Apartment 1, Auburn, New York",
+          "shared_numbers": [
+            "32"
+          ],
+          "shared_addr_tokens": [
+            "apartment",
+            "havens"
+          ],
+          "source": "S3",
+          "retrieval_evidence": "Shared number: ['32'] + Shared Addr Token: ['apartment', 'havens']"
+        }
+      ],
+      "false_positive_pairs": [
+        [
+          "S1-997043596",
+          "S3-429165240"
+        ],
+        [
+          "S1-997043596",
+          "S3-485613123"
+        ],
+        [
+          "S1-997043596",
+          "S2-213419548"
+        ],
+        [
+          "S1-997043596",
+          "S3-514210097"
+        ],
+        [
+          "S1-997043596",
+          "S3-200741373"
+        ],
+        [
+          "S1-997043596",
+          "S3-885006453"
+        ],
+        [
+          "S1-997043596",
+          "S3-473045348"
+        ],
+        [
+          "S1-997043596",
+          "S3-728107194"
+        ],
+        [
+          "S1-997043596",
+          "S3-431127716"
+        ],
+        [
+          "S1-997043596",
+          "S3-739202949"
+        ]
+      ],
+      "false_positive_examples": [
+        {
+          "s1_id": "S1-997043596",
+          "cand_id": "S3-429165240",
+          "s1_name": "Millions Steel Co",
+          "cand_name": "Aaa Sbvea Samiti Enterprises",
+          "s1_addr": "Plot No. 115, Sector -82, Jlpl, Ropar, Rupnagar, Punjab",
+          "cand_addr": "#152 B Sector 82 Jlpl, S.a.s Nagar, ਪੰਜਾਬ"
+        },
+        {
+          "s1_id": "S1-997043596",
+          "cand_id": "S3-485613123",
+          "s1_name": "Millions Steel Co",
+          "cand_name": "ਸ਼ਿਵਾ ਕੰਸਲਟੈਂਸੀ ਪ੍ਰਾਈਵੇਟ ਲਿਮਟਿਡ",
+          "s1_addr": "Plot No. 115, Sector -82, Jlpl, Ropar, Rupnagar, Punjab",
+          "cand_addr": "Mohali, No 185/4, Mohali, ਪੰਜਾਬ, Jlpl Industrial Park, Sector 82"
+        },
+        {
+          "s1_id": "S1-997043596",
+          "cand_id": "S2-213419548",
+          "s1_name": "Millions Steel Co",
+          "cand_name": "Dr brightmarketing.com",
+          "s1_addr": "Plot No. 115, Sector -82, Jlpl, Ropar, Rupnagar, Punjab",
+          "cand_addr": "SCO 56, LEVEL I, SECTOR 82, JLPL MOHALI PB IN, MOHALI, <NULL>, Punjab"
+        },
+        {
+          "s1_id": "S1-997043596",
+          "cand_id": "S3-514210097",
+          "s1_name": "Millions Steel Co",
+          "cand_name": "Dr Ace Pvt Ltd Partners",
+          "s1_addr": "Plot No. 115, Sector -82, Jlpl, Ropar, Rupnagar, Punjab",
+          "cand_addr": "Jlpl Sector 82, Industrial Area, #165, S.a.s.nagar (Mohali), ਪੰਜਾਬ, Rupnagar"
+        },
+        {
+          "s1_id": "S1-997043596",
+          "cand_id": "S3-200741373",
+          "s1_name": "Millions Steel Co",
+          "cand_name": "The Retina & Co",
+          "s1_addr": "Plot No. 115, Sector -82, Jlpl, Ropar, Rupnagar, Punjab",
+          "cand_addr": "Built-up Industrila Plot, No. 729 Sector 82, Jlpl, S.a.s.nagar (Mohali), Rupnagar, PB"
+        },
+        {
+          "s1_id": "S1-997043596",
+          "cand_id": "S3-885006453",
+          "s1_name": "Millions Steel Co",
+          "cand_name": "Radhika Electricals",
+          "s1_addr": "Plot No. 115, Sector -82, Jlpl, Ropar, Rupnagar, Punjab",
+          "cand_addr": "Mohali, Plot 1555A Jlpl Sector 82, Mohali, PB"
+        },
+        {
+          "s1_id": "S1-997043596",
+          "cand_id": "S3-473045348",
+          "s1_name": "Millions Steel Co",
+          "cand_name": "Sri Red Impex Bakery Private Limited",
+          "s1_addr": "Plot No. 115, Sector -82, Jlpl, Ropar, Rupnagar, Punjab",
+          "cand_addr": "Hn 342 953, Sector 82 Jlpl Industrial Area, Mohali, PB"
+        },
+        {
+          "s1_id": "S1-997043596",
+          "cand_id": "S3-728107194",
+          "s1_name": "Millions Steel Co",
+          "cand_name": "Best Developers Private Limited",
+          "s1_addr": "Plot No. 115, Sector -82, Jlpl, Ropar, Rupnagar, Punjab",
+          "cand_addr": "Plot No #1266-C, Sector-82, Jlpl Industrial Area, Sas Nagar, Mohali, PB"
+        },
+        {
+          "s1_id": "S1-997043596",
+          "cand_id": "S3-431127716",
+          "s1_name": "Millions Steel Co",
+          "cand_name": "Gujarat Food Private",
+          "s1_addr": "Plot No. 115, Sector -82, Jlpl, Ropar, Rupnagar, Punjab",
+          "cand_addr": "No 401, Sector 82, Jlpl, Airport Road, Mohali, PB"
+        },
+        {
+          "s1_id": "S1-997043596",
+          "cand_id": "S3-739202949",
+          "s1_name": "Millions Steel Co",
+          "cand_name": "ਰਾਮ ਇੰਟਰਨੈਸ਼ਨਲ ਪ੍ਰਾਈਵੇਟ ਲਿਮਟਿਡ",
+          "s1_addr": "Plot No. 115, Sector -82, Jlpl, Ropar, Rupnagar, Punjab",
+          "cand_addr": "Plot No 51, Jlpl, Industrial Area, Sector 82, S.a.s.nagar (Mohali), Rupnagar, ਪੰਜਾਬ"
+        }
+      ]
+    },
+    {
+      "variant_id": "Variant C2-B",
+      "name": "Country + Shared Address Number + 1 Addr Token (DF <= 1,000)",
+      "retrieved_true_matches": 16379,
+      "total_val_matches": 17314,
+      "recall": 0.945997458703939,
+      "newly_recovered_over_c3": 161,
+      "newly_recovered_over_c3ab": 127,
+      "total_candidates": 8797155,
+      "mean_candidates_per_s1": 1759.431,
+      "median_candidates": 279.0,
+      "p90_candidates": 3858.000000000022,
+      "p95_candidates": 8452.100000000011,
+      "p99_candidates": 26180.320000000007,
+      "max_candidates": 59456,
+      "total_added_candidates": 333842,
+      "added_mean_candidates": 66.76839999999993,
+      "efficiency_total": 0.0004822640650367539,
+      "efficiency_mean": 2.4113203251837723,
+      "recall_gain_per_1000_cands_s1": 13.926997373130256,
+      "affected_s1_count": 1206,
+      "recovered_cross_script_count": 73,
+      "recovered_other_missed_count": 88,
+      "cross_script_zero_name_tokens": 38,
+      "cross_script_zero_name_char_overlap": 23,
+      "cross_script_depend_addr_num": 73,
+      "cross_script_depend_pincode": 0,
+      "cross_script_have_shared_addr_tok": 73,
+      "recovered_examples": [
+        {
+          "s1_id": "S1-467880743",
+          "cand_id": "S2-207245576",
+          "s1_name": "Department of Education",
+          "cand_name": "DEPARTMENT OF | www.department.com",
+          "s1_addr": "50 Tamarack Lane, Pomona, NY",
+          "cand_addr": "50 TAMARACK LN, POMONA, NY",
+          "shared_numbers": [
+            "50"
+          ],
+          "shared_addr_tokens": [
+            "tamarack",
+            "pomona"
+          ],
+          "source": "S2",
+          "retrieval_evidence": "Shared number: ['50'] + Shared Addr Token: ['tamarack', 'pomona']"
+        },
+        {
+          "s1_id": "S1-594639890",
+          "cand_id": "S3-264516911",
+          "s1_name": "Jonell's Brewing",
+          "cand_name": "J0nell's (Brewing)",
+          "s1_addr": "CT, 66 Buell Street, North Haven",
+          "cand_addr": "66 Buell Street, North Haven, Connecticut",
+          "shared_numbers": [
+            "66"
+          ],
+          "shared_addr_tokens": [
+            "buell",
+            "haven"
+          ],
+          "source": "S3",
+          "retrieval_evidence": "Shared number: ['66'] + Shared Addr Token: ['buell', 'haven']"
+        },
+        {
+          "s1_id": "S1-936116075",
+          "cand_id": "S3-576914791",
+          "s1_name": "Hutchinson, Chrysa, Esq., P.C.",
+          "cand_name": "Hutchins0n, Crhrysa, Esq., P.C.",
+          "s1_addr": "75 Ringgold Street, Brownsville, TX",
+          "cand_addr": "75 Ringgold Street, Brownsville, Texas",
+          "shared_numbers": [
+            "75"
+          ],
+          "shared_addr_tokens": [
+            "ringgold",
+            "brownsville"
+          ],
+          "source": "S3",
+          "retrieval_evidence": "Shared number: ['75'] + Shared Addr Token: ['ringgold', 'brownsville']"
+        },
+        {
+          "s1_id": "S1-936116075",
+          "cand_id": "S2-48788412",
+          "s1_name": "Hutchinson, Chrysa, Esq., P.C.",
+          "cand_name": "hutchinsonchrysaesq.com",
+          "s1_addr": "75 Ringgold Street, Brownsville, TX",
+          "cand_addr": "75 RINGGOLD ST, TX, BROWNSVILLE",
+          "shared_numbers": [
+            "75"
+          ],
+          "shared_addr_tokens": [
+            "ringgold",
+            "brownsville"
+          ],
+          "source": "S2",
+          "retrieval_evidence": "Shared number: ['75'] + Shared Addr Token: ['ringgold', 'brownsville']"
+        },
+        {
+          "s1_id": "S1-425430826",
+          "cand_id": "S3-519930458",
+          "s1_name": "Ferron Assets LLC",
+          "cand_name": "ferronassets.com",
+          "s1_addr": "563 Main Street, West Newbury, MA",
+          "cand_addr": "Massachusetts, 563 Main St, West Newbury",
+          "shared_numbers": [
+            "563"
+          ],
+          "shared_addr_tokens": [
+            "563",
+            "newbury"
+          ],
+          "source": "S3",
+          "retrieval_evidence": "Shared number: ['563'] + Shared Addr Token: ['563', 'newbury']"
+        },
+        {
+          "s1_id": "S1-192899223",
+          "cand_id": "S2-643148629",
+          "s1_name": "Gonzalez Dave LLC",
+          "cand_name": "gónzalezdave.com",
+          "s1_addr": "417 Melanie Street, San Tan Valley, AZ",
+          "cand_addr": "417 MELANIE STREET, QUEEN CREEK, AZ",
+          "shared_numbers": [
+            "417"
+          ],
+          "shared_addr_tokens": [
+            "417",
+            "melanie"
+          ],
+          "source": "S2",
+          "retrieval_evidence": "Shared number: ['417'] + Shared Addr Token: ['417', 'melanie']"
+        },
+        {
+          "s1_id": "S1-819290306",
+          "cand_id": "S3-457057660",
+          "s1_name": "Smart Global Private Limited",
+          "cand_name": "ஸ்மார்ட் குளோபல் பிரைவேட் லிமிடெட்",
+          "s1_addr": "Chennai, Tamil Nadu, Chennai, 2C Southboag Road T Nagar, Old No 51 New No 14 Flat",
+          "cand_addr": "தமிழ்நாடு, Old No 53 New No 14 Flet, 2C Southboag Road T Nagar, Chennai",
+          "shared_numbers": [
+            "2c",
+            "14"
+          ],
+          "shared_addr_tokens": [
+            "southboag"
+          ],
+          "source": "S3",
+          "retrieval_evidence": "Shared number: ['2c', '14'] + Shared Addr Token: ['southboag']"
+        },
+        {
+          "s1_id": "S1-819290306",
+          "cand_id": "S3-620602407",
+          "s1_name": "Smart Global Private Limited",
+          "cand_name": "ஸ்மார்ட் குளோபல் பிரைவேட் லிமிடெட்",
+          "s1_addr": "Chennai, Tamil Nadu, Chennai, 2C Southboag Road T Nagar, Old No 51 New No 14 Flat",
+          "cand_addr": "H.no 53 New No 14 Flat, Chennai, தமிழ்நாடு, Chennai, 2C Southboag Road T Nagar",
+          "shared_numbers": [
+            "2c",
+            "14"
+          ],
+          "shared_addr_tokens": [
+            "southboag"
+          ],
+          "source": "S3",
+          "retrieval_evidence": "Shared number: ['2c', '14'] + Shared Addr Token: ['southboag']"
+        },
+        {
+          "s1_id": "S1-870267195",
+          "cand_id": "S2-369733065",
+          "s1_name": "D 8 Pinnacle Starlink LLC",
+          "cand_name": "Tavosolquo",
+          "s1_addr": "20 Ewing Street, Saint David, AZ",
+          "cand_addr": "20 EWING SREET, ST DAVID, AZ",
+          "shared_numbers": [
+            "20"
+          ],
+          "shared_addr_tokens": [
+            "david",
+            "ewing"
+          ],
+          "source": "S2",
+          "retrieval_evidence": "Shared number: ['20'] + Shared Addr Token: ['david', 'ewing']"
+        },
+        {
+          "s1_id": "S1-295859366",
+          "cand_id": "S2-700894013",
+          "s1_name": "Supreme Producer Private Limited",
+          "cand_name": "ಸುಪ್ರೀಮ್ ಪ್ರೊಡ್ಯೂಸರ್ ಪ್ರೈವೇಟ್ ಲಿಮಿಟೆಡ್",
+          "s1_addr": "Ark 48, 1St Floor, No.48, R.V.Road, Bangalore South, Bangalore, Karnataka",
+          "cand_addr": "ARK 48, 1ST FLOOR, NO.48, R.V.ROAD, BANGALORE, BANGALORE SOUTH, Karnataka",
+          "shared_numbers": [
+            "1st",
+            "48"
+          ],
+          "shared_addr_tokens": [
+            "1st",
+            "ark"
+          ],
+          "source": "S2",
+          "retrieval_evidence": "Shared number: ['1st', '48'] + Shared Addr Token: ['1st', 'ark']"
+        }
+      ],
+      "false_positive_pairs": [
+        [
+          "S1-20569380",
+          "S3-14646048"
+        ],
+        [
+          "S1-20569380",
+          "S3-121085211"
+        ],
+        [
+          "S1-20569380",
+          "S3-422744175"
+        ],
+        [
+          "S1-20569380",
+          "S2-422125384"
+        ],
+        [
+          "S1-20569380",
+          "S2-892696808"
+        ],
+        [
+          "S1-20569380",
+          "S3-574572347"
+        ],
+        [
+          "S1-20569380",
+          "S2-921031015"
+        ],
+        [
+          "S1-20569380",
+          "S2-459734072"
+        ],
+        [
+          "S1-20569380",
+          "S2-294345516"
+        ],
+        [
+          "S1-20569380",
+          "S3-253003773"
+        ]
+      ],
+      "false_positive_examples": [
+        {
+          "s1_id": "S1-20569380",
+          "cand_id": "S3-14646048",
+          "s1_name": "Chiropractic Sterling Group",
+          "cand_name": "1297 Ocean Holdings Services",
+          "s1_addr": "494 1830, Orem, UT",
+          "cand_addr": "494 Saint Nick Road, Memphis, Tennessee"
+        },
+        {
+          "s1_id": "S1-20569380",
+          "cand_id": "S3-121085211",
+          "s1_name": "Chiropractic Sterling Group",
+          "cand_name": "Laurianne Aguilar Dte Holdings",
+          "s1_addr": "494 1830, Orem, UT",
+          "cand_addr": "494 Bald Hill Road, Wells, Maine"
+        },
+        {
+          "s1_id": "S1-20569380",
+          "cand_id": "S3-422744175",
+          "s1_name": "Chiropractic Sterling Group",
+          "cand_name": "Hempstead Wicdlinfe Better (Network)",
+          "s1_addr": "494 1830, Orem, UT",
+          "cand_addr": "#494 Mansfield Ave, New York, Hempstead"
+        },
+        {
+          "s1_id": "S1-20569380",
+          "cand_id": "S2-422125384",
+          "s1_name": "Chiropractic Sterling Group",
+          "cand_name": "Sandoval  Tree Partners",
+          "s1_addr": "494 1830, Orem, UT",
+          "cand_addr": "494 220, TX, PO BOX 7910, KILLEEN CIITY"
+        },
+        {
+          "s1_id": "S1-20569380",
+          "cand_id": "S2-892696808",
+          "s1_name": "Chiropractic Sterling Group",
+          "cand_name": "howesrojasgalloway.com",
+          "s1_addr": "494 1830, Orem, UT",
+          "cand_addr": "1830 STEWART AVENUE, PARK RIDGE, IL"
+        },
+        {
+          "s1_id": "S1-20569380",
+          "cand_id": "S3-574572347",
+          "s1_name": "Chiropractic Sterling Group",
+          "cand_name": "Foot & Ánkle Care LLC",
+          "s1_addr": "494 1830, Orem, UT",
+          "cand_addr": "Alabama, 494 Court St, Slocmb"
+        },
+        {
+          "s1_id": "S1-20569380",
+          "cand_id": "S2-921031015",
+          "s1_name": "Chiropractic Sterling Group",
+          "cand_name": "Burt, Maryr0se T.,",
+          "s1_addr": "494 1830, Orem, UT",
+          "cand_addr": "1830 PARK BEACH DR, ABERDEEN, MD"
+        },
+        {
+          "s1_id": "S1-20569380",
+          "cand_id": "S2-459734072",
+          "s1_name": "Chiropractic Sterling Group",
+          "cand_name": "Davis-Reigsnal LLC",
+          "s1_addr": "494 1830, Orem, UT",
+          "cand_addr": "1830- MERIFIELD DR, MECKLENBURG COUNTY, VA"
+        },
+        {
+          "s1_id": "S1-20569380",
+          "cand_id": "S2-294345516",
+          "s1_name": "Chiropractic Sterling Group",
+          "cand_name": "METRO ANIRTLML HOSPITAL LTD",
+          "s1_addr": "494 1830, Orem, UT",
+          "cand_addr": "1830 ISAACS CREEK RD, LOST CREEK, WV"
+        },
+        {
+          "s1_id": "S1-20569380",
+          "cand_id": "S3-253003773",
+          "s1_name": "Chiropractic Sterling Group",
+          "cand_name": "BESCH OPTIMAL PIPELINE L.L.C.",
+          "s1_addr": "494 1830, Orem, UT",
+          "cand_addr": "1830 Merryvale Rd, Vestavia Hills, Alabama"
+        }
+      ]
+    },
+    {
+      "variant_id": "Variant C2-C",
+      "name": "Country + Shared Address Number + 1 Addr Token (DF <= 2,000)",
+      "retrieved_true_matches": 16448,
+      "total_val_matches": 17314,
+      "recall": 0.9499826729814024,
+      "newly_recovered_over_c3": 230,
+      "newly_recovered_over_c3ab": 194,
+      "total_candidates": 9532958,
+      "mean_candidates_per_s1": 1906.5916,
+      "median_candidates": 383.5,
+      "p90_candidates": 4046.0000000000036,
+      "p95_candidates": 8653.300000000001,
+      "p99_candidates": 26336.96000000002,
+      "max_candidates": 59462,
+      "total_added_candidates": 1069645,
+      "added_mean_candidates": 213.92899999999986,
+      "efficiency_total": 0.00021502461096905982,
+      "efficiency_mean": 1.0751230548453,
+      "recall_gain_per_1000_cands_s1": 6.209559055361556,
+      "affected_s1_count": 2042,
+      "recovered_cross_script_count": 108,
+      "recovered_other_missed_count": 122,
+      "cross_script_zero_name_tokens": 58,
+      "cross_script_zero_name_char_overlap": 40,
+      "cross_script_depend_addr_num": 108,
+      "cross_script_depend_pincode": 0,
+      "cross_script_have_shared_addr_tok": 108,
+      "recovered_examples": [
+        {
+          "s1_id": "S1-467880743",
+          "cand_id": "S2-207245576",
+          "s1_name": "Department of Education",
+          "cand_name": "DEPARTMENT OF | www.department.com",
+          "s1_addr": "50 Tamarack Lane, Pomona, NY",
+          "cand_addr": "50 TAMARACK LN, POMONA, NY",
+          "shared_numbers": [
+            "50"
+          ],
+          "shared_addr_tokens": [
+            "tamarack",
+            "pomona"
+          ],
+          "source": "S2",
+          "retrieval_evidence": "Shared number: ['50'] + Shared Addr Token: ['tamarack', 'pomona']"
+        },
+        {
+          "s1_id": "S1-594639890",
+          "cand_id": "S3-264516911",
+          "s1_name": "Jonell's Brewing",
+          "cand_name": "J0nell's (Brewing)",
+          "s1_addr": "CT, 66 Buell Street, North Haven",
+          "cand_addr": "66 Buell Street, North Haven, Connecticut",
+          "shared_numbers": [
+            "66"
+          ],
+          "shared_addr_tokens": [
+            "buell",
+            "haven"
+          ],
+          "source": "S3",
+          "retrieval_evidence": "Shared number: ['66'] + Shared Addr Token: ['buell', 'haven']"
+        },
+        {
+          "s1_id": "S1-936116075",
+          "cand_id": "S3-576914791",
+          "s1_name": "Hutchinson, Chrysa, Esq., P.C.",
+          "cand_name": "Hutchins0n, Crhrysa, Esq., P.C.",
+          "s1_addr": "75 Ringgold Street, Brownsville, TX",
+          "cand_addr": "75 Ringgold Street, Brownsville, Texas",
+          "shared_numbers": [
+            "75"
+          ],
+          "shared_addr_tokens": [
+            "ringgold",
+            "brownsville"
+          ],
+          "source": "S3",
+          "retrieval_evidence": "Shared number: ['75'] + Shared Addr Token: ['ringgold', 'brownsville']"
+        },
+        {
+          "s1_id": "S1-936116075",
+          "cand_id": "S2-48788412",
+          "s1_name": "Hutchinson, Chrysa, Esq., P.C.",
+          "cand_name": "hutchinsonchrysaesq.com",
+          "s1_addr": "75 Ringgold Street, Brownsville, TX",
+          "cand_addr": "75 RINGGOLD ST, TX, BROWNSVILLE",
+          "shared_numbers": [
+            "75"
+          ],
+          "shared_addr_tokens": [
+            "ringgold",
+            "brownsville"
+          ],
+          "source": "S2",
+          "retrieval_evidence": "Shared number: ['75'] + Shared Addr Token: ['ringgold', 'brownsville']"
+        },
+        {
+          "s1_id": "S1-425430826",
+          "cand_id": "S3-519930458",
+          "s1_name": "Ferron Assets LLC",
+          "cand_name": "ferronassets.com",
+          "s1_addr": "563 Main Street, West Newbury, MA",
+          "cand_addr": "Massachusetts, 563 Main St, West Newbury",
+          "shared_numbers": [
+            "563"
+          ],
+          "shared_addr_tokens": [
+            "563",
+            "newbury"
+          ],
+          "source": "S3",
+          "retrieval_evidence": "Shared number: ['563'] + Shared Addr Token: ['563', 'newbury']"
+        },
+        {
+          "s1_id": "S1-192899223",
+          "cand_id": "S2-643148629",
+          "s1_name": "Gonzalez Dave LLC",
+          "cand_name": "gónzalezdave.com",
+          "s1_addr": "417 Melanie Street, San Tan Valley, AZ",
+          "cand_addr": "417 MELANIE STREET, QUEEN CREEK, AZ",
+          "shared_numbers": [
+            "417"
+          ],
+          "shared_addr_tokens": [
+            "417",
+            "melanie"
+          ],
+          "source": "S2",
+          "retrieval_evidence": "Shared number: ['417'] + Shared Addr Token: ['417', 'melanie']"
+        },
+        {
+          "s1_id": "S1-843544105",
+          "cand_id": "S2-359975942",
+          "s1_name": "SVJ Energy Private Limited",
+          "cand_name": "seprivate.com",
+          "s1_addr": "Door No.1-2-285, Domalaguda, Hyderabad, Telangana",
+          "cand_addr": "DOOR NO.1-2-285, HYDERABAD, Telangana",
+          "shared_numbers": [
+            "1-2-285"
+          ],
+          "shared_addr_tokens": [
+            "285"
+          ],
+          "source": "S2",
+          "retrieval_evidence": "Shared number: ['1-2-285'] + Shared Addr Token: ['285']"
+        },
+        {
+          "s1_id": "S1-819290306",
+          "cand_id": "S3-457057660",
+          "s1_name": "Smart Global Private Limited",
+          "cand_name": "ஸ்மார்ட் குளோபல் பிரைவேட் லிமிடெட்",
+          "s1_addr": "Chennai, Tamil Nadu, Chennai, 2C Southboag Road T Nagar, Old No 51 New No 14 Flat",
+          "cand_addr": "தமிழ்நாடு, Old No 53 New No 14 Flet, 2C Southboag Road T Nagar, Chennai",
+          "shared_numbers": [
+            "2c",
+            "14"
+          ],
+          "shared_addr_tokens": [
+            "southboag"
+          ],
+          "source": "S3",
+          "retrieval_evidence": "Shared number: ['2c', '14'] + Shared Addr Token: ['southboag']"
+        },
+        {
+          "s1_id": "S1-819290306",
+          "cand_id": "S3-620602407",
+          "s1_name": "Smart Global Private Limited",
+          "cand_name": "ஸ்மார்ட் குளோபல் பிரைவேட் லிமிடெட்",
+          "s1_addr": "Chennai, Tamil Nadu, Chennai, 2C Southboag Road T Nagar, Old No 51 New No 14 Flat",
+          "cand_addr": "H.no 53 New No 14 Flat, Chennai, தமிழ்நாடு, Chennai, 2C Southboag Road T Nagar",
+          "shared_numbers": [
+            "2c",
+            "14"
+          ],
+          "shared_addr_tokens": [
+            "southboag"
+          ],
+          "source": "S3",
+          "retrieval_evidence": "Shared number: ['2c', '14'] + Shared Addr Token: ['southboag']"
+        },
+        {
+          "s1_id": "S1-870267195",
+          "cand_id": "S2-369733065",
+          "s1_name": "D 8 Pinnacle Starlink LLC",
+          "cand_name": "Tavosolquo",
+          "s1_addr": "20 Ewing Street, Saint David, AZ",
+          "cand_addr": "20 EWING SREET, ST DAVID, AZ",
+          "shared_numbers": [
+            "20"
+          ],
+          "shared_addr_tokens": [
+            "david",
+            "ewing"
+          ],
+          "source": "S2",
+          "retrieval_evidence": "Shared number: ['20'] + Shared Addr Token: ['david', 'ewing']"
+        }
+      ],
+      "false_positive_pairs": [
+        [
+          "S1-306339121",
+          "S2-906901174"
+        ],
+        [
+          "S1-306339121",
+          "S3-845900935"
+        ],
+        [
+          "S1-306339121",
+          "S3-710778751"
+        ],
+        [
+          "S1-306339121",
+          "S3-331487293"
+        ],
+        [
+          "S1-306339121",
+          "S3-256294070"
+        ],
+        [
+          "S1-306339121",
+          "S2-802796104"
+        ],
+        [
+          "S1-306339121",
+          "S2-535610495"
+        ],
+        [
+          "S1-306339121",
+          "S3-501202780"
+        ],
+        [
+          "S1-306339121",
+          "S3-284586175"
+        ],
+        [
+          "S1-306339121",
+          "S2-942177443"
+        ]
+      ],
+      "false_positive_examples": [
+        {
+          "s1_id": "S1-306339121",
+          "cand_id": "S2-906901174",
+          "s1_name": "Jain Consulting Private Limited",
+          "cand_name": "Rjs Educational Society Infratech Limited",
+          "s1_addr": "Office No 426 & 427, 4Th Flr, Sec-19A, Plt No 2, 3 & 4, Bombay Oil Seeds, Navi Mumbai, Thane, Maharashtra",
+          "cand_addr": "PLOT NO 426 , 02ND FLOOR INDUSTRIAL AREA, PHASE 8B, SAS NAGAR, MOHALI, Punjab"
+        },
+        {
+          "s1_id": "S1-306339121",
+          "cand_id": "S3-845900935",
+          "s1_name": "Jain Consulting Private Limited",
+          "cand_name": "Royal Impex Private Limited",
+          "s1_addr": "Office No 426 & 427, 4Th Flr, Sec-19A, Plt No 2, 3 & 4, Bombay Oil Seeds, Navi Mumbai, Thane, Maharashtra",
+          "cand_addr": "Plot 426 B-722, Ahmedabad, Ahmedabad City, GJ"
+        },
+        {
+          "s1_id": "S1-306339121",
+          "cand_id": "S3-710778751",
+          "s1_name": "Jain Consulting Private Limited",
+          "cand_name": "Jaxvantage",
+          "s1_addr": "Office No 426 & 427, 4Th Flr, Sec-19A, Plt No 2, 3 & 4, Bombay Oil Seeds, Navi Mumbai, Thane, Maharashtra",
+          "cand_addr": "1 / 426, East Street, S. Kadamankulam Village, Kariapatti, Virudhunagar, TN"
+        },
+        {
+          "s1_id": "S1-306339121",
+          "cand_id": "S3-331487293",
+          "s1_name": "Jain Consulting Private Limited",
+          "cand_name": "শিব ফাউন্ডেশন লিমিটেড",
+          "s1_addr": "Office No 426 & 427, 4Th Flr, Sec-19A, Plt No 2, 3 & 4, Bombay Oil Seeds, Navi Mumbai, Thane, Maharashtra",
+          "cand_addr": "2-21 Hemant Basu Sarani Centre Point, Room No 426, Kolkata, Howrah, পশ্চিমবঙ্গ"
+        },
+        {
+          "s1_id": "S1-306339121",
+          "cand_id": "S3-256294070",
+          "s1_name": "Jain Consulting Private Limited",
+          "cand_name": "Planet Chit Ltd",
+          "s1_addr": "Office No 426 & 427, 4Th Flr, Sec-19A, Plt No 2, 3 & 4, Bombay Oil Seeds, Navi Mumbai, Thane, Maharashtra",
+          "cand_addr": "Xviii/427 Kallettumkara Po, Kallettumkara, Thrissur, KL"
+        },
+        {
+          "s1_id": "S1-306339121",
+          "cand_id": "S2-802796104",
+          "s1_name": "Jain Consulting Private Limited",
+          "cand_name": "विजन डेवलपर्स",
+          "s1_addr": "Office No 426 & 427, 4Th Flr, Sec-19A, Plt No 2, 3 & 4, Bombay Oil Seeds, Navi Mumbai, Thane, Maharashtra",
+          "cand_addr": "DOOR NO 108 S-12-78PL-88 TO 91, HAWARE MALL SECTOR 19A, THANE, Maharashtra"
+        },
+        {
+          "s1_id": "S1-306339121",
+          "cand_id": "S2-535610495",
+          "s1_name": "Jain Consulting Private Limited",
+          "cand_name": "Digit Departmental Holdings Prmvt  Limited",
+          "s1_addr": "Office No 426 & 427, 4Th Flr, Sec-19A, Plt No 2, 3 & 4, Bombay Oil Seeds, Navi Mumbai, Thane, Maharashtra",
+          "cand_addr": "PLOT 426 KMC XII/541A, OPP. MATHOTH TEMPLE KANHANGAD SOUTH PO, KANHANGD, Kerala"
+        },
+        {
+          "s1_id": "S1-306339121",
+          "cand_id": "S3-501202780",
+          "s1_name": "Jain Consulting Private Limited",
+          "cand_name": "Zephlyra Co DBA Future Finance Private Limited",
+          "s1_addr": "Office No 426 & 427, 4Th Flr, Sec-19A, Plt No 2, 3 & 4, Bombay Oil Seeds, Navi Mumbai, Thane, Maharashtra",
+          "cand_addr": "T-12 Plot No. 88 To 91, Sector- 19A, Nerul, Thane, Maharashtra"
+        },
+        {
+          "s1_id": "S1-306339121",
+          "cand_id": "S3-284586175",
+          "s1_name": "Jain Consulting Private Limited",
+          "cand_name": "Nirmala Holdings  LLP Center",
+          "s1_addr": "Office No 426 & 427, 4Th Flr, Sec-19A, Plt No 2, 3 & 4, Bombay Oil Seeds, Navi Mumbai, Thane, Maharashtra",
+          "cand_addr": "#427 Wing B Dhananjay Apts, Off Veera Desai Road, Thane, Mumbai, MH"
+        },
+        {
+          "s1_id": "S1-306339121",
+          "cand_id": "S2-942177443",
+          "s1_name": "Jain Consulting Private Limited",
+          "cand_name": "Pune City Sylsem Private Limited",
+          "s1_addr": "Office No 426 & 427, 4Th Flr, Sec-19A, Plt No 2, 3 & 4, Bombay Oil Seeds, Navi Mumbai, Thane, Maharashtra",
+          "cand_addr": "UNIT NO 427, S R NO 17/1A, (P), GOODWILL SQUARE, PUNE CITY, महाराष्ट्र"
+        }
+      ]
+    },
+    {
+      "variant_id": "Variant C2-D",
+      "name": "Country + Shared Pincode + 1 Addr Token (DF <= 2,000)",
+      "retrieved_true_matches": 16218,
+      "total_val_matches": 17314,
+      "recall": 0.9366986253898579,
+      "newly_recovered_over_c3": 0,
+      "newly_recovered_over_c3ab": 0,
+      "total_candidates": 8463313,
+      "mean_candidates_per_s1": 1692.6626,
+      "median_candidates": 221.5,
+      "p90_candidates": 3782.300000000001,
+      "p95_candidates": 8339.2,
+      "p99_candidates": 26163.130000000005,
+      "max_candidates": 59455,
+      "total_added_candidates": 0,
+      "added_mean_candidates": 0.0,
+      "efficiency_total": 0.0,
+      "efficiency_mean": 0.0,
+      "recall_gain_per_1000_cands_s1": 0.0,
+      "affected_s1_count": 0,
+      "recovered_cross_script_count": 0,
+      "recovered_other_missed_count": 0,
+      "cross_script_zero_name_tokens": 0,
+      "cross_script_zero_name_char_overlap": 0,
+      "cross_script_depend_addr_num": 0,
+      "cross_script_depend_pincode": 0,
+      "cross_script_have_shared_addr_tok": 0,
+      "recovered_examples": [],
+      "false_positive_pairs": [],
+      "false_positive_examples": []
+    },
+    {
+      "variant_id": "Variant C2-E",
+      "name": "Country + (Shared Addr Number OR Pincode) + 1 Addr Token (DF <= 2,000)",
+      "retrieved_true_matches": 16448,
+      "total_val_matches": 17314,
+      "recall": 0.9499826729814024,
+      "newly_recovered_over_c3": 230,
+      "newly_recovered_over_c3ab": 194,
+      "total_candidates": 9532958,
+      "mean_candidates_per_s1": 1906.5916,
+      "median_candidates": 383.5,
+      "p90_candidates": 4046.0000000000036,
+      "p95_candidates": 8653.300000000001,
+      "p99_candidates": 26336.96000000002,
+      "max_candidates": 59462,
+      "total_added_candidates": 1069645,
+      "added_mean_candidates": 213.92899999999986,
+      "efficiency_total": 0.00021502461096905982,
+      "efficiency_mean": 1.0751230548453,
+      "recall_gain_per_1000_cands_s1": 6.209559055361556,
+      "affected_s1_count": 2042,
+      "recovered_cross_script_count": 108,
+      "recovered_other_missed_count": 122,
+      "cross_script_zero_name_tokens": 58,
+      "cross_script_zero_name_char_overlap": 40,
+      "cross_script_depend_addr_num": 108,
+      "cross_script_depend_pincode": 0,
+      "cross_script_have_shared_addr_tok": 108,
+      "recovered_examples": [
+        {
+          "s1_id": "S1-467880743",
+          "cand_id": "S2-207245576",
+          "s1_name": "Department of Education",
+          "cand_name": "DEPARTMENT OF | www.department.com",
+          "s1_addr": "50 Tamarack Lane, Pomona, NY",
+          "cand_addr": "50 TAMARACK LN, POMONA, NY",
+          "shared_numbers": [
+            "50"
+          ],
+          "shared_addr_tokens": [
+            "tamarack",
+            "pomona"
+          ],
+          "source": "S2",
+          "retrieval_evidence": "Shared number: ['50'] + Shared Addr Token: ['tamarack', 'pomona']"
+        },
+        {
+          "s1_id": "S1-594639890",
+          "cand_id": "S3-264516911",
+          "s1_name": "Jonell's Brewing",
+          "cand_name": "J0nell's (Brewing)",
+          "s1_addr": "CT, 66 Buell Street, North Haven",
+          "cand_addr": "66 Buell Street, North Haven, Connecticut",
+          "shared_numbers": [
+            "66"
+          ],
+          "shared_addr_tokens": [
+            "buell",
+            "haven"
+          ],
+          "source": "S3",
+          "retrieval_evidence": "Shared number: ['66'] + Shared Addr Token: ['buell', 'haven']"
+        },
+        {
+          "s1_id": "S1-936116075",
+          "cand_id": "S3-576914791",
+          "s1_name": "Hutchinson, Chrysa, Esq., P.C.",
+          "cand_name": "Hutchins0n, Crhrysa, Esq., P.C.",
+          "s1_addr": "75 Ringgold Street, Brownsville, TX",
+          "cand_addr": "75 Ringgold Street, Brownsville, Texas",
+          "shared_numbers": [
+            "75"
+          ],
+          "shared_addr_tokens": [
+            "ringgold",
+            "brownsville"
+          ],
+          "source": "S3",
+          "retrieval_evidence": "Shared number: ['75'] + Shared Addr Token: ['ringgold', 'brownsville']"
+        },
+        {
+          "s1_id": "S1-936116075",
+          "cand_id": "S2-48788412",
+          "s1_name": "Hutchinson, Chrysa, Esq., P.C.",
+          "cand_name": "hutchinsonchrysaesq.com",
+          "s1_addr": "75 Ringgold Street, Brownsville, TX",
+          "cand_addr": "75 RINGGOLD ST, TX, BROWNSVILLE",
+          "shared_numbers": [
+            "75"
+          ],
+          "shared_addr_tokens": [
+            "ringgold",
+            "brownsville"
+          ],
+          "source": "S2",
+          "retrieval_evidence": "Shared number: ['75'] + Shared Addr Token: ['ringgold', 'brownsville']"
+        },
+        {
+          "s1_id": "S1-425430826",
+          "cand_id": "S3-519930458",
+          "s1_name": "Ferron Assets LLC",
+          "cand_name": "ferronassets.com",
+          "s1_addr": "563 Main Street, West Newbury, MA",
+          "cand_addr": "Massachusetts, 563 Main St, West Newbury",
+          "shared_numbers": [
+            "563"
+          ],
+          "shared_addr_tokens": [
+            "563",
+            "newbury"
+          ],
+          "source": "S3",
+          "retrieval_evidence": "Shared number: ['563'] + Shared Addr Token: ['563', 'newbury']"
+        },
+        {
+          "s1_id": "S1-192899223",
+          "cand_id": "S2-643148629",
+          "s1_name": "Gonzalez Dave LLC",
+          "cand_name": "gónzalezdave.com",
+          "s1_addr": "417 Melanie Street, San Tan Valley, AZ",
+          "cand_addr": "417 MELANIE STREET, QUEEN CREEK, AZ",
+          "shared_numbers": [
+            "417"
+          ],
+          "shared_addr_tokens": [
+            "417",
+            "melanie"
+          ],
+          "source": "S2",
+          "retrieval_evidence": "Shared number: ['417'] + Shared Addr Token: ['417', 'melanie']"
+        },
+        {
+          "s1_id": "S1-843544105",
+          "cand_id": "S2-359975942",
+          "s1_name": "SVJ Energy Private Limited",
+          "cand_name": "seprivate.com",
+          "s1_addr": "Door No.1-2-285, Domalaguda, Hyderabad, Telangana",
+          "cand_addr": "DOOR NO.1-2-285, HYDERABAD, Telangana",
+          "shared_numbers": [
+            "1-2-285"
+          ],
+          "shared_addr_tokens": [
+            "285"
+          ],
+          "source": "S2",
+          "retrieval_evidence": "Shared number: ['1-2-285'] + Shared Addr Token: ['285']"
+        },
+        {
+          "s1_id": "S1-819290306",
+          "cand_id": "S3-457057660",
+          "s1_name": "Smart Global Private Limited",
+          "cand_name": "ஸ்மார்ட் குளோபல் பிரைவேட் லிமிடெட்",
+          "s1_addr": "Chennai, Tamil Nadu, Chennai, 2C Southboag Road T Nagar, Old No 51 New No 14 Flat",
+          "cand_addr": "தமிழ்நாடு, Old No 53 New No 14 Flet, 2C Southboag Road T Nagar, Chennai",
+          "shared_numbers": [
+            "2c",
+            "14"
+          ],
+          "shared_addr_tokens": [
+            "southboag"
+          ],
+          "source": "S3",
+          "retrieval_evidence": "Shared number: ['2c', '14'] + Shared Addr Token: ['southboag']"
+        },
+        {
+          "s1_id": "S1-819290306",
+          "cand_id": "S3-620602407",
+          "s1_name": "Smart Global Private Limited",
+          "cand_name": "ஸ்மார்ட் குளோபல் பிரைவேட் லிமிடெட்",
+          "s1_addr": "Chennai, Tamil Nadu, Chennai, 2C Southboag Road T Nagar, Old No 51 New No 14 Flat",
+          "cand_addr": "H.no 53 New No 14 Flat, Chennai, தமிழ்நாடு, Chennai, 2C Southboag Road T Nagar",
+          "shared_numbers": [
+            "2c",
+            "14"
+          ],
+          "shared_addr_tokens": [
+            "southboag"
+          ],
+          "source": "S3",
+          "retrieval_evidence": "Shared number: ['2c', '14'] + Shared Addr Token: ['southboag']"
+        },
+        {
+          "s1_id": "S1-870267195",
+          "cand_id": "S2-369733065",
+          "s1_name": "D 8 Pinnacle Starlink LLC",
+          "cand_name": "Tavosolquo",
+          "s1_addr": "20 Ewing Street, Saint David, AZ",
+          "cand_addr": "20 EWING SREET, ST DAVID, AZ",
+          "shared_numbers": [
+            "20"
+          ],
+          "shared_addr_tokens": [
+            "david",
+            "ewing"
+          ],
+          "source": "S2",
+          "retrieval_evidence": "Shared number: ['20'] + Shared Addr Token: ['david', 'ewing']"
+        }
+      ],
+      "false_positive_pairs": [
+        [
+          "S1-306339121",
+          "S2-906901174"
+        ],
+        [
+          "S1-306339121",
+          "S3-845900935"
+        ],
+        [
+          "S1-306339121",
+          "S3-710778751"
+        ],
+        [
+          "S1-306339121",
+          "S3-256294070"
+        ],
+        [
+          "S1-306339121",
+          "S3-331487293"
+        ],
+        [
+          "S1-306339121",
+          "S2-802796104"
+        ],
+        [
+          "S1-306339121",
+          "S2-535610495"
+        ],
+        [
+          "S1-306339121",
+          "S3-501202780"
+        ],
+        [
+          "S1-306339121",
+          "S3-284586175"
+        ],
+        [
+          "S1-306339121",
+          "S2-942177443"
+        ]
+      ],
+      "false_positive_examples": [
+        {
+          "s1_id": "S1-306339121",
+          "cand_id": "S2-906901174",
+          "s1_name": "Jain Consulting Private Limited",
+          "cand_name": "Rjs Educational Society Infratech Limited",
+          "s1_addr": "Office No 426 & 427, 4Th Flr, Sec-19A, Plt No 2, 3 & 4, Bombay Oil Seeds, Navi Mumbai, Thane, Maharashtra",
+          "cand_addr": "PLOT NO 426 , 02ND FLOOR INDUSTRIAL AREA, PHASE 8B, SAS NAGAR, MOHALI, Punjab"
+        },
+        {
+          "s1_id": "S1-306339121",
+          "cand_id": "S3-845900935",
+          "s1_name": "Jain Consulting Private Limited",
+          "cand_name": "Royal Impex Private Limited",
+          "s1_addr": "Office No 426 & 427, 4Th Flr, Sec-19A, Plt No 2, 3 & 4, Bombay Oil Seeds, Navi Mumbai, Thane, Maharashtra",
+          "cand_addr": "Plot 426 B-722, Ahmedabad, Ahmedabad City, GJ"
+        },
+        {
+          "s1_id": "S1-306339121",
+          "cand_id": "S3-710778751",
+          "s1_name": "Jain Consulting Private Limited",
+          "cand_name": "Jaxvantage",
+          "s1_addr": "Office No 426 & 427, 4Th Flr, Sec-19A, Plt No 2, 3 & 4, Bombay Oil Seeds, Navi Mumbai, Thane, Maharashtra",
+          "cand_addr": "1 / 426, East Street, S. Kadamankulam Village, Kariapatti, Virudhunagar, TN"
+        },
+        {
+          "s1_id": "S1-306339121",
+          "cand_id": "S3-256294070",
+          "s1_name": "Jain Consulting Private Limited",
+          "cand_name": "Planet Chit Ltd",
+          "s1_addr": "Office No 426 & 427, 4Th Flr, Sec-19A, Plt No 2, 3 & 4, Bombay Oil Seeds, Navi Mumbai, Thane, Maharashtra",
+          "cand_addr": "Xviii/427 Kallettumkara Po, Kallettumkara, Thrissur, KL"
+        },
+        {
+          "s1_id": "S1-306339121",
+          "cand_id": "S3-331487293",
+          "s1_name": "Jain Consulting Private Limited",
+          "cand_name": "শিব ফাউন্ডেশন লিমিটেড",
+          "s1_addr": "Office No 426 & 427, 4Th Flr, Sec-19A, Plt No 2, 3 & 4, Bombay Oil Seeds, Navi Mumbai, Thane, Maharashtra",
+          "cand_addr": "2-21 Hemant Basu Sarani Centre Point, Room No 426, Kolkata, Howrah, পশ্চিমবঙ্গ"
+        },
+        {
+          "s1_id": "S1-306339121",
+          "cand_id": "S2-802796104",
+          "s1_name": "Jain Consulting Private Limited",
+          "cand_name": "विजन डेवलपर्स",
+          "s1_addr": "Office No 426 & 427, 4Th Flr, Sec-19A, Plt No 2, 3 & 4, Bombay Oil Seeds, Navi Mumbai, Thane, Maharashtra",
+          "cand_addr": "DOOR NO 108 S-12-78PL-88 TO 91, HAWARE MALL SECTOR 19A, THANE, Maharashtra"
+        },
+        {
+          "s1_id": "S1-306339121",
+          "cand_id": "S2-535610495",
+          "s1_name": "Jain Consulting Private Limited",
+          "cand_name": "Digit Departmental Holdings Prmvt  Limited",
+          "s1_addr": "Office No 426 & 427, 4Th Flr, Sec-19A, Plt No 2, 3 & 4, Bombay Oil Seeds, Navi Mumbai, Thane, Maharashtra",
+          "cand_addr": "PLOT 426 KMC XII/541A, OPP. MATHOTH TEMPLE KANHANGAD SOUTH PO, KANHANGD, Kerala"
+        },
+        {
+          "s1_id": "S1-306339121",
+          "cand_id": "S3-501202780",
+          "s1_name": "Jain Consulting Private Limited",
+          "cand_name": "Zephlyra Co DBA Future Finance Private Limited",
+          "s1_addr": "Office No 426 & 427, 4Th Flr, Sec-19A, Plt No 2, 3 & 4, Bombay Oil Seeds, Navi Mumbai, Thane, Maharashtra",
+          "cand_addr": "T-12 Plot No. 88 To 91, Sector- 19A, Nerul, Thane, Maharashtra"
+        },
+        {
+          "s1_id": "S1-306339121",
+          "cand_id": "S3-284586175",
+          "s1_name": "Jain Consulting Private Limited",
+          "cand_name": "Nirmala Holdings  LLP Center",
+          "s1_addr": "Office No 426 & 427, 4Th Flr, Sec-19A, Plt No 2, 3 & 4, Bombay Oil Seeds, Navi Mumbai, Thane, Maharashtra",
+          "cand_addr": "#427 Wing B Dhananjay Apts, Off Veera Desai Road, Thane, Mumbai, MH"
+        },
+        {
+          "s1_id": "S1-306339121",
+          "cand_id": "S2-942177443",
+          "s1_name": "Jain Consulting Private Limited",
+          "cand_name": "Pune City Sylsem Private Limited",
+          "s1_addr": "Office No 426 & 427, 4Th Flr, Sec-19A, Plt No 2, 3 & 4, Bombay Oil Seeds, Navi Mumbai, Thane, Maharashtra",
+          "cand_addr": "UNIT NO 427, S R NO 17/1A, (P), GOODWILL SQUARE, PUNE CITY, महाराष्ट्र"
+        }
+      ]
+    }
+  ]
+}

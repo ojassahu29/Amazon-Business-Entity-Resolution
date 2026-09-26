@@ -1,0 +1,516 @@
+{
+  "metadata": {
+    "validation_sample_size": 5000,
+    "seed": 42,
+    "total_val_matches": 17314,
+    "combo3_retrieved_matches": 16218,
+    "combo3_recall": 0.9366986253898579,
+    "combo3_missed_matches": 1096,
+    "combo3_missed_pct": 6.330137461014209
+  },
+  "failure_mode_breakdown": [
+    {
+      "category": "1. Multilingual / Cross-Script / Synthetic Obfuscation",
+      "missed_count": 594,
+      "pct_of_missed": 54.1970802919708,
+      "affected_s1_count": 460,
+      "potential_signals": "Address building/plot number fallback (Variant 3) + City token; Romanized address tokens",
+      "examples": [
+        {
+          "s1_id": "S1-338546895",
+          "cand_id": "S3-976371890",
+          "s1_name": "First Foods Private Limited",
+          "cand_name": "\u092b\u0930\u094d\u0938\u094d\u091f \u092b\u0942\u0921\u094d\u0938 \u092a\u094d\u0930\u093e\u0907\u0935\u0947\u091f \u0932\u093f\u092e\u093f\u091f\u0947\u0921",
+          "s1_addr": "Flat No. 29, Riddhi Siddhi Gruhsankul, Sinhgad Road, Anand Nagar, Pune, Maharashtra",
+          "cand_addr": "Fat No. 29, Pune, MH",
+          "shared_name_tokens": [],
+          "shared_addr_tokens": [],
+          "shared_numbers": [
+            "29"
+          ],
+          "name_fuzz": 10.71428571428571,
+          "addr_jaccard": 0.214
+        },
+        {
+          "s1_id": "S1-338546895",
+          "cand_id": "S2-959412356",
+          "s1_name": "First Foods Private Limited",
+          "cand_name": "\u092b\u0930\u094d\u0938\u094d\u091f \u092b\u0942\u0921\u094d\u0938 \u092a\u094d\u0930\u093e\u0907\u0935\u0947\u091f \u0932\u093f\u092e\u093f\u091f\u0947\u0921",
+          "s1_addr": "Flat No. 29, Riddhi Siddhi Gruhsankul, Sinhgad Road, Anand Nagar, Pune, Maharashtra",
+          "cand_addr": "#29, PUNE, Maharashtra",
+          "shared_name_tokens": [],
+          "shared_addr_tokens": [],
+          "shared_numbers": [
+            "29"
+          ],
+          "name_fuzz": 10.71428571428571,
+          "addr_jaccard": 0.25
+        },
+        {
+          "s1_id": "S1-249021867",
+          "cand_id": "S2-869907700",
+          "s1_name": "Al Technologies Limited",
+          "cand_name": "\u0905\u0932 \u091f\u0947\u0915\u094d\u0928\u094b\u0932\u0949\u091c\u0940\u091c \u0932\u093f\u092e\u093f\u091f\u0947\u0921",
+          "s1_addr": "Plot No. 3/1, Chitrakoot Scheme, Sector-3, Jaipur, Rajasthan",
+          "cand_addr": "PLOT NO. 3/1, JAIPUR, Rajasthan",
+          "shared_name_tokens": [],
+          "shared_addr_tokens": [
+            "jaipur",
+            "rajasthan"
+          ],
+          "shared_numbers": [
+            "3/1"
+          ],
+          "name_fuzz": 8.888888888888891,
+          "addr_jaccard": 0.667
+        }
+      ]
+    },
+    {
+      "category": "2. Name Spelling / OCR Typo / Fuzzy Variation",
+      "missed_count": 296,
+      "pct_of_missed": 27.00729927007299,
+      "affected_s1_count": 258,
+      "potential_signals": "Targeted fuzzy name matching (RapidFuzz ratio >= 80) within address-number blocks or city blocks",
+      "examples": [
+        {
+          "s1_id": "S1-275544899",
+          "cand_id": "S3-856446196",
+          "s1_name": "Doyle Continental Source",
+          "cand_name": "Doylecontinentalsource.Com",
+          "s1_addr": "250 374, Plattsburgh, NY",
+          "cand_addr": "00250 374, Cadyvlile, New York",
+          "shared_name_tokens": [],
+          "shared_addr_tokens": [
+            "374"
+          ],
+          "shared_numbers": [
+            "374"
+          ],
+          "name_fuzz": 88.0,
+          "addr_jaccard": 0.125
+        },
+        {
+          "s1_id": "S1-249021867",
+          "cand_id": "S3-571279074",
+          "s1_name": "Al Technologies Limited",
+          "cand_name": "Al Technologies Ltd",
+          "s1_addr": "Plot No. 3/1, Chitrakoot Scheme, Sector-3, Jaipur, Rajasthan",
+          "cand_addr": "Plot No. 3/1, Jaipur, RJ",
+          "shared_name_tokens": [
+            "technologies"
+          ],
+          "shared_addr_tokens": [
+            "jaipur"
+          ],
+          "shared_numbers": [
+            "3/1"
+          ],
+          "name_fuzz": 90.47619047619048,
+          "addr_jaccard": 0.5
+        },
+        {
+          "s1_id": "S1-249021867",
+          "cand_id": "S3-594634491",
+          "s1_name": "Al Technologies Limited",
+          "cand_name": "Al Technologies",
+          "s1_addr": "Plot No. 3/1, Chitrakoot Scheme, Sector-3, Jaipur, Rajasthan",
+          "cand_addr": "Plot No. 3/1, Jaipur, RJ",
+          "shared_name_tokens": [
+            "technologies"
+          ],
+          "shared_addr_tokens": [
+            "jaipur"
+          ],
+          "shared_numbers": [
+            "3/1"
+          ],
+          "name_fuzz": 78.94736842105263,
+          "addr_jaccard": 0.5
+        }
+      ]
+    },
+    {
+      "category": "3. Single Informative Shared Name Token",
+      "missed_count": 89,
+      "pct_of_missed": 8.120437956204379,
+      "affected_s1_count": 79,
+      "potential_signals": "Relaxed single token blocker: allow DF <= 200 (vs current DF <= 50) when length >= 5",
+      "examples": [
+        {
+          "s1_id": "S1-476578586",
+          "cand_id": "S2-652583797",
+          "s1_name": "HFN Ace Point",
+          "cand_name": "HFN P0INT  PARTNERS",
+          "s1_addr": "201 Ridgemont Drive, Blair Township, PA",
+          "cand_addr": "RIDGEMONT DRIVE, PENN FARMS, PA",
+          "shared_name_tokens": [
+            "hfn"
+          ],
+          "shared_addr_tokens": [
+            "ridgemont"
+          ],
+          "shared_numbers": [],
+          "name_fuzz": 51.61290322580645,
+          "addr_jaccard": 0.375
+        },
+        {
+          "s1_id": "S1-282250991",
+          "cand_id": "S3-415533005",
+          "s1_name": "Indo Producer",
+          "cand_name": "M/s Indo Prdce",
+          "s1_addr": "Bangalore South, G01, Gm Istha, Jai Fortune, Apartment, Hagadur, Gmistha, Karnataka, Bangalore",
+          "cand_addr": "G01, Bangalore South, Bangalore, KA",
+          "shared_name_tokens": [
+            "indo"
+          ],
+          "shared_addr_tokens": [
+            "g01"
+          ],
+          "shared_numbers": [],
+          "name_fuzz": 74.07407407407408,
+          "addr_jaccard": 0.25
+        },
+        {
+          "s1_id": "S1-382197822",
+          "cand_id": "S3-854744093",
+          "s1_name": "Om Logistics Limited",
+          "cand_name": "Fayexylo formerly: Om Logistics Limited",
+          "s1_addr": "West Bengal, Calcutta, Kolkata, 20 Phars Lane",
+          "cand_addr": "20 Phars Lane, Kolkata, Calcutta, West Bengal",
+          "shared_name_tokens": [
+            "logistics"
+          ],
+          "shared_addr_tokens": [
+            "calcutta",
+            "phars"
+          ],
+          "shared_numbers": [
+            "20"
+          ],
+          "name_fuzz": 68.96551724137932,
+          "addr_jaccard": 1.0
+        }
+      ]
+    },
+    {
+      "category": "4. Address Number / Pincode Evidence Available",
+      "missed_count": 64,
+      "pct_of_missed": 5.839416058394161,
+      "affected_s1_count": 62,
+      "potential_signals": "Relaxed number blocker: Address number (DF <= 1000) + city/state or 1 legal name suffix",
+      "examples": [
+        {
+          "s1_id": "S1-625830155",
+          "cand_id": "S2-995383088",
+          "s1_name": "#Zion Automobile LLC",
+          "cand_name": "Wexlyra",
+          "s1_addr": "31 Clovebrook Road, Mount Pleasant, NY",
+          "cand_addr": "31 CLOVEBROOK ROAD, VALHALLA, NY",
+          "shared_name_tokens": [],
+          "shared_addr_tokens": [
+            "clovebrook"
+          ],
+          "shared_numbers": [
+            "31"
+          ],
+          "name_fuzz": 15.384615384615385,
+          "addr_jaccard": 0.571
+        },
+        {
+          "s1_id": "S1-382197822",
+          "cand_id": "S3-601899294",
+          "s1_name": "Om Logistics Limited",
+          "cand_name": "Om Limited Partners",
+          "s1_addr": "West Bengal, Calcutta, Kolkata, 20 Phars Lane",
+          "cand_addr": "H.no ##20 Phars Lane, Calcutta, WB",
+          "shared_name_tokens": [],
+          "shared_addr_tokens": [
+            "calcutta",
+            "phars"
+          ],
+          "shared_numbers": [
+            "20"
+          ],
+          "name_fuzz": 51.28205128205128,
+          "addr_jaccard": 0.4
+        },
+        {
+          "s1_id": "S1-837516706",
+          "cand_id": "S3-132732710",
+          "s1_name": "Bombay Construction Private Limited",
+          "cand_name": "Lyraectoquo",
+          "s1_addr": "81 Rambagh, Ratlam, Gwalior, Madhya Pradesh",
+          "cand_addr": "H.no 81 Rambahg, Ratlam, Gwalior, MP",
+          "shared_name_tokens": [],
+          "shared_addr_tokens": [
+            "gwalior",
+            "ratlam"
+          ],
+          "shared_numbers": [
+            "81"
+          ],
+          "name_fuzz": 21.739130434782606,
+          "addr_jaccard": 0.3
+        }
+      ]
+    },
+    {
+      "category": "5. Address Overlap Below Current Threshold (2 Shared Tokens)",
+      "missed_count": 37,
+      "pct_of_missed": 3.375912408759124,
+      "affected_s1_count": 36,
+      "potential_signals": "Relaxed 2-token address blocker: allow DF <= 1000 (vs current DF <= 500) for two rare address tokens",
+      "examples": [
+        {
+          "s1_id": "S1-154982437",
+          "cand_id": "S2-188754702",
+          "s1_name": "Refrigeration Trading Private Limited",
+          "cand_name": "TRADINGPRIVATE.COM",
+          "s1_addr": "C-4, Kachnar Shikhar Vineet Talkies, Jabalpur, Madhya Pradesh",
+          "cand_addr": "JABALPUR, C-4, Madhya Pradesh, JABALPUR",
+          "shared_name_tokens": [],
+          "shared_addr_tokens": [
+            "madhya",
+            "jabalpur"
+          ],
+          "shared_numbers": [],
+          "name_fuzz": 58.18181818181818,
+          "addr_jaccard": 0.556
+        },
+        {
+          "s1_id": "S1-291543688",
+          "cand_id": "S3-141063638",
+          "s1_name": "Hari Construction Limited",
+          "cand_name": "Mr Tavogild",
+          "s1_addr": "Plot No.379, Vivekananda Nagar Colony, Kukatpally, Hyderabad, Telangana",
+          "cand_addr": "Plot No.0379, Vivekananda Nagar Colony, Hyderabad, Kukatpally, TG",
+          "shared_name_tokens": [],
+          "shared_addr_tokens": [
+            "vivekananda",
+            "kukatpally"
+          ],
+          "shared_numbers": [],
+          "name_fuzz": 33.333333333333336,
+          "addr_jaccard": 0.636
+        },
+        {
+          "s1_id": "S1-870996451",
+          "cand_id": "S2-877017721",
+          "s1_name": "F G & A Software Inc.",
+          "cand_name": "F  G & A",
+          "s1_addr": "Saco, 29 Stockman Avenue, ME",
+          "cand_addr": "29-C STOCKMAN AVE, SACO, ME",
+          "shared_name_tokens": [],
+          "shared_addr_tokens": [
+            "stockman",
+            "saco"
+          ],
+          "shared_numbers": [],
+          "name_fuzz": 43.47826086956522,
+          "addr_jaccard": 0.571
+        }
+      ]
+    },
+    {
+      "category": "6. Different Name / Trade Alias with Matching Address",
+      "missed_count": 8,
+      "pct_of_missed": 0.7299270072992701,
+      "affected_s1_count": 7,
+      "potential_signals": "Address-only bridge: Address number + 2 address tokens when names are brand aliases",
+      "examples": [
+        {
+          "s1_id": "S1-867745043",
+          "cand_id": "S2-869932941",
+          "s1_name": "Smart Venture LLC",
+          "cand_name": "Kelodelta",
+          "s1_addr": "2 Coyote Lane, ME, Carthage",
+          "cand_addr": "##2 COYOTE LN, DIXFIELD, ME",
+          "shared_name_tokens": [],
+          "shared_addr_tokens": [
+            "coyote"
+          ],
+          "shared_numbers": [],
+          "name_fuzz": 23.076923076923073,
+          "addr_jaccard": 0.429
+        },
+        {
+          "s1_id": "S1-239277080",
+          "cand_id": "S2-916199980",
+          "s1_name": "JJ Mobility",
+          "cand_name": "JJ Mdoooily",
+          "s1_addr": "7351 Martinsburg Road, Mount Vernon, OH",
+          "cand_addr": "Martinsburg Road, M TVERNON, OH",
+          "shared_name_tokens": [],
+          "shared_addr_tokens": [
+            "martinsburg"
+          ],
+          "shared_numbers": [],
+          "name_fuzz": 72.72727272727273,
+          "addr_jaccard": 0.375
+        },
+        {
+          "s1_id": "S1-424421921",
+          "cand_id": "S3-64656701",
+          "s1_name": "Z 8 S Nuclear",
+          "cand_name": "Z  8 S",
+          "s1_addr": "224 Auburn Street, Waterloo, IA",
+          "cand_addr": "224C Auburn Street, Watterloo, Iowa",
+          "shared_name_tokens": [],
+          "shared_addr_tokens": [
+            "auburn"
+          ],
+          "shared_numbers": [],
+          "name_fuzz": 55.55555555555556,
+          "addr_jaccard": 0.25
+        }
+      ]
+    },
+    {
+      "category": "7. Country Mismatch or Missing Address Field",
+      "missed_count": 1,
+      "pct_of_missed": 0.09124087591240876,
+      "affected_s1_count": 1,
+      "potential_signals": "Cross-country fallback for neighboring country codes or international relocations",
+      "examples": [
+        {
+          "s1_id": "S1-474666946",
+          "cand_id": "S3-660874054",
+          "s1_name": "LX Chand Private Limited",
+          "cand_name": "LX Private Limited Partners",
+          "s1_addr": "East Delhi, Delhi, East Delhi, New Seelampur, E-105 Block E",
+          "cand_addr": "",
+          "shared_name_tokens": [],
+          "shared_addr_tokens": [],
+          "shared_numbers": [],
+          "name_fuzz": 70.58823529411764,
+          "addr_jaccard": 0.0
+        }
+      ]
+    },
+    {
+      "category": "8. Residual Multi-Field Distortion / Severe Noise",
+      "missed_count": 7,
+      "pct_of_missed": 0.6386861313868614,
+      "affected_s1_count": 7,
+      "potential_signals": "Weak signal fusion (shared number + 1 rare address token + single 4-gram)",
+      "examples": [
+        {
+          "s1_id": "S1-200936555",
+          "cand_id": "S2-660601981",
+          "s1_name": "Olivares Safe Electronics, Corp",
+          "cand_name": "Umbradovavera",
+          "s1_addr": "803 Violet Avenue, Unit Apartment 7, Hyde Park, NY",
+          "cand_addr": "VIOLET AVENUE, NY, HAVILAND",
+          "shared_name_tokens": [],
+          "shared_addr_tokens": [
+            "violet"
+          ],
+          "shared_numbers": [],
+          "name_fuzz": 23.25581395348837,
+          "addr_jaccard": 0.3
+        },
+        {
+          "s1_id": "S1-916217645",
+          "cand_id": "S3-58473314",
+          "s1_name": "Pushpam Solutions Limited",
+          "cand_name": "Nylayumaumbra",
+          "s1_addr": "718 S/F, Old No-D-53, Kh.No. 525&526, Gali No. 9 Chander Lok C, Olony, Delhi, East Delhi, Delhi",
+          "cand_addr": "S/f, Delhi, DL",
+          "shared_name_tokens": [],
+          "shared_addr_tokens": [],
+          "shared_numbers": [],
+          "name_fuzz": 21.052631578947366,
+          "addr_jaccard": 0.158
+        },
+        {
+          "s1_id": "S1-19352335",
+          "cand_id": "S2-172455762",
+          "s1_name": "Nevarez Dynamic Critical",
+          "cand_name": "Pyraarconyx",
+          "s1_addr": "315 34th Street, Lubbock, TX",
+          "cand_addr": "LBUBOCK, TX, 34RD ST",
+          "shared_name_tokens": [],
+          "shared_addr_tokens": [],
+          "shared_numbers": [],
+          "name_fuzz": 22.857142857142854,
+          "addr_jaccard": 0.125
+        }
+      ]
+    }
+  ],
+  "recovery_hypotheses_evaluation": [
+    {
+      "name": "Hypothesis 1: Single Rare Name Token (len>=5, DF<=200 vs current DF<=50)",
+      "recovered_matches": 30,
+      "pct_of_1096_missed": 2.737226277372263,
+      "mean_added_candidates": 17.4626,
+      "total_added_candidates": 87313,
+      "efficiency_ratio": 1.717957234317914
+    },
+    {
+      "name": "Hypothesis 2: Single Rare Name Token (len>=4, DF<=100)",
+      "recovered_matches": 12,
+      "pct_of_1096_missed": 1.094890510948905,
+      "mean_added_candidates": 3.8288,
+      "total_added_candidates": 19144,
+      "efficiency_ratio": 3.134141245298788
+    },
+    {
+      "name": "Hypothesis 3: Two Rare Addr Tokens (both DF<=1000 vs current DF<=500)",
+      "recovered_matches": 31,
+      "pct_of_1096_missed": 2.8284671532846715,
+      "mean_added_candidates": 3.177,
+      "total_added_candidates": 15885,
+      "efficiency_ratio": 9.757632987094743
+    },
+    {
+      "name": "Hypothesis 4: Two Rare Addr Tokens (both DF<=2000)",
+      "recovered_matches": 82,
+      "pct_of_1096_missed": 7.481751824817519,
+      "mean_added_candidates": 17.5986,
+      "total_added_candidates": 87993,
+      "efficiency_ratio": 4.6594615480776875
+    },
+    {
+      "name": "Hypothesis 5: Addr Number (len>=3, DF<=1000) + Addr Token (DF<=2000)",
+      "recovered_matches": 57,
+      "pct_of_1096_missed": 5.200729927007299,
+      "mean_added_candidates": 80.2422,
+      "total_added_candidates": 401211,
+      "efficiency_ratio": 0.7103494171396099
+    },
+    {
+      "name": "Hypothesis 6: Addr Number (len>=2, DF<=500) + Addr Token (DF<=1000)",
+      "recovered_matches": 0,
+      "pct_of_1096_missed": 0.0,
+      "mean_added_candidates": 0.0,
+      "total_added_candidates": 0,
+      "efficiency_ratio": 0.0
+    },
+    {
+      "name": "Hypothesis 7: Name DF<=1000 + Secondary Token (Variant 1A with DF<=1000)",
+      "recovered_matches": 23,
+      "pct_of_1096_missed": 2.0985401459854014,
+      "mean_added_candidates": 11.99,
+      "total_added_candidates": 59950,
+      "efficiency_ratio": 1.9182652210175146
+    },
+    {
+      "name": "Hypothesis 8: Pincode (5-6 digits, DF<=2000) + 1 Addr Token (DF<=1000)",
+      "recovered_matches": 0,
+      "pct_of_1096_missed": 0.0,
+      "mean_added_candidates": 0.0,
+      "total_added_candidates": 0,
+      "efficiency_ratio": 0.0
+    },
+    {
+      "name": "Hypothesis 9: Targeted Fuzzy Name (Ratio>=80) within Addr Number Blocks",
+      "recovered_matches": 0,
+      "pct_of_1096_missed": 0.0,
+      "mean_added_candidates": 0.0,
+      "total_added_candidates": 0,
+      "efficiency_ratio": 0.0
+    }
+  ]
+}

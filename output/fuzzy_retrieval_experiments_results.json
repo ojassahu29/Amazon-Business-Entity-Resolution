@@ -1,0 +1,764 @@
+{
+  "metadata": {
+    "validation_sample": 5000,
+    "seed": 42,
+    "total_val_positives": 17314,
+    "timestamp": "2026-09-27 02:53:09",
+    "elapsed_seconds": 389.94
+  },
+  "baseline": {
+    "name": "Combo 3 + Secondary A + Secondary B + C2-A",
+    "retrieved_positives": 16380,
+    "recall": 0.9460552154325979,
+    "candidate_stats": {
+      "total": 8574256,
+      "mean": 1714.8512,
+      "median": 235.0,
+      "p90": 3796.1000000000004,
+      "p95": 8339.2,
+      "p99": 26163.15,
+      "max": 59456,
+      "min": 1
+    }
+  },
+  "step1_characterization": {
+    "total_remaining_misses": 934,
+    "cross_script_misses": 528,
+    "fuzzy_ocr_misses": 305,
+    "other_misses": 101,
+    "similarity_distributions": {
+      "rapidfuzz_ratio": {
+        "mean": 80.56661884606446,
+        "median": 83.33333333333334,
+        "min": 13.33333333333333,
+        "max": 97.2972972972973,
+        "counts_ge_95": 22,
+        "counts_ge_90": 73,
+        "counts_ge_85": 136,
+        "counts_ge_80": 187,
+        "counts_ge_75": 226
+      },
+      "token_sort_ratio": {
+        "mean": 76.8333223836836,
+        "median": 80.0,
+        "min": 13.33333333333333,
+        "max": 97.5,
+        "counts_ge_95": 27,
+        "counts_ge_90": 71,
+        "counts_ge_85": 117,
+        "counts_ge_80": 155,
+        "counts_ge_75": 188
+      },
+      "token_set_ratio": {
+        "mean": 84.75680770268694,
+        "median": 88.23529411764706,
+        "min": 41.26984126984127,
+        "max": 100.0,
+        "counts_ge_95": 93,
+        "counts_ge_90": 138,
+        "counts_ge_85": 185,
+        "counts_ge_80": 225,
+        "counts_ge_75": 241
+      },
+      "partial_ratio": {
+        "mean": 89.89280792601721,
+        "median": 91.22807017543859,
+        "min": 52.0,
+        "max": 100.0,
+        "counts_ge_95": 106,
+        "counts_ge_90": 167,
+        "counts_ge_85": 232,
+        "counts_ge_80": 267,
+        "counts_ge_75": 284
+      }
+    },
+    "name_lengths": {
+      "s1_length": {
+        "mean": 20.918032786885245,
+        "median": 20.0,
+        "min": 4,
+        "max": 44
+      },
+      "cand_length": {
+        "mean": 20.373770491803278,
+        "median": 20.0,
+        "min": 1,
+        "max": 40
+      },
+      "s1_token_count": {
+        "mean": 3.137704918032787,
+        "median": 3.0
+      },
+      "cand_token_count": {
+        "mean": 2.8065573770491805,
+        "median": 3.0
+      }
+    },
+    "token_and_ngram_overlap_counts": {
+      "shared_exact_tokens": {
+        "0": 75,
+        "1": 59,
+        "2": 103,
+        "3": 58,
+        "4": 9,
+        "5": 1
+      },
+      "shared_info_name_tokens": {
+        "0": 100,
+        "1": 205
+      },
+      "shared_address_tokens": {
+        "0": 55,
+        "1": 89,
+        "2": 161
+      },
+      "shared_address_numbers": {
+        "0": 167,
+        "1": 127,
+        "2": 11
+      },
+      "shared_4grams": {
+        "0": 14,
+        "1": 4,
+        "2": 7,
+        "3": 13,
+        "4": 16,
+        "5": 15,
+        "6": 18,
+        "7": 19,
+        "8": 25,
+        "9": 8,
+        "10": 166
+      }
+    }
+  },
+  "step2_and_3_experiments": {
+    "F1": {
+      "description": "Country + 1 Info Name Token (DF<=500) + Fuzzy Name Sim",
+      "thresholds": {
+        "80": {
+          "threshold": 80,
+          "total_true_matches": 16408,
+          "retrieval_recall": 0.9476724038350468,
+          "newly_recovered_vs_baseline": 28,
+          "fuzzy_category_recovered": 10,
+          "total_candidates": 8574609,
+          "added_candidates_total": 353,
+          "added_candidates_per_s1": 0.0706,
+          "mean_candidates_per_s1": 1714.9218,
+          "median_candidates": 235.0,
+          "p90_candidates": 3796.1000000000004,
+          "p95_candidates": 8339.2,
+          "p99_candidates": 26163.15,
+          "max_candidates": 59456,
+          "efficiency_positives_per_added_candidate": 0.07932011331444759,
+          "recall_gain_per_1000_added_cands_per_s1": 0.004581270261894859
+        },
+        "85": {
+          "threshold": 85,
+          "total_true_matches": 16402,
+          "retrieval_recall": 0.9473258634630934,
+          "newly_recovered_vs_baseline": 22,
+          "fuzzy_category_recovered": 5,
+          "total_candidates": 8574377,
+          "added_candidates_total": 121,
+          "added_candidates_per_s1": 0.0242,
+          "mean_candidates_per_s1": 1714.8754,
+          "median_candidates": 235.0,
+          "p90_candidates": 3796.1000000000004,
+          "p95_candidates": 8339.2,
+          "p99_candidates": 26163.15,
+          "max_candidates": 59456,
+          "efficiency_positives_per_added_candidate": 0.18181818181818182,
+          "recall_gain_per_1000_added_cands_per_s1": 0.010501223392525228
+        },
+        "90": {
+          "threshold": 90,
+          "total_true_matches": 16396,
+          "retrieval_recall": 0.9469793230911401,
+          "newly_recovered_vs_baseline": 16,
+          "fuzzy_category_recovered": 2,
+          "total_candidates": 8574316,
+          "added_candidates_total": 60,
+          "added_candidates_per_s1": 0.012,
+          "mean_candidates_per_s1": 1714.8632,
+          "median_candidates": 235.0,
+          "p90_candidates": 3796.1000000000004,
+          "p95_candidates": 8339.2,
+          "p99_candidates": 26163.15,
+          "max_candidates": 59456,
+          "efficiency_positives_per_added_candidate": 0.26666666666666666,
+          "recall_gain_per_1000_added_cands_per_s1": 0.015401794309037004
+        },
+        "95": {
+          "threshold": 95,
+          "total_true_matches": 16382,
+          "retrieval_recall": 0.9461707288899157,
+          "newly_recovered_vs_baseline": 2,
+          "fuzzy_category_recovered": 0,
+          "total_candidates": 8574266,
+          "added_candidates_total": 10,
+          "added_candidates_per_s1": 0.002,
+          "mean_candidates_per_s1": 1714.8532,
+          "median_candidates": 235.0,
+          "p90_candidates": 3796.1000000000004,
+          "p95_candidates": 8339.2,
+          "p99_candidates": 26163.15,
+          "max_candidates": 59456,
+          "efficiency_positives_per_added_candidate": 0.2,
+          "recall_gain_per_1000_added_cands_per_s1": 0.011551345731777752
+        }
+      }
+    },
+    "F2": {
+      "description": "Country + Rare Prefix5 (DF<=200) + Length Ratio >=0.7 + Fuzzy Name Sim",
+      "thresholds": {
+        "80": {
+          "threshold": 80,
+          "total_true_matches": 16404,
+          "retrieval_recall": 0.9474413769204112,
+          "newly_recovered_vs_baseline": 24,
+          "fuzzy_category_recovered": 15,
+          "total_candidates": 8575790,
+          "added_candidates_total": 1534,
+          "added_candidates_per_s1": 0.3068,
+          "mean_candidates_per_s1": 1715.158,
+          "median_candidates": 235.0,
+          "p90_candidates": 3796.1000000000004,
+          "p95_candidates": 8339.2,
+          "p99_candidates": 26163.15,
+          "max_candidates": 59456,
+          "efficiency_positives_per_added_candidate": 0.01564537157757497,
+          "recall_gain_per_1000_added_cands_per_s1": 0.0009036254809734878
+        },
+        "85": {
+          "threshold": 85,
+          "total_true_matches": 16393,
+          "retrieval_recall": 0.9468060529051634,
+          "newly_recovered_vs_baseline": 13,
+          "fuzzy_category_recovered": 8,
+          "total_candidates": 8574960,
+          "added_candidates_total": 704,
+          "added_candidates_per_s1": 0.1408,
+          "mean_candidates_per_s1": 1714.992,
+          "median_candidates": 235.0,
+          "p90_candidates": 3796.1000000000004,
+          "p95_candidates": 8339.2,
+          "p99_candidates": 26163.15,
+          "max_candidates": 59456,
+          "efficiency_positives_per_added_candidate": 0.018465909090909092,
+          "recall_gain_per_1000_added_cands_per_s1": 0.0010665305008033437
+        },
+        "90": {
+          "threshold": 90,
+          "total_true_matches": 16386,
+          "retrieval_recall": 0.9464017558045512,
+          "newly_recovered_vs_baseline": 6,
+          "fuzzy_category_recovered": 3,
+          "total_candidates": 8574664,
+          "added_candidates_total": 408,
+          "added_candidates_per_s1": 0.0816,
+          "mean_candidates_per_s1": 1714.9328,
+          "median_candidates": 235.0,
+          "p90_candidates": 3796.1000000000004,
+          "p95_candidates": 8339.2,
+          "p99_candidates": 26163.15,
+          "max_candidates": 59456,
+          "efficiency_positives_per_added_candidate": 0.014705882352941176,
+          "recall_gain_per_1000_added_cands_per_s1": 0.000849363656748364
+        },
+        "95": {
+          "threshold": 95,
+          "total_true_matches": 16380,
+          "retrieval_recall": 0.9460552154325979,
+          "newly_recovered_vs_baseline": 0,
+          "fuzzy_category_recovered": 0,
+          "total_candidates": 8574404,
+          "added_candidates_total": 148,
+          "added_candidates_per_s1": 0.0296,
+          "mean_candidates_per_s1": 1714.8808,
+          "median_candidates": 235.0,
+          "p90_candidates": 3796.1000000000004,
+          "p95_candidates": 8339.2,
+          "p99_candidates": 26163.15,
+          "max_candidates": 59456,
+          "efficiency_positives_per_added_candidate": 0.0,
+          "recall_gain_per_1000_added_cands_per_s1": 0.0
+        }
+      }
+    },
+    "F3": {
+      "description": "Country + 1 Name Token (DF<=1000) & 1 Addr Token (DF<=2000) + Fuzzy Name Sim",
+      "thresholds": {
+        "80": {
+          "threshold": 80,
+          "total_true_matches": 16397,
+          "retrieval_recall": 0.947037079819799,
+          "newly_recovered_vs_baseline": 17,
+          "fuzzy_category_recovered": 7,
+          "total_candidates": 8574277,
+          "added_candidates_total": 21,
+          "added_candidates_per_s1": 0.0042,
+          "mean_candidates_per_s1": 1714.8554,
+          "median_candidates": 235.0,
+          "p90_candidates": 3796.1000000000004,
+          "p95_candidates": 8339.2,
+          "p99_candidates": 26163.15,
+          "max_candidates": 59456,
+          "efficiency_positives_per_added_candidate": 0.8095238095238095,
+          "recall_gain_per_1000_added_cands_per_s1": 0.046755447009576616
+        },
+        "85": {
+          "threshold": 85,
+          "total_true_matches": 16395,
+          "retrieval_recall": 0.9469215663624813,
+          "newly_recovered_vs_baseline": 15,
+          "fuzzy_category_recovered": 5,
+          "total_candidates": 8574273,
+          "added_candidates_total": 17,
+          "added_candidates_per_s1": 0.0034,
+          "mean_candidates_per_s1": 1714.8546,
+          "median_candidates": 235.0,
+          "p90_candidates": 3796.1000000000004,
+          "p95_candidates": 8339.2,
+          "p99_candidates": 26163.15,
+          "max_candidates": 59456,
+          "efficiency_positives_per_added_candidate": 0.8823529411764706,
+          "recall_gain_per_1000_added_cands_per_s1": 0.05096181940490185
+        },
+        "90": {
+          "threshold": 90,
+          "total_true_matches": 16389,
+          "retrieval_recall": 0.9465750259905279,
+          "newly_recovered_vs_baseline": 9,
+          "fuzzy_category_recovered": 3,
+          "total_candidates": 8574265,
+          "added_candidates_total": 9,
+          "added_candidates_per_s1": 0.0018,
+          "mean_candidates_per_s1": 1714.853,
+          "median_candidates": 235.0,
+          "p90_candidates": 3796.1000000000004,
+          "p95_candidates": 8339.2,
+          "p99_candidates": 26163.15,
+          "max_candidates": 59456,
+          "efficiency_positives_per_added_candidate": 1.0,
+          "recall_gain_per_1000_added_cands_per_s1": 0.05775672865888876
+        },
+        "95": {
+          "threshold": 95,
+          "total_true_matches": 16381,
+          "retrieval_recall": 0.9461129721612568,
+          "newly_recovered_vs_baseline": 1,
+          "fuzzy_category_recovered": 0,
+          "total_candidates": 8574257,
+          "added_candidates_total": 1,
+          "added_candidates_per_s1": 0.0002,
+          "mean_candidates_per_s1": 1714.8514,
+          "median_candidates": 235.0,
+          "p90_candidates": 3796.1000000000004,
+          "p95_candidates": 8339.2,
+          "p99_candidates": 26163.15,
+          "max_candidates": 59456,
+          "efficiency_positives_per_added_candidate": 1.0,
+          "recall_gain_per_1000_added_cands_per_s1": 0.05775672865888876
+        }
+      }
+    },
+    "F4": {
+      "description": "Country + Shared Bldg Num & 1 Addr Token (DF<=1000) + Fuzzy Name Sim",
+      "thresholds": {
+        "80": {
+          "threshold": 80,
+          "total_true_matches": 16411,
+          "retrieval_recall": 0.9478456740210235,
+          "newly_recovered_vs_baseline": 31,
+          "fuzzy_category_recovered": 19,
+          "total_candidates": 8574322,
+          "added_candidates_total": 66,
+          "added_candidates_per_s1": 0.0132,
+          "mean_candidates_per_s1": 1714.8644,
+          "median_candidates": 235.0,
+          "p90_candidates": 3796.1000000000004,
+          "p95_candidates": 8339.2,
+          "p99_candidates": 26163.15,
+          "max_candidates": 59456,
+          "efficiency_positives_per_added_candidate": 0.4696969696969697,
+          "recall_gain_per_1000_added_cands_per_s1": 0.02712816043069018
+        },
+        "85": {
+          "threshold": 85,
+          "total_true_matches": 16403,
+          "retrieval_recall": 0.9473836201917524,
+          "newly_recovered_vs_baseline": 23,
+          "fuzzy_category_recovered": 13,
+          "total_candidates": 8574286,
+          "added_candidates_total": 30,
+          "added_candidates_per_s1": 0.006,
+          "mean_candidates_per_s1": 1714.8572,
+          "median_candidates": 235.0,
+          "p90_candidates": 3796.1000000000004,
+          "p95_candidates": 8339.2,
+          "p99_candidates": 26163.15,
+          "max_candidates": 59456,
+          "efficiency_positives_per_added_candidate": 0.7666666666666667,
+          "recall_gain_per_1000_added_cands_per_s1": 0.044280158638481386
+        },
+        "90": {
+          "threshold": 90,
+          "total_true_matches": 16391,
+          "retrieval_recall": 0.9466905394478456,
+          "newly_recovered_vs_baseline": 11,
+          "fuzzy_category_recovered": 7,
+          "total_candidates": 8574269,
+          "added_candidates_total": 13,
+          "added_candidates_per_s1": 0.0026,
+          "mean_candidates_per_s1": 1714.8538,
+          "median_candidates": 235.0,
+          "p90_candidates": 3796.1000000000004,
+          "p95_candidates": 8339.2,
+          "p99_candidates": 26163.15,
+          "max_candidates": 59456,
+          "efficiency_positives_per_added_candidate": 0.8461538461538461,
+          "recall_gain_per_1000_added_cands_per_s1": 0.048871078095982796
+        },
+        "95": {
+          "threshold": 95,
+          "total_true_matches": 16386,
+          "retrieval_recall": 0.9464017558045512,
+          "newly_recovered_vs_baseline": 6,
+          "fuzzy_category_recovered": 4,
+          "total_candidates": 8574262,
+          "added_candidates_total": 6,
+          "added_candidates_per_s1": 0.0012,
+          "mean_candidates_per_s1": 1714.8524,
+          "median_candidates": 235.0,
+          "p90_candidates": 3796.1000000000004,
+          "p95_candidates": 8339.2,
+          "p99_candidates": 26163.15,
+          "max_candidates": 59456,
+          "efficiency_positives_per_added_candidate": 1.0,
+          "recall_gain_per_1000_added_cands_per_s1": 0.05775672865888876
+        }
+      }
+    }
+  },
+  "step4_error_analysis": {
+    "recovered_true_matches": [
+      {
+        "s1_id": "S1-275544899",
+        "s1_name": "Doyle Continental Source",
+        "matched_id": "S3-856446196",
+        "matched_name": "Doylecontinentalsource.Com",
+        "s1_address": "250 374, Plattsburgh, NY",
+        "matched_address": "00250 374, Cadyvlile, New York",
+        "fuzz_ratio": 88.0,
+        "fuzz_token_sort": 68.0,
+        "shared_name_tokens": [],
+        "shared_addr_tokens": [
+          "374"
+        ],
+        "shared_nums": [
+          "374"
+        ],
+        "distortion_mechanism": "Trunaction / Substring"
+      },
+      {
+        "s1_id": "S1-249021867",
+        "s1_name": "Al Technologies Limited",
+        "matched_id": "S3-571279074",
+        "matched_name": "Al Technologies Ltd",
+        "s1_address": "Plot No. 3/1, Chitrakoot Scheme, Sector-3, Jaipur, Rajasthan",
+        "matched_address": "Plot No. 3/1, Jaipur, RJ",
+        "fuzz_ratio": 90.47619047619048,
+        "fuzz_token_sort": 90.47619047619048,
+        "shared_name_tokens": [
+          "technologies"
+        ],
+        "shared_addr_tokens": [
+          "jaipur"
+        ],
+        "shared_nums": [
+          "3/1"
+        ],
+        "distortion_mechanism": "OCR / Character Substitution"
+      },
+      {
+        "s1_id": "S1-749787985",
+        "s1_name": "Daedalus Inc",
+        "matched_id": "S3-684223204",
+        "matched_name": "Inc Daoedialmus",
+        "s1_address": "367 Cambridge Drive, Botetourt County, VA",
+        "matched_address": "367 Cambridge Dr, PMB 766, Daleville, Virginia",
+        "fuzz_ratio": 59.25925925925925,
+        "fuzz_token_sort": 88.88888888888889,
+        "shared_name_tokens": [],
+        "shared_addr_tokens": [
+          "cambridge",
+          "367"
+        ],
+        "shared_nums": [
+          "367"
+        ],
+        "distortion_mechanism": "Spelling / Typo"
+      },
+      {
+        "s1_id": "S1-428596549",
+        "s1_name": "Metropolitan Guild II, Inc",
+        "matched_id": "S2-351343632",
+        "matched_name": "METROPOLITAN GCUDL II, INC (ID: 15421)",
+        "s1_address": "44 Winter Street, Lisbon, ME",
+        "matched_address": "WINTER STREET, LIISBON, ME",
+        "fuzz_ratio": 77.96610169491525,
+        "fuzz_token_sort": 81.35593220338984,
+        "shared_name_tokens": [
+          "metropolitan"
+        ],
+        "shared_addr_tokens": [
+          "winter"
+        ],
+        "shared_nums": [],
+        "distortion_mechanism": "Digit / Letter Substitution"
+      },
+      {
+        "s1_id": "S1-875959521",
+        "s1_name": "Trish's Fitness",
+        "matched_id": "S2-235759021",
+        "matched_name": "Trish's F\u00edtness",
+        "s1_address": "4733 30th Avenue, Minneapolis, MN",
+        "matched_address": "",
+        "fuzz_ratio": 93.33333333333333,
+        "fuzz_token_sort": 93.33333333333333,
+        "shared_name_tokens": [
+          "trish"
+        ],
+        "shared_addr_tokens": [],
+        "shared_nums": [],
+        "distortion_mechanism": "OCR / Character Substitution"
+      },
+      {
+        "s1_id": "S1-875959521",
+        "s1_name": "Trish's Fitness",
+        "matched_id": "S3-22247086",
+        "matched_name": "Trish's F\u00edtness",
+        "s1_address": "4733 30th Avenue, Minneapolis, MN",
+        "matched_address": "4734 30th Ave, Minneapolis, Minnesota",
+        "fuzz_ratio": 93.33333333333333,
+        "fuzz_token_sort": 93.33333333333333,
+        "shared_name_tokens": [
+          "trish"
+        ],
+        "shared_addr_tokens": [
+          "30th",
+          "minneapolis"
+        ],
+        "shared_nums": [
+          "30th"
+        ],
+        "distortion_mechanism": "OCR / Character Substitution"
+      },
+      {
+        "s1_id": "S1-377968494",
+        "s1_name": "Creative Chesapeake PC",
+        "matched_id": "S3-450449825",
+        "matched_name": "creativechesapeake.com",
+        "s1_address": "504 Highland Avenue, South Portland, ME",
+        "matched_address": "Maine, South Portland, 50 Highland Avenue",
+        "fuzz_ratio": 90.9090909090909,
+        "fuzz_token_sort": 50.0,
+        "shared_name_tokens": [],
+        "shared_addr_tokens": [
+          "highland",
+          "portland"
+        ],
+        "shared_nums": [],
+        "distortion_mechanism": "Trunaction / Substring"
+      },
+      {
+        "s1_id": "S1-956512348",
+        "s1_name": "Hotline Holdings Group",
+        "matched_id": "S3-116801058",
+        "matched_name": "Htdle Holdings Group",
+        "s1_address": "40, 3Rd Floor Hashim Building Veer Nariman Road, Fort, Mumbai, Mumbai City, Maharashtra",
+        "matched_address": "40, Mumbai, Mumbai City, MH",
+        "fuzz_ratio": 90.47619047619048,
+        "fuzz_token_sort": 90.47619047619048,
+        "shared_name_tokens": [],
+        "shared_addr_tokens": [],
+        "shared_nums": [
+          "40"
+        ],
+        "distortion_mechanism": "OCR / Character Substitution"
+      },
+      {
+        "s1_id": "S1-739470090",
+        "s1_name": "Beis, LLC",
+        "matched_id": "S3-157371634",
+        "matched_name": "LLC Be,",
+        "s1_address": "Hendersonville, NC, 710 1st Avenue",
+        "matched_address": "##710 First Ave, North Carolina, Hendersonville, N/A",
+        "fuzz_ratio": 42.85714285714286,
+        "fuzz_token_sort": 85.71428571428572,
+        "shared_name_tokens": [],
+        "shared_addr_tokens": [
+          "710",
+          "hendersonville"
+        ],
+        "shared_nums": [
+          "710"
+        ],
+        "distortion_mechanism": "Spelling / Typo"
+      },
+      {
+        "s1_id": "S1-553107201",
+        "s1_name": "D+ Aurora, Inc",
+        "matched_id": "S2-415847847",
+        "matched_name": "D+ Adroar, Inc",
+        "s1_address": "64 Amesbury Court, Lubbock, TX",
+        "matched_address": "64 AMESBURY CT, LUBBOCK, TX",
+        "fuzz_ratio": 84.61538461538461,
+        "fuzz_token_sort": 84.61538461538461,
+        "shared_name_tokens": [],
+        "shared_addr_tokens": [
+          "lubbock",
+          "amesbury"
+        ],
+        "shared_nums": [
+          "64"
+        ],
+        "distortion_mechanism": "Spelling / Typo"
+      }
+    ],
+    "false_positive_examples": [
+      {
+        "s1_id": "S1-313571688",
+        "s1_name": "Nagaksh Stocks",
+        "candidate_id": "S3-836925455",
+        "candidate_name": "Nagacsh Stocks LLP",
+        "s1_address": "136 1St Floor, Shubham Tower, Neelam Chowk Nit, Faridabad, Haryana",
+        "candidate_address": "13 1St Floor, Faridabad, HR",
+        "fuzz_ratio": 81.25,
+        "shared_blocking_tokens": [
+          "stocks"
+        ],
+        "why_introduced": "Shared token(s) ['stocks'] with fuzzy ratio 81.2"
+      },
+      {
+        "s1_id": "S1-36113878",
+        "s1_name": "Idell's Fitness",
+        "candidate_id": "S3-777459447",
+        "candidate_name": "Idell's Fditeess [Inc.]",
+        "s1_address": "603 Debruin Road, Village Of Combined Locks, WI",
+        "candidate_address": "00172 Blish Rd, Arkadlphia, Arkansas",
+        "fuzz_ratio": 80.0,
+        "shared_blocking_tokens": [
+          "idell"
+        ],
+        "why_introduced": "Shared token(s) ['idell'] with fuzzy ratio 80.0"
+      },
+      {
+        "s1_id": "S1-36113878",
+        "s1_name": "Idell's Fitness",
+        "candidate_id": "S2-808101827",
+        "candidate_name": "Idell's-Fess",
+        "s1_address": "603 Debruin Road, Village Of Combined Locks, WI",
+        "candidate_address": "WOODSFIELD, 411B CHURCH STREET, OH",
+        "fuzz_ratio": 88.88888888888889,
+        "shared_blocking_tokens": [
+          "idell"
+        ],
+        "why_introduced": "Shared token(s) ['idell'] with fuzzy ratio 88.9"
+      },
+      {
+        "s1_id": "S1-739470090",
+        "s1_name": "Beis, LLC",
+        "candidate_id": "S3-836384505",
+        "candidate_name": "... Beis,  Co.",
+        "s1_address": "Hendersonville, NC, 710 1st Avenue",
+        "candidate_address": "4031 Herner County Lie Rd, Southington CITY, Ohio",
+        "fuzz_ratio": 80.0,
+        "shared_blocking_tokens": [
+          "beis"
+        ],
+        "why_introduced": "Shared token(s) ['beis'] with fuzzy ratio 80.0"
+      },
+      {
+        "s1_id": "S1-739470090",
+        "s1_name": "Beis, LLC",
+        "candidate_id": "S2-399310504",
+        "candidate_name": "Beis-P.L.L.C.",
+        "s1_address": "Hendersonville, NC, 710 1st Avenue",
+        "candidate_address": "1280 ANITOCH RD, NEW BERN, NC",
+        "fuzz_ratio": 80.0,
+        "shared_blocking_tokens": [
+          "beis"
+        ],
+        "why_introduced": "Shared token(s) ['beis'] with fuzzy ratio 80.0"
+      },
+      {
+        "s1_id": "S1-100983186",
+        "s1_name": "Quezada Royce Inc",
+        "candidate_id": "S2-946587581",
+        "candidate_name": "QUEZADA ROLYCE-LLC",
+        "s1_address": "414 Main Street, Jasper, IN",
+        "candidate_address": "910 Kirkdale Road, BETHESDA, MD",
+        "fuzz_ratio": 85.71428571428572,
+        "shared_blocking_tokens": [
+          "quezada"
+        ],
+        "why_introduced": "Shared token(s) ['quezada'] with fuzzy ratio 85.7"
+      },
+      {
+        "s1_id": "S1-291536407",
+        "s1_name": "Lennon's Logistics Inc",
+        "candidate_id": "S2-22686301",
+        "candidate_name": "Lennon's L\u00f3gistics Corp",
+        "s1_address": "NY, 1435 Mill Road, Southold",
+        "candidate_address": "631 SHELTON AVENUE, RENTON, WA",
+        "fuzz_ratio": 84.44444444444444,
+        "shared_blocking_tokens": [
+          "lennon"
+        ],
+        "why_introduced": "Shared token(s) ['lennon'] with fuzzy ratio 84.4"
+      },
+      {
+        "s1_id": "S1-979602213",
+        "s1_name": "Sas Strategies LLP",
+        "candidate_id": "S2-83603742",
+        "candidate_name": "Sans Strategies",
+        "s1_address": "S. No. 196, Shop No. 2/3 Akata Nagar, Shil Phatha Shil, Thane, Maharashtra",
+        "candidate_address": "21-013, PRESTIGE SHANTINIKETAN, ITPL MAIN ROAD, WHITEFIELD, BANGALORE NORTH, Karnataka",
+        "fuzz_ratio": 84.84848484848484,
+        "shared_blocking_tokens": [
+          "strategies"
+        ],
+        "why_introduced": "Shared token(s) ['strategies'] with fuzzy ratio 84.8"
+      },
+      {
+        "s1_id": "S1-168028112",
+        "s1_name": "Agrasen Vidyalaya",
+        "candidate_id": "S3-814049232",
+        "candidate_name": "Agrasen V\u00eddyalaya",
+        "s1_address": "Baguiati, Bagui, Para, P.O.- Aswini Nagar, D B Nagr, North 24 Parganas, West Bengal, H/H-19/1",
+        "candidate_address": "9-10-10/3/1, Tadepalligudem, West Godavari, AP",
+        "fuzz_ratio": 94.11764705882352,
+        "shared_blocking_tokens": [
+          "agrasen"
+        ],
+        "why_introduced": "Shared token(s) ['agrasen'] with fuzzy ratio 94.1"
+      },
+      {
+        "s1_id": "S1-168028112",
+        "s1_name": "Agrasen Vidyalaya",
+        "candidate_id": "S2-232439046",
+        "candidate_name": "AGRASEN V\u00cdDYALAYA",
+        "s1_address": "Baguiati, Bagui, Para, P.O.- Aswini Nagar, D B Nagr, North 24 Parganas, West Bengal, H/H-19/1",
+        "candidate_address": "B3/9-10-10/3/1, GANAPATHI STREET, TADEPALLIGUDEM, \u0c06\u0c02\u0c27\u0c4d\u0c30\u0c2a\u0c4d\u0c30\u0c26\u0c47\u0c36\u0c4d",
+        "fuzz_ratio": 94.11764705882352,
+        "shared_blocking_tokens": [
+          "agrasen"
+        ],
+        "why_introduced": "Shared token(s) ['agrasen'] with fuzzy ratio 94.1"
+      }
+    ]
+  }
+}

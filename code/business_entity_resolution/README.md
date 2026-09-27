@@ -129,22 +129,19 @@ Canonical high-recall candidate retrieval architecture selected from conducted v
    - Rare informative name token ($DF \le 500$) co-occurring with name stopword token.
    - Rare address number ($DF \le 500, \text{len} \ge 3$) co-occurring with address token ($DF \le 1000$).
    - Rare address 2-token overlap ($DF \le 500$).
-   - Single rare informative name token ($\text{len} \ge 5, DF \le 50$).
+   - Single rare informative name token ($\text{len} \ge 4, DF \le 200$).
    - Rare compact prefix-5 ($\text{len} \ge 5, DF \le 50$).
 2. **Secondary A (Address Overlap)**:
-   - $\ge 2$ shared informative address tokens with $DF \le 2000$.
+   - At least 2 shared informative address tokens with $DF \le 2000$.
 3. **C2-A (Country + Building Number + Address Token)**:
-   - Same country + shared building/address number + $\ge 1$ address token with $DF \le 500$.
+   - Same country + shared building/address number + at least 1 address token with $DF \le 500$.
 
-#### Note on Secondary B Removal
-Secondary B (single informative name token with length $\ge 4$ and $DF \le 100$) was evaluated on two independent validation splits:
-- `seed=42`: Contributed only 10 unique true matches while adding 19,089 candidate pairs (~1,909 candidates per match).
-- `seed=123`: Contributed only 9 unique true matches while adding 20,317 candidate pairs (~2,257 candidates per match).
-Because the marginal recall gain was negligible relative to the candidate-volume increase, Secondary B is excluded from production retrieval.
+#### Evidence-ranked candidate selection
+Candidates from evidence sources weighted $\ge 4$ are preserved. Up to 17,500 lower-evidence candidates per query are retained by aggregate evidence, with entity ID as a deterministic tie-break. This is a soft cap on lower-evidence candidates, not a hard total candidate limit.
 
-#### Validated Architecture Metrics (5,000 $S_1$ queries, full $S_2 + S_3$ universe)
-- **Seed=42**: 16,370 / 17,314 true matches (94.55% recall), 8,555,167 candidate pairs; mean 1,711.03, median 233.5, P95 8,339.2, P99 26,163.2, max 59,456. Digest: `873c791862d91ae0c91f26047c4787af50de93e32d06db878e0d5802956f2c5c`.
-- **Seed=123**: 16,264 / 17,205 true matches (94.53% recall), 9,595,099 candidate pairs; mean 1,919.02.
+#### Candidate-only validation (before address scoring)
+- **Seed=42**: 16,380 / 17,314 true pairs (94.61% recall), 7,464,219 candidate pairs (0.2194% precision).
+- **Seed=123**: 16,261 / 17,205 true pairs (94.51% recall), 8,056,698 candidate pairs (0.2018% precision).
 
 `blocking.py` contains the early prototype blocker; production retrieval uses `retrieval.py`.
 
@@ -159,7 +156,7 @@ Run from the repository root:
   --output-dir output
 ```
 
-The command selects an address threshold on one deterministic 0.5% training bucket, reports a second 0.5% hold-out bucket, then writes predictions for every test S1 row. Full-dataset metrics are printed at runtime; the 5,000-query recall results above are the frozen selector's separate validation measurements.
+The selected production run calibrated threshold `0.85`; its labeled hold-out reported micro pair precision `0.357416`, recall `0.441166`, macro $F_{0.5}$ `0.465278`, and candidate pair recall `0.944430`. Test labels are unavailable, so these are hold-out—not test-set—scores.
 
 ### 7. Evaluation (`src/evaluation.py`)
 `f_beta_per_s1(predicted, truth)` scores one S1 record, including correct empty predictions for singletons. `macro_f05(predictions, ground_truth)` averages that score across every labeled S1 record. The baseline reports candidate pair recall separately from held-out macro $F_{0.5}$.

@@ -1,9 +1,14 @@
+import contextlib
+import io
+import sqlite3
+
 import csv
 import tempfile
 import unittest
 from pathlib import Path
 
 from baseline import (
+    _report_holdout,
     active_keys_for_records,
     build_index,
     build_production_index,
@@ -16,6 +21,35 @@ from retrieval import ProductionRetrievalIndex
 
 
 class BaselineTests(unittest.TestCase):
+    def test_holdout_reports_micro_pair_precision_and_recall(self):
+        conn = sqlite3.connect(":memory:")
+        conn.execute("CREATE TABLE targets (entity_id TEXT PRIMARY KEY, country TEXT NOT NULL, address_norm TEXT NOT NULL)")
+        conn.executemany(
+            "INSERT INTO targets VALUES (?, ?, ?)",
+            [("t1", "us", ""), ("t2", "us", ""), ("t3", "us", "")],
+        )
+        truths = {"s1a": {"t1", "t2"}, "s1b": set(), "s1c": {"t3"}}
+        candidates = {
+            "s1a": {"t1": "", "t2": "", "false": ""},
+            "s1b": {"false-s": ""},
+            "s1c": {"t3": ""},
+        }
+        scores = {
+            "s1a": {"t1": 0.9, "t2": 0.2, "false": 0.8},
+            "s1b": {"false-s": 0.9},
+            "s1c": {"t3": 0.9},
+        }
+        rows = {s1_id: ("name", "address", "US") for s1_id in truths}
+        output = io.StringIO()
+        try:
+            with contextlib.redirect_stdout(output):
+                _report_holdout(conn, scores, candidates, truths, 0.5, rows)
+        finally:
+            conn.close()
+
+        self.assertIn("holdout_pair_precision=0.500000", output.getvalue())
+        self.assertIn("holdout_pair_recall=0.666667", output.getvalue())
+
     def test_test_outputs_preserve_empty_rows_and_filter_by_address(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

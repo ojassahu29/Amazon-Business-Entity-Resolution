@@ -262,6 +262,14 @@ def _report_holdout(
     }
     singleton_scores = [f_beta_per_s1(predictions[s1_id], set()) for s1_id, truth in truths.items() if not truth]
     positive_scores = [f_beta_per_s1(predictions[s1_id], truth) for s1_id, truth in positive.items()]
+    predicted_links = sum(len(predicted) for predicted in predictions.values())
+    matched_links = sum(
+        len(predictions[s1_id] & truth)
+        for s1_id, truth in truths.items()
+    )
+    print(f"holdout_pair_precision={matched_links / predicted_links if predicted_links else 0.0:.6f}")
+    print(f"holdout_pair_recall={matched_links / true_links:.6f}")
+
     print(f"holdout_macro_f05={macro_f05(predictions, truths):.6f}")
     print(f"holdout_singleton_score={sum(singleton_scores) / len(singleton_scores):.6f}" if singleton_scores else "holdout_singleton_score=n/a")
     print(f"holdout_positive_row_score={sum(positive_scores) / len(positive_scores):.6f}")

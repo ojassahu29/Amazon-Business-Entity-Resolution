@@ -91,16 +91,15 @@ flowchart TD
 2. **Diagnostic Analysis** (`analyze_true_matches.py`, `analyze_hard_negatives.py`):
    - Deep inspection of true match distributions (78%+ exact name agreement across true pairs, 99.4% country agreement).
    - Identification of high-frequency legal stopwords causing candidate combinatorial explosion.
-3. **Frozen Production Retrieval** (`retrieval.py`):
-   - Multi-layer, frequency-aware candidate retrieval architecture selected from conducted validation experiments:
-     - **Combo 3**: Primary multi-index frequency-aware retrieval combining exact normalized, token-sorted, compact, 2-token name overlap, 3-token address overlap, rare name token + stopword co-occurrence, address number + address token co-occurrence, rare address 2-token overlap, rare name token ($DF \le 50$), and rare compact prefix-5 ($DF \le 50$).
-     - **Secondary A**: High-recall address token overlap ($\ge 2$ shared informative address tokens with document frequency $DF \le 2000$).
-     - **C2-A**: Country match + building/address number + address token ($DF \le 500$).
-   - **Exclusion of Secondary B**: Evaluated on two independent validation samples (`seed=42` and `seed=123`) and excluded from production retrieval because it contributed only 10 unique matches for ~19k candidates on `seed=42` and 9 unique matches for ~20k candidates on `seed=123`.
-   - **Validated Retrieval Performance** (5,000 $S_1$ validation records, full $S_2 + S_3$ universe):
-     - `seed=42`: 16,370 / 17,314 true matches (94.55% recall), 8,555,167 candidates (mean 1,711.03 / $S_1$).
-     - `seed=123`: 16,264 / 17,205 true matches (94.53% recall), 9,595,099 candidates (mean 1,919.02 / $S_1$).
-   - `baseline.py` applies this exact selector to threshold-selection rows, held-out rows, and test queries. It builds postings only for keys active in the current S1 query set; target addresses remain in a temporary SQLite table.
+3. **Selected Production Retrieval** (`retrieval.py`):
+   - **Combo 3**: Exact normalized/sorted/compact name matches, 2-token name overlap, 3-token address overlap, rare name + stopword co-occurrence, address-number/token co-occurrence, rare address overlap, and a single rare informative name token ($\text{len} \ge 4, DF \le 200$).
+   - **Secondary A**: At least 2 shared informative address tokens ($DF \le 2000$).
+   - **C2-A**: Same country, shared building/address number, and at least 1 address token ($DF \le 500$).
+   - Preserve candidates from evidence sources weighted $\ge 4$; retain up to 17,500 lower-evidence candidates per query by aggregate evidence, with entity ID as deterministic tie-break.
+   - **Candidate-only validation** (before address scoring; 5,000 queries against full $S_2 + S_3$):
+     - `seed=42`: 16,380 / 17,314 true pairs (94.61% recall), 7,464,219 candidates (0.2194% precision).
+     - `seed=123`: 16,261 / 17,205 true pairs (94.51% recall), 8,056,698 candidates (0.2018% precision).
+   - `baseline.py` applies the same selector to threshold-selection rows, held-out rows, and test queries; target addresses remain in a temporary SQLite table.
 4. **Scoring & Resolution** (`evaluation.py`):
    - Evaluates micro and macro Precision, Recall, and $F_{0.5}$ with support for singletons.
 
@@ -125,7 +124,7 @@ python3 -m venv .venv
 
 The command calibrates an address-score threshold on sampled training records, reports a separate held-out result, then indexes test S2/S3 and writes both output TSVs. Test countries remain open-set strings, including France.
 
-The command prints the selected threshold and current hold-out metrics. Full-dataset scores are not pinned here; retrieval metrics above apply to the separate 5,000-query validation runs.
+The selected production run calibrated threshold `0.85`; its labeled hold-out reported micro pair precision `0.357416`, recall `0.441166`, macro $F_{0.5}$ `0.465278`, and candidate pair recall `0.944430`. Test labels are unavailable, so these are hold-out—not test-set—scores.
 
 See [Pipeline Documentation](code/business_entity_resolution/README.md) for output headers and evaluation details.
 ---

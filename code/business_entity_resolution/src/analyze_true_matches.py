@@ -16,6 +16,7 @@ from collections import Counter
 from pathlib import Path
 
 import pandas as pd
+# pyrefly: ignore [missing-import]
 from rapidfuzz import fuzz
 
 # ---------------------------------------------------------------------------

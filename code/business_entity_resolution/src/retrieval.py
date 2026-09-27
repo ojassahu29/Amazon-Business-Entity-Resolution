@@ -22,6 +22,7 @@ from __future__ import annotations
 
 from collections import defaultdict
 from itertools import combinations
+import heapq
 from pathlib import Path
 import pickle
 import re
@@ -102,8 +103,8 @@ COMBO3_RARE_ADDR_NUM_DF_MAX: int = 500
 COMBO3_RARE_ADDR_TOKEN_DF_MAX: int = 1000
 COMBO3_RARE_ADDR_OVERLAP_MIN: int = 2
 COMBO3_RARE_ADDR_OVERLAP_DF_MAX: int = 500
-COMBO3_SINGLE_RARE_NAME_LEN_MIN: int = 5
-COMBO3_SINGLE_RARE_NAME_DF_MAX: int = 50
+COMBO3_SINGLE_RARE_NAME_LEN_MIN: int = 4
+COMBO3_SINGLE_RARE_NAME_DF_MAX: int = 200
 COMBO3_PREFIX5_LEN_MIN: int = 5
 COMBO3_PREFIX5_DF_MAX: int = 50
 
@@ -113,6 +114,20 @@ SECONDARY_A_ADDR_TOKEN_DF_MAX: int = 2000
 
 # 3. C2-A thresholds
 C2A_ADDR_TOKEN_DF_MAX: int = 500
+
+# Keep strong candidates; cap only lower-evidence matches.
+MAX_LOW_EVIDENCE_CANDIDATES_PER_QUERY: int = 17500
+MIN_PRESERVED_EVIDENCE_WEIGHT: int = 4
+EXACT_EVIDENCE_WEIGHT: int = 4
+NAME_OVERLAP_EVIDENCE_WEIGHT: int = 1
+ADDRESS_OVERLAP_EVIDENCE_WEIGHT: int = 3
+NAME_STOPWORD_EVIDENCE_WEIGHT: int = 2
+ADDRESS_NUMBER_TOKEN_EVIDENCE_WEIGHT: int = 5
+RARE_ADDRESS_EVIDENCE_WEIGHT: int = 2
+SINGLE_RARE_NAME_EVIDENCE_WEIGHT: int = 1
+PREFIX_EVIDENCE_WEIGHT: int = 3
+SECONDARY_A_EVIDENCE_WEIGHT: int = 1
+C2A_EVIDENCE_WEIGHT: int = 5
 
 
 # ===================================================================
@@ -215,7 +230,8 @@ class ProductionRetrievalIndex:
     Multi-index inverted index storing candidates from the candidate space (S2 + S3).
     """
 
-    def __init__(self) -> None:
+    def __init__(self, active_keys: dict[str, set[tuple[str, str]]] | None = None) -> None:
+        self.active_keys = active_keys
         self.idx_name_norm: dict[tuple[str, str], set[str]] = defaultdict(set)
         self.idx_name_sorted: dict[tuple[str, str], set[str]] = defaultdict(set)
         self.idx_name_compact: dict[tuple[str, str], set[str]] = defaultdict(set)
@@ -255,35 +271,47 @@ class ProductionRetrievalIndex:
         business_address: str,
         country: str,
     ) -> None:
-        """Index a single entity record into all multi-key indices."""
+        """Index one entity, optionally retaining only keys active in the query set."""
         c = normalize_basic(country)
         name = business_name or ""
         addr = business_address or ""
-
         nn = normalize_basic(name)
         ns = sorted_tokens(name)
         nc = compact(name)
 
-        self.idx_name_norm[(c, nn)].add(entity_id)
-        self.idx_name_sorted[(c, ns)].add(entity_id)
-        self.idx_name_compact[(c, nc)].add(entity_id)
+        key = (c, nn)
+        if self.active_keys is None or key in self.active_keys["idx_name_norm"]:
+            self.idx_name_norm[key].add(entity_id)
+        key = (c, ns)
+        if self.active_keys is None or key in self.active_keys["idx_name_sorted"]:
+            self.idx_name_sorted[key].add(entity_id)
+        key = (c, nc)
+        if self.active_keys is None or key in self.active_keys["idx_name_compact"]:
+            self.idx_name_compact[key].add(entity_id)
 
         if len(nc) >= COMBO3_PREFIX5_LEN_MIN:
-            self.idx_compact_prefix5[(c, nc[:COMBO3_PREFIX5_LEN_MIN])].add(entity_id)
+            key = (c, nc[:COMBO3_PREFIX5_LEN_MIN])
+            if self.active_keys is None or key in self.active_keys["idx_compact_prefix5"]:
+                self.idx_compact_prefix5[key].add(entity_id)
 
         for t in tokenize(name):
             if len(t) >= 3:
-                if t not in NAME_STOPWORDS:
-                    self.idx_name_tokens[(c, t)].add(entity_id)
-                else:
-                    self.idx_name_stopwords[(c, t)].add(entity_id)
+                index_name = "idx_name_tokens" if t not in NAME_STOPWORDS else "idx_name_stopwords"
+                index = self.idx_name_tokens if t not in NAME_STOPWORDS else self.idx_name_stopwords
+                key = (c, t)
+                if self.active_keys is None or key in self.active_keys[index_name]:
+                    index[key].add(entity_id)
 
         for t in tokenize(addr):
             if len(t) >= 3 and t not in ADDR_STOPWORDS:
-                self.idx_addr_tokens[(c, t)].add(entity_id)
+                key = (c, t)
+                if self.active_keys is None or key in self.active_keys["idx_addr_tokens"]:
+                    self.idx_addr_tokens[key].add(entity_id)
 
         for num in extract_address_numbers(addr):
-            self.idx_addr_numbers[(c, num)].add(entity_id)
+            key = (c, num)
+            if self.active_keys is None or key in self.active_keys["idx_addr_numbers"]:
+                self.idx_addr_numbers[key].add(entity_id)
 
         self.n_indexed += 1
 
@@ -291,6 +319,26 @@ class ProductionRetrievalIndex:
 # ===================================================================
 # CANONICAL PRODUCTION RETRIEVAL ENTRY POINTS
 # ===================================================================
+
+def _limit_candidates(
+    candidates: set[str],
+    evidence_sets: list[tuple[set[str], int]],
+    limit: int,
+) -> set[str]:
+    if limit <= 0 or len(candidates) <= limit:
+        return candidates
+    support: dict[str, int] = defaultdict(int)
+    preserved: set[str] = set()
+    for evidence, weight in evidence_sets:
+        for entity_id in evidence:
+            if entity_id in candidates:
+                support[entity_id] += weight
+                if weight >= MIN_PRESERVED_EVIDENCE_WEIGHT:
+                    preserved.add(entity_id)
+    weak_candidates = (entity_id for entity_id in candidates if entity_id not in preserved)
+    ranked_weak = heapq.nsmallest(limit, weak_candidates, key=lambda entity_id: (-support.get(entity_id, 0), entity_id))
+    return preserved | set(ranked_weak)
+
 
 def retrieve_candidates_for_record(
     parsed: dict[str, Any],
@@ -305,25 +353,29 @@ def retrieve_candidates_for_record(
       3. C2-A (DF <= 500)
     """
     c = parsed["country"]
+    cap = MAX_LOW_EVIDENCE_CANDIDATES_PER_QUERY
+    evidence_sets: list[tuple[set[str], int]] | None = [] if cap > 0 else None
 
     # -------------------------------------------------------------
     # 1. COMBO 3: Primary Frequency-Aware Multi-Index Retrieval
     # -------------------------------------------------------------
-    # Exact / canonical representations
     c1 = index.idx_name_norm.get((c, parsed["name_norm"]), set())
     c2 = index.idx_name_sorted.get((c, parsed["name_sorted"]), set())
     c3 = index.idx_name_compact.get((c, parsed["name_compact"]), set())
 
-    # Multi-token overlap
     name_sets = [index.idx_name_tokens.get((c, t), set()) for t in parsed["info_name"] if (c, t) in index.idx_name_tokens]
     c4 = get_token_overlap_candidates(name_sets, min_overlap=COMBO3_NAME_OVERLAP_MIN)
-
     addr_sets = [index.idx_addr_tokens.get((c, t), set()) for t in parsed["info_addr"] if (c, t) in index.idx_addr_tokens]
     c5 = get_token_overlap_candidates(addr_sets, min_overlap=COMBO3_ADDR_OVERLAP_MIN)
+    exact = c1 | c2 | c3
+    c_set: set[str] = exact | c4 | c5
+    if evidence_sets is not None:
+        evidence_sets.extend((
+            (exact, EXACT_EVIDENCE_WEIGHT),
+            (c4, NAME_OVERLAP_EVIDENCE_WEIGHT),
+            (c5, ADDRESS_OVERLAP_EVIDENCE_WEIGHT),
+        ))
 
-    c_set: set[str] = c1 | c2 | c3 | c4 | c5
-
-    # Rare informative name token + stopword name token
     rare_info = [
         index.idx_name_tokens[(c, t)]
         for t in parsed["info_name"]
@@ -334,10 +386,17 @@ def retrieve_candidates_for_record(
         for st in parsed["stop_name"]:
             s_union |= index.idx_name_stopwords.get((c, st), set())
         if s_union:
-            for n_set in rare_info:
-                c_set |= (n_set & s_union)
+            if evidence_sets is None:
+                for n_set in rare_info:
+                    c_set |= n_set & s_union
+            else:
+                signal = set()
+                for n_set in rare_info:
+                    signal |= n_set & s_union
+                c_set |= signal
+                if signal:
+                    evidence_sets.append((signal, NAME_STOPWORD_EVIDENCE_WEIGHT))
 
-    # Address number + address token
     valid_nums = [
         n for n in parsed["all_nums"]
         if len(n) >= COMBO3_ADDR_NUM_LEN_MIN and (c, n) in index.idx_addr_numbers and len(index.idx_addr_numbers[(c, n)]) <= COMBO3_RARE_ADDR_NUM_DF_MAX
@@ -349,31 +408,55 @@ def retrieve_candidates_for_record(
     ]
     if valid_nums and valid_addrs:
         a_union = set().union(*valid_addrs)
-        for num in valid_nums:
-            c_set |= (index.idx_addr_numbers[(c, num)] & a_union)
+        if evidence_sets is None:
+            for num in valid_nums:
+                c_set |= index.idx_addr_numbers[(c, num)] & a_union
+        else:
+            signal = set()
+            for num in valid_nums:
+                signal |= index.idx_addr_numbers[(c, num)] & a_union
+            c_set |= signal
+            if signal:
+                evidence_sets.append((signal, ADDRESS_NUMBER_TOKEN_EVIDENCE_WEIGHT))
 
-    # Rare address 2-token overlap
     rare_addrs = [
         index.idx_addr_tokens[(c, t)]
         for t in parsed["info_addr"]
         if (c, t) in index.idx_addr_tokens and len(index.idx_addr_tokens[(c, t)]) <= COMBO3_RARE_ADDR_OVERLAP_DF_MAX
     ]
     if len(rare_addrs) >= COMBO3_RARE_ADDR_OVERLAP_MIN:
-        c_set |= get_token_overlap_candidates(rare_addrs, min_overlap=COMBO3_RARE_ADDR_OVERLAP_MIN)
+        signal = get_token_overlap_candidates(rare_addrs, min_overlap=COMBO3_RARE_ADDR_OVERLAP_MIN)
+        c_set |= signal
+        if evidence_sets is not None and signal:
+            evidence_sets.append((signal, RARE_ADDRESS_EVIDENCE_WEIGHT))
 
-    # Single rare informative name token
-    for t in parsed["info_name"]:
-        if (
-            len(t) >= COMBO3_SINGLE_RARE_NAME_LEN_MIN
-            and (c, t) in index.idx_name_tokens
-            and len(index.idx_name_tokens[(c, t)]) <= COMBO3_SINGLE_RARE_NAME_DF_MAX
-        ):
-            c_set |= index.idx_name_tokens[(c, t)]
+    if evidence_sets is None:
+        for t in parsed["info_name"]:
+            if (
+                len(t) >= COMBO3_SINGLE_RARE_NAME_LEN_MIN
+                and (c, t) in index.idx_name_tokens
+                and len(index.idx_name_tokens[(c, t)]) <= COMBO3_SINGLE_RARE_NAME_DF_MAX
+            ):
+                c_set |= index.idx_name_tokens[(c, t)]
+    else:
+        signal = set()
+        for t in parsed["info_name"]:
+            if (
+                len(t) >= COMBO3_SINGLE_RARE_NAME_LEN_MIN
+                and (c, t) in index.idx_name_tokens
+                and len(index.idx_name_tokens[(c, t)]) <= COMBO3_SINGLE_RARE_NAME_DF_MAX
+            ):
+                signal |= index.idx_name_tokens[(c, t)]
+        c_set |= signal
+        if signal:
+            evidence_sets.append((signal, SINGLE_RARE_NAME_EVIDENCE_WEIGHT))
 
-    # Rare compact prefix-5
     p5 = parsed["prefix5"]
     if p5 and (c, p5) in index.idx_compact_prefix5 and len(index.idx_compact_prefix5[(c, p5)]) <= COMBO3_PREFIX5_DF_MAX:
-        c_set |= index.idx_compact_prefix5[(c, p5)]
+        signal = index.idx_compact_prefix5[(c, p5)]
+        c_set |= signal
+        if evidence_sets is not None:
+            evidence_sets.append((signal, PREFIX_EVIDENCE_WEIGHT))
 
     # -------------------------------------------------------------
     # 2. SECONDARY A: >= 2 shared informative address tokens (DF <= 2000)
@@ -384,7 +467,10 @@ def retrieve_candidates_for_record(
         if (c, t) in index.idx_addr_tokens and len(index.idx_addr_tokens[(c, t)]) <= SECONDARY_A_ADDR_TOKEN_DF_MAX
     ]
     if len(sec_a_rare) >= SECONDARY_A_ADDR_OVERLAP_MIN:
-        c_set |= get_token_overlap_candidates(sec_a_rare, min_overlap=SECONDARY_A_ADDR_OVERLAP_MIN)
+        signal = get_token_overlap_candidates(sec_a_rare, min_overlap=SECONDARY_A_ADDR_OVERLAP_MIN)
+        c_set |= signal
+        if evidence_sets is not None and signal:
+            evidence_sets.append((signal, SECONDARY_A_EVIDENCE_WEIGHT))
 
     # -------------------------------------------------------------
     # 3. C2-A: Country + Building Number + >= 1 Address Token (DF <= 500)
@@ -397,10 +483,18 @@ def retrieve_candidates_for_record(
     ]
     if b_nums and a_toks:
         a_u = set().union(*a_toks)
-        for n in b_nums:
-            c_set |= (index.idx_addr_numbers[(c, n)] & a_u)
+        if evidence_sets is None:
+            for n in b_nums:
+                c_set |= index.idx_addr_numbers[(c, n)] & a_u
+        else:
+            signal = set()
+            for n in b_nums:
+                signal |= index.idx_addr_numbers[(c, n)] & a_u
+            c_set |= signal
+            if signal:
+                evidence_sets.append((signal, C2A_EVIDENCE_WEIGHT))
 
-    return c_set
+    return c_set if evidence_sets is None else _limit_candidates(c_set, evidence_sets, cap)
 
 
 def retrieve_candidates_batch(

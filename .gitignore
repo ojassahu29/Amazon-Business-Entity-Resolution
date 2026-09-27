@@ -44,3 +44,11 @@ output/*.tsv
 
 # Generated retrieval caches
 output/*.pkl
+
+output/tmp-index-*/
+output/*.tmp
+output/shortlist-study.json
+output/shortlist-study-progress.json
+output/tmp-study-*/
+output/model-cache/
+.venv-study/

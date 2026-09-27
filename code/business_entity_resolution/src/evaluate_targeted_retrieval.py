@@ -136,6 +136,101 @@ def get_token_overlap_candidates(
     return {eid for eid, cnt in hits.items() if cnt >= min_overlap}
 
 
+def combo3_candidate_variants(
+    parsed: dict[str, Any],
+    indexes: dict[str, dict[tuple[str, str], set[str]]],
+) -> dict[str, set[str]]:
+    country = parsed["country"]
+
+    def postings(index_name: str, token: str) -> set[str]:
+        return indexes[index_name].get((country, token), set())
+
+    candidates: set[str] = set()
+    for index_name, field in (
+        ("name_norm", "name_norm"),
+        ("name_sorted", "name_sorted"),
+        ("name_compact", "name_compact"),
+    ):
+        candidates |= postings(index_name, parsed[field])
+
+    info_names = set(parsed["info_name_tokens"])
+    stop_names = set(parsed["stop_name_tokens"])
+    info_addrs = set(parsed["info_addr_tokens"])
+    geo_addrs = set(parsed["geo_addr_tokens"])
+    addr_numbers = set(parsed["addr_numbers"])
+    name_sets = [postings("name_tokens", token) for token in info_names]
+    name_sets = [posting_set for posting_set in name_sets if posting_set]
+    addr_sets = [postings("addr_tokens", token) for token in info_addrs]
+    addr_sets = [posting_set for posting_set in addr_sets if posting_set]
+
+    candidates |= get_token_overlap_candidates(name_sets, min_overlap=2)
+    candidates |= get_token_overlap_candidates(addr_sets, min_overlap=3)
+
+    rare_name_sets = [posting_set for posting_set in name_sets if len(posting_set) <= 500]
+    stop_union = set().union(
+        *(postings("name_stopwords", token) for token in stop_names)
+    ) if stop_names else set()
+    if stop_union:
+        for posting_set in rare_name_sets:
+            candidates |= posting_set & stop_union
+
+    valid_numbers = [
+        (number, postings("addr_numbers", number))
+        for number in addr_numbers
+        if len(number) >= 3
+        and postings("addr_numbers", number)
+        and len(postings("addr_numbers", number)) <= 500
+    ]
+    valid_address_sets = [posting_set for posting_set in addr_sets if len(posting_set) <= 1000]
+    if valid_numbers and valid_address_sets:
+        address_union = set().union(*valid_address_sets)
+        for _, number_set in valid_numbers:
+            candidates |= number_set & address_union
+
+    rare_address_sets = [posting_set for posting_set in addr_sets if len(posting_set) <= 500]
+    candidates |= get_token_overlap_candidates(rare_address_sets, min_overlap=2)
+
+    for token in info_names:
+        token_set = postings("name_tokens", token)
+        if len(token) >= 5 and token_set and len(token_set) <= 50:
+            candidates |= token_set
+
+    prefix = parsed["prefix5"]
+    prefix_set = postings("prefix5", prefix) if prefix else set()
+    if prefix_set and len(prefix_set) <= 50:
+        candidates |= prefix_set
+
+    method_b = set(candidates)
+
+    relaxed_name = set(method_b)
+    if stop_union:
+        for posting_set in name_sets:
+            relaxed_name |= posting_set & stop_union
+
+    relaxed_address = set(method_b)
+    relaxed_address |= get_token_overlap_candidates(addr_sets, min_overlap=2)
+    all_address_union = set().union(*addr_sets) if addr_sets else set()
+    for token in geo_addrs:
+        all_address_union |= postings("geo_tokens", token)
+    for number in addr_numbers:
+        relaxed_address |= postings("addr_numbers", number) & all_address_union
+
+    relaxed_geographic = set(method_b)
+    geo_union = set().union(*(postings("geo_tokens", token) for token in geo_addrs)) if geo_addrs else set()
+    for posting_set in addr_sets:
+        relaxed_geographic |= posting_set & geo_union
+    for number in addr_numbers:
+        relaxed_geographic |= postings("addr_numbers", number) & geo_union
+
+    return {
+        "method_b": method_b,
+        "method_b_plus_name_relaxation": relaxed_name,
+        "method_b_plus_address_relaxation": relaxed_address,
+        "method_b_plus_geographic_relaxation": relaxed_geographic,
+        "method_b_plus_all_relaxations": relaxed_name | relaxed_address | relaxed_geographic,
+    }
+
+
 def load_ground_truth(path: Path) -> dict[str, list[str]]:
     gt = {}
     for chunk in pd.read_csv(
@@ -233,6 +328,7 @@ def run_targeted_experiments(
     active_addr_tokens: dict[tuple[str, str], set[str]] = defaultdict(set)
     active_geo_tokens: dict[tuple[str, str], set[str]] = defaultdict(set)
     active_addr_numbers: dict[tuple[str, str], set[str]] = defaultdict(set)
+    active_compact_prefix5: dict[tuple[str, str], set[str]] = defaultdict(set)
 
     s1_parsed: dict[str, dict] = {}
 
@@ -244,6 +340,7 @@ def run_targeted_experiments(
         nn = normalize_basic(name)
         ns = sorted_tokens(name)
         nc = compact(name)
+        prefix5 = nc[:5] if len(nc) >= 5 else ""
 
         toks_name = tokenize(name)
         toks_addr = tokenize(addr)
@@ -260,6 +357,7 @@ def run_targeted_experiments(
             "name_norm": nn,
             "name_sorted": ns,
             "name_compact": nc,
+            "prefix5": prefix5,
             "info_name_tokens": info_name,
             "stop_name_tokens": stop_name,
             "info_addr_tokens": info_addr,
@@ -270,6 +368,8 @@ def run_targeted_experiments(
         active_name_norm[(country, nn)].add(s1_id)
         active_name_sorted[(country, ns)].add(s1_id)
         active_name_compact[(country, nc)].add(s1_id)
+        if prefix5:
+            active_compact_prefix5[(country, prefix5)].add(s1_id)
 
         for t in info_name:
             active_name_tokens[(country, t)].add(s1_id)
@@ -303,6 +403,7 @@ def run_targeted_experiments(
     idx_addr_tokens: dict[tuple[str, str], set[str]] = defaultdict(set)
     idx_geo_tokens: dict[tuple[str, str], set[str]] = defaultdict(set)
     idx_addr_numbers: dict[tuple[str, str], set[str]] = defaultdict(set)
+    idx_compact_prefix5: dict[tuple[str, str], set[str]] = defaultdict(set)
 
     match_records: dict[str, dict] = {}
     total_streamed = 0
@@ -348,6 +449,10 @@ def run_targeted_experiments(
                     idx_name_sorted[k_ns].add(eid)
 
                 nc = compact(name)
+                if len(nc) >= 5:
+                    k_prefix = (c, nc[:5])
+                    if k_prefix in active_compact_prefix5:
+                        idx_compact_prefix5[k_prefix].add(eid)
                 k_nc = (c, nc)
                 if k_nc in active_name_compact:
                     idx_name_compact[k_nc].add(eid)
@@ -378,6 +483,7 @@ def run_targeted_experiments(
                     k_num = (c, num)
                     if k_num in active_addr_numbers:
                         idx_addr_numbers[k_num].add(eid)
+            print(f"  {source_label}: indexed {count_src:,} rows", flush=True)
 
         total_streamed += count_src
         print(f"  Finished {source_label}: {count_src:,} rows in {time.time()-t_src:.1f}s", flush=True)
@@ -388,6 +494,17 @@ def run_targeted_experiments(
     print(f"  RAM working set: {get_process_memory_mb():.1f} MB", flush=True)
 
     gc.collect()
+    combo3_indexes = {
+        "name_norm": idx_name_norm,
+        "name_sorted": idx_name_sorted,
+        "name_compact": idx_name_compact,
+        "prefix5": idx_compact_prefix5,
+        "name_tokens": idx_name_tokens,
+        "name_stopwords": idx_name_stopwords,
+        "addr_tokens": idx_addr_tokens,
+        "geo_tokens": idx_geo_tokens,
+        "addr_numbers": idx_addr_numbers,
+    }
 
     # 4. EXPERIMENT 1: Query Baseline A & Safe Stopword-Relaxed Variants
     print("\n[Step 4] Querying Baseline A & Safe Stopword-Relaxed Variants (Experiment 1)...", flush=True)
@@ -415,6 +532,17 @@ def run_targeted_experiments(
 
     baseline_missed_pairs: list[dict] = []
     baseline_all_candidates_by_s1: dict[str, set[str]] = {}
+    combo3_variant_names = [
+        "method_b",
+        "method_b_plus_name_relaxation",
+        "method_b_plus_address_relaxation",
+        "method_b_plus_geographic_relaxation",
+        "method_b_plus_all_relaxations",
+    ]
+    combo3_candidate_counts = {name: [] for name in combo3_variant_names}
+    combo3_retrieved = {name: 0 for name in combo3_variant_names}
+    combo3_retrieved_s2 = {name: 0 for name in combo3_variant_names}
+    combo3_retrieved_s3 = {name: 0 for name in combo3_variant_names}
 
     for i, s1_id in enumerate(val_s1_ids):
         if (i + 1) % 1000 == 0:
@@ -448,6 +576,17 @@ def run_targeted_experiments(
 
         c_base = c1 | c2 | c3 | c4 | c5
         baseline_all_candidates_by_s1[s1_id] = c_base
+        combo3_variants = combo3_candidate_variants(parsed, combo3_indexes)
+        for variant_name, candidate_set in combo3_variants.items():
+            found = true_matches & candidate_set
+            combo3_candidate_counts[variant_name].append(len(candidate_set))
+            combo3_retrieved[variant_name] += len(found)
+            combo3_retrieved_s2[variant_name] += sum(
+                1 for entity_id in found if entity_id.startswith("S2-")
+            )
+            combo3_retrieved_s3[variant_name] += sum(
+                1 for entity_id in found if entity_id.startswith("S3-")
+            )
 
         # --- Variant 1A: Relaxed Name ---
         # >= 1 info token AND >= 1 secondary token (informative or legal/generic)
@@ -574,6 +713,24 @@ def run_targeted_experiments(
             "runtime_seconds": round(exp1_runtime, 2),
         }
         exp1_rows.append(row)
+    combo3_baseline_retrieved = combo3_retrieved["method_b"]
+    combo3_recovery_rows = []
+    for variant_name in combo3_variant_names:
+        counts = np.array(combo3_candidate_counts[variant_name])
+        retrieved_count = combo3_retrieved[variant_name]
+        combo3_recovery_rows.append({
+            "variant": variant_name,
+            "overall_recall": retrieved_count / total_val_matches if total_val_matches else 0.0,
+            "total_retrieved": retrieved_count,
+            "newly_recovered_matches": retrieved_count - combo3_baseline_retrieved,
+            "s2_recall": combo3_retrieved_s2[variant_name] / val_s2_matches if val_s2_matches else 0.0,
+            "s3_recall": combo3_retrieved_s3[variant_name] / val_s3_matches if val_s3_matches else 0.0,
+            "total_candidates": int(np.sum(counts)),
+            "mean_candidates": float(np.mean(counts)),
+            "median_candidates": float(np.median(counts)),
+            "p95_candidates": float(np.percentile(counts, 95)),
+            "max_candidates": int(np.max(counts)),
+        })
 
     # 5. EXPERIMENT 2: Cross-Script Failure Analysis
     print(f"\n[Step 5] Characterizing Cross-Script / Multilingual Missed Matches (Experiment 2)...", flush=True)
@@ -810,6 +967,7 @@ def run_targeted_experiments(
             "val_s3_matches": val_s3_matches,
         },
         "experiment_1_variants": exp1_rows,
+        "combo3_b_recovery_variants": combo3_recovery_rows,
         "experiment_2_cross_script": {
             "total_cross_script_cases": len(cross_script_cases),
             "nature_breakdown": dict(nature_counts),

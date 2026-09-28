@@ -11,17 +11,18 @@ Runs Experiments 1, 2, 3, and 4 on the SAME 5,000 S1 validation split (seed=42):
 from __future__ import annotations
 
 import argparse
-from collections import Counter, defaultdict
 import gc
-from itertools import combinations
 import json
 import os
-from pathlib import Path
 import random
 import re
 import subprocess
 import sys
 import time
+from collections import Counter, defaultdict
+from collections.abc import Mapping
+from itertools import combinations
+from pathlib import Path
 from typing import Any
 
 import numpy as np
@@ -138,7 +139,7 @@ def get_token_overlap_candidates(
 
 def combo3_candidate_variants(
     parsed: dict[str, Any],
-    indexes: dict[str, dict[tuple[str, str], set[str]]],
+    indexes: Mapping[str, Mapping[tuple[str, str], set[str]]],
 ) -> dict[str, set[str]]:
     country = parsed["country"]
 
@@ -269,7 +270,6 @@ def run_targeted_experiments(
     s3_path = train_dir / "train_source3.tsv"
 
     # 1. Load Ground Truth and create deterministic validation split
-    t0 = time.time()
     print("\n[Step 1] Loading ground truth & creating validation split...", flush=True)
     gt = load_ground_truth(gt_path)
     all_s1_ids = sorted(gt.keys())
@@ -279,7 +279,6 @@ def run_targeted_experiments(
 
     val_gt = {s1_id: gt[s1_id] for s1_id in val_s1_ids}
     singletons = sum(1 for s1_id, matches in val_gt.items() if not matches)
-    entities_with_matches = len(val_gt) - singletons
     val_s2_matches = sum(sum(1 for m in matches if m.startswith("S2-")) for matches in val_gt.values())
     val_s3_matches = sum(sum(1 for m in matches if m.startswith("S3-")) for matches in val_gt.values())
     total_val_matches = val_s2_matches + val_s3_matches
@@ -293,7 +292,6 @@ def run_targeted_experiments(
     print(f"    Total true matches: {total_val_matches:,} (S2: {val_s2_matches:,}, S3: {val_s3_matches:,})", flush=True)
 
     # 2. Load validation S1 records & prepare query key structures
-    t0 = time.time()
     print("\n[Step 2] Loading validation S1 records & preparing query structures...", flush=True)
     val_s1_records: dict[str, dict] = {}
     for chunk in pd.read_csv(
@@ -733,7 +731,7 @@ def run_targeted_experiments(
         })
 
     # 5. EXPERIMENT 2: Cross-Script Failure Analysis
-    print(f"\n[Step 5] Characterizing Cross-Script / Multilingual Missed Matches (Experiment 2)...", flush=True)
+    print("\n[Step 5] Characterizing Cross-Script / Multilingual Missed Matches (Experiment 2)...", flush=True)
     cross_script_cases = []
     for item in baseline_missed_pairs:
         s1_rec = item["s1_record"]
@@ -824,14 +822,14 @@ def run_targeted_experiments(
 
         t_n1 = set(tokenize(n1))
         t_n2 = set(tokenize(n2))
-        info_n1 = set(t for t in t_n1 if len(t) >= 3 and t not in NAME_STOPWORDS)
-        info_n2 = set(t for t in t_n2 if len(t) >= 3 and t not in NAME_STOPWORDS)
+        info_n1 = {t for t in t_n1 if len(t) >= 3 and t not in NAME_STOPWORDS}
+        info_n2 = {t for t in t_n2 if len(t) >= 3 and t not in NAME_STOPWORDS}
         shared_info_n = info_n1 & info_n2
 
         t_a1 = set(tokenize(a1))
         t_a2 = set(tokenize(a2))
-        info_a1 = set(t for t in t_a1 if len(t) >= 3 and t not in ADDR_STOPWORDS)
-        info_a2 = set(t for t in t_a2 if len(t) >= 3 and t not in ADDR_STOPWORDS)
+        info_a1 = {t for t in t_a1 if len(t) >= 3 and t not in ADDR_STOPWORDS}
+        info_a2 = {t for t in t_a2 if len(t) >= 3 and t not in ADDR_STOPWORDS}
         shared_info_a = info_a1 & info_a2
 
         s_n1 = detect_script(n1)
@@ -870,13 +868,10 @@ def run_targeted_experiments(
 
     rec_spelling_prefix5 = sum(1 for p in cat_spelling if p["nc1"][:5] == p["nc2"][:5] and len(p["nc1"]) >= 5)
     rec_spelling_tsort80 = sum(1 for p in cat_spelling if p["n_tsort"] >= 80)
-    rec_spelling_tsort70 = sum(1 for p in cat_spelling if p["n_tsort"] >= 70)
 
     rec_single_len5 = sum(1 for p in cat_single_token if any(len(t) >= 5 for t in p["shared_info_n"]))
-    rec_single_len6 = sum(1 for p in cat_single_token if any(len(t) >= 6 for t in p["shared_info_n"]))
 
     rec_multi_addr = sum(1 for p in cat_multilingual if (p["shared_nums"] or len(p["shared_info_a"]) >= 1))
-    rec_addr_sim = sum(1 for p in cat_addr_similar if (p["shared_nums"] or len(p["shared_info_a"]) >= 1))
 
     fuzzy_strategies = [
         {
@@ -1014,7 +1009,7 @@ def main() -> None:
     parser.add_argument("--output-dir", type=Path, default=Path("output"))
     args = parser.parse_args()
 
-    results = run_targeted_experiments(
+    run_targeted_experiments(
         data_dir=args.data_dir,
         sample_size=args.sample_size,
         seed=args.seed,

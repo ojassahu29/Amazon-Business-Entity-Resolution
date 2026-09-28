@@ -7,19 +7,15 @@ on the SAME 5,000 S1 validation entities (seed=42).
 from __future__ import annotations
 
 import argparse
-from collections import Counter, defaultdict
-import gc
-from itertools import combinations
 import json
-import os
-from pathlib import Path
 import random
 import re
 import sys
 import time
-from typing import Any
+from collections import defaultdict
+from itertools import combinations
+from pathlib import Path
 
-import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))

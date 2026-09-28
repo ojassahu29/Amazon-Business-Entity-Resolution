@@ -12,9 +12,9 @@ import argparse
 import random
 import sys
 import time
-from collections import Counter
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 from rapidfuzz import fuzz
 
@@ -25,12 +25,11 @@ from rapidfuzz import fuzz
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from preprocessing import (
-    normalize_basic,
     compact,
+    normalize_basic,
     sorted_tokens,
     tokenize,
 )
-
 
 # ===================================================================
 # Data loading helpers
@@ -284,9 +283,10 @@ def print_feature_distributions(all_features: list[dict]) -> None:
 
     for col in bool_cols:
         if col in df.columns:
-            rate = df[col].mean() * 100
-            count = df[col].sum()
-            print(f"{col:<25} {rate:>7.1f}% {int(count):>8,}")
+            vals = df[col]
+            rate = vals.mean() * 100
+            count = int(vals.to_numpy().sum())
+            print(f"{col:<25} {rate:>7.1f}% {count:>8,}")
 
     # Numeric features: report percentiles.
     numeric_cols = [
@@ -599,12 +599,7 @@ def main() -> None:
     # Token overlap analysis.
     print("\n--- Name Token Overlap Analysis ---")
 
-    token_overlaps = []
-
-    for feat in all_features:
-        s1_tokens = set()  # We need raw tokens, recompute from jaccard context.
-
-    # Instead use the precomputed name_jaccard and overlap stats.
+    # Use the precomputed name_jaccard and overlap stats.
     print(f"  Pairs with name_jaccard >= 0.5:  "
           f"{(df['name_jaccard'] >= 0.5).sum():,} / {len(df):,}  "
           f"({(df['name_jaccard'] >= 0.5).mean()*100:.1f}%)")
@@ -622,14 +617,17 @@ def main() -> None:
           f"({(df['name_token_sort_ratio'] >= 0.6).mean()*100:.1f}%)")
 
     # What the hardest cases look like.
-    print(f"\n--- Hardest True Matches (name_jaccard < 0.3) ---")
+    print("\n--- Hardest True Matches (name_jaccard < 0.3) ---")
     hardest = df[df["name_jaccard"] < 0.3]
     print(f"  Count: {len(hardest):,} / {len(df):,} ({len(hardest)/len(df)*100:.1f}%)")
 
     if len(hardest) > 0:
-        print(f"  These have name_ratio p50: {hardest['name_ratio'].median():.3f}")
-        print(f"  addr_jaccard p50: {hardest['addr_jaccard'].median():.3f}")
-        print(f"  addr_missing_one rate: {hardest['addr_missing_one'].mean()*100:.1f}%")
+        name_ratio_p50 = float(np.median(hardest["name_ratio"]))
+        addr_jaccard_p50 = float(np.median(hardest["addr_jaccard"]))
+        addr_missing_rate = float(np.mean(hardest["addr_missing_one"])) * 100
+        print(f"  These have name_ratio p50: {name_ratio_p50:.3f}")
+        print(f"  addr_jaccard p50: {addr_jaccard_p50:.3f}")
+        print(f"  addr_missing_one rate: {addr_missing_rate:.1f}%")
 
     print("\nDone.")
 

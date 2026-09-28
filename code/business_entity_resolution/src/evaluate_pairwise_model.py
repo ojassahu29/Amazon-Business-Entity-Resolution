@@ -13,17 +13,17 @@ Evaluation: Macro S1-level F0.5 (competition metric), pairwise metrics,
 from __future__ import annotations
 
 import argparse
-from collections import Counter, defaultdict
 import gc
-from itertools import combinations
 import json
 import os
-from pathlib import Path
 import random
 import re
 import subprocess
 import sys
 import time
+from collections import defaultdict
+from itertools import combinations
+from pathlib import Path
 from typing import Any
 
 import lightgbm as lgb
@@ -38,14 +38,13 @@ from blocking import (
     ADDR_STOPWORDS,
     NAME_STOPWORDS,
 )
-from evaluation import f_beta_per_s1, macro_f05_detailed
+from evaluation import f_beta_per_s1
 from preprocessing import (
     compact,
     normalize_basic,
     sorted_tokens,
     tokenize,
 )
-
 
 FEATURE_NAMES = [
     # NAME features (15)
@@ -287,7 +286,7 @@ def compute_pair_features(
     b7 = 1.0 if (blocker_bits & (1 << 7)) else 0.0
     b8 = 1.0 if (blocker_bits & (1 << 8)) else 0.0
     b9 = 1.0 if (blocker_bits & (1 << 9)) else 0.0
-    num_blockers = float(bin(blocker_bits).count("1"))
+    num_blockers = float(blocker_bits.bit_count())
 
     return [
         name_exact,
@@ -440,8 +439,6 @@ def run_pairwise_pipeline(
     n_train = int(len(val_s1_ids) * train_ratio)
     train_s1_ids = val_s1_ids[:n_train]
     test_s1_ids = val_s1_ids[n_train:]
-    train_s1_set = set(train_s1_ids)
-    test_s1_set = set(test_s1_ids)
 
     val_gt = {s1_id: gt[s1_id] for s1_id in val_s1_ids}
     train_gt = {s1_id: val_gt[s1_id] for s1_id in train_s1_ids}
@@ -957,12 +954,12 @@ def run_pairwise_pipeline(
     feature_imp_df["gain_pct"] = feature_imp_df["gain"] / total_gain * 100
 
     print("\nTop 20 Features by Information Gain:")
-    for i, row in feature_imp_df.head(20).iterrows():
-        print(f"  {i+1:>2}. {row['feature']:<30} Gain: {row['gain']:>12.1f} ({row['gain_pct']:>5.2f}%)  Splits: {int(row['split']):>5}")
+    for rank, (feat, gain, split, gain_pct) in enumerate(feature_imp_df.head(20).itertuples(index=False), 1):
+        print(f"  {rank:>2}. {feat:<30} Gain: {gain:>12.1f} ({gain_pct:>5.2f}%)  Splits: {int(split):>5}")
 
     # Pairwise evaluation on Test set
     print("\nEvaluating Pairwise Test Set Metrics...", flush=True)
-    y_test_probs = model.predict(X_test)
+    y_test_probs = np.asarray(model.predict(X_test), dtype=np.float64)
     pr_auc = float(average_precision_score(y_test, y_test_probs))
 
     # Evaluate pairwise metrics across multiple thresholds
